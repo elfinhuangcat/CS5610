@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Index Page</title>
+</head>
+<body>
+
+<h1>Welcome to CS5610 Fall 2015</h1>
+<h2>Yaxin Huang</h2>
+<p>This is a paragraph explaining what this page is about.</p>
+
+<h3>List Element Examples</h3>
+<h4>Ordered Lists</h4>
+    <ol>
+        <li> course 1 </li>
+        <li> course 2 </li>
+        <li> course 3 </li>
+    </ol>
+<h4>Unordered List</h4>
+    <ul>
+        <li> cat </li>
+        <li> dog </li>
+        <li> pig </li>
+    </ul>
+
+<h3> Tabular Data </h3>
+<table>
+    <thead>
+        
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+</body>
+</html>
