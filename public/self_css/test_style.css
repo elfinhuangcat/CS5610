@@ -1,0 +1,17 @@
+body {
+    background-color: beige;
+}
+
+h1 {
+    color: navy;
+    margin-left: 20px;
+}
+
+.likes {
+    background-color: light-yellow;
+    color: orange;
+}
+
+#favfood {
+    color: red;
+}
