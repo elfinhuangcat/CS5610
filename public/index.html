@@ -1,64 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Index Page</title>
-    <link href="self_css/test_style.css" rel="stylesheet"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Welcome!</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 </head>
+
 <body>
 
-<header>
-    <nav>
-        <a href="index.html">HOME</a> |
-        <a href="author.html">AUTHOR</a>
-    </nav>
-<h1>Welcome to CS5610 Fall 2015</h1>
-    <a>Yaxin Huang</a>
-    <a>NUID: *****</a>
-    <a><p>This is a paragraph explaining what this page is about.</p></a>
-</header>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CS5610 Fall-2015   Yaxin Huang</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <!--<ul class="nav navbar-nav navbar-right">
+                <li><a href="assign.html">Register</a></li>
+            </ul> -->
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
 
-<section>
-<h3>List Element Examples</h3>
-<h4>Ordered Lists</h4>
-    <ol>
-        <li> course 1 </li>
-        <li> course 2 </li>
-        <li> course 3 </li>
-    </ol>
-<h4>Unordered List</h4>
-    <ul>
-        <li> cat </li>
-        <li> dog </li>
-        <li> pig </li>
-    </ul>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Hello!</h1>
+        <p>This is the website containing everything related to CS5610. Here you can find links and description about the assignments. Follow the button to go to the home page of this course.</p>
+        <p><a class="btn btn-primary btn-lg" href="http://portal-cs5610online.rhcloud.com/" role="button">Learn more &raquo;</a></p>
+    </div>
+</div>
 
-</section>
+<div class="container">
+    <!-- A row can contain 3 col-md-4 columns -->
+    <div class="row">
+        <div class="col-md-4">
+            <h2>HW1</h2>
+            <p>The requirement is to set up an environment for future development. Nodejs, Git, Openshift are required to installed properly.</p>
+            <p><a class="btn btn-default" href="hello.html" role="button">Go to hello.html &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>HW2</h2>
+            <p>The homework 2 requires a prototype of the form-maker. Follow the button below to view the HW2 home page.</p>
+            <p><a class="btn btn-default" href="assignment/home.html" role="button">Go to HW2 &raquo;</a></p>
+        </div>
+        <!-- <div class="col-md-4">
+            <h2>C#</h2>
+            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <p><a class="btn btn-default" href="csharp.html" role="button">View details &raquo;</a></p>
+        </div> -->
+    </div>
 
-<section>
-<h3> Tabular Data </h3>
-<table>
-    <thead>
-        <tr>
-            <th>Last Name</th>
-            <th>First Name</th>
-         
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Wonder</td>
-            <td>Land</td>
-        </tr>
-        <tr>
-            <td>Wonder2</td>
-            <td>Land2</td>
-        </tr>
-    </tbody>
-</table>
-</section>
+    <hr>
 
-<footer>
-This is the footer.
-</footer>
+    <footer>
+        <p>&copy; Yaxin Huang 2015</p>
+    </footer>
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
 </body>
 </html>
+
