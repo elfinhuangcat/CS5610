@@ -46,8 +46,10 @@
             for (var form in forms) {
                 if (form.id == formid) {
                     for (var property in newForm) {
-                        
+                        form[property] = newForm[property];
                     }
+                    callback(form);
+                    break;
                 }
             }
         }
@@ -63,4 +65,4 @@
                 s4() + '-' + s4() + s4() + s4();
         }
     }
-}
+})();

@@ -1,9 +1,11 @@
 <!-- Left-hand side navigation bar -->
 <div class="col-sm-3 col-md-2 sidebar" ng-controller="SidebarController">
     <ul class="nav nav-sidebar">
-        <li><a href="home.html">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="profile.html">Profile</a></li>
-        <li><a href="admin.html">Admin</a></li>
-        <li><a href="forms.html">Forms</a></li>
+        <!-- TODO : HOME HIGHLIGT TO BE FIXED -->
+
+        <li ng-class="{'active' : $location.url().indexOf('/') == $location.url().length -1}"><a href="#/">Home</a></li>
+        <li ng-class="{'active' : $location.url().indexOf('/profile') != -1}"><a href="#/profile">Profile</a></li>
+        <li ng-class="{'active' : $location.url().indexOf('/admin') != -1}"><a href="#/admin">Admin</a></li>
+        <li ng-class="{'active' : $location.url().indexOf('/forms') != -1}"><a href="#/forms">Forms</a></li>
     </ul>
 </div>

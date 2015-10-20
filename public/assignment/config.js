@@ -8,23 +8,24 @@
             $routeProvider
                 .when("/",
                 {
-                    templateUrl: "index.html",
-                    controller: "courseList.controller"
+                    templateUrl: "home/home.view.html",
                 })
-                .when("/index",
+                .when("/home",
                 {
-                    templateUrl: "index.html",
-                    controller: "courseOverview.controller"
+                    templateUrl: "home/home.view.html",
                 })
                 .when("/register",
                 {
-                    templateUrl: "register.html",
-                    controller: "courseOverview.controller"
+                    templateUrl: "register/register.html",
+                    controller: "RegisterController"
                 })
                 .when("/login",
                 {
                     templateUrl: "login/login.view.html",
-                    controller: "courseOverview.controller"
+                    controller: "LoginController"
                 })
+                .otherwise({
+                    redirectTo: "/"
+                });
         });
 })();

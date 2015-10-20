@@ -8,6 +8,6 @@
     function SidebarController($scope, $location)
     {
         $scope.$location = $location;
-        //console.log($location.url());
+        console.log($location.url());
     }
 })();
