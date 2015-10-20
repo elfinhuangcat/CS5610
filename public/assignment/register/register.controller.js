@@ -13,7 +13,7 @@
         function register() {
             var user = UserService.createUser($scope.username, $scope.password, $scope.email, console.log);
             $rootScope.user = user;
-            $location.path('/profile'); // TODO: didn't work?
+            $scope.$location.url('/profile'); // TODO: didn't work?
         }
     }
 })();

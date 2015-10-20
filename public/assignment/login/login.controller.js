@@ -13,7 +13,7 @@
         function login() {
             var user = UserService.findUserByUsernameAndPassword($scope.username, $scope.password, console.log);
             $rootScope.user = user;
-            $location.path('/profile'); // TODO: didn't work?
+            $scope.$location.path('/profile'); // TODO: didn't work?
         }
     }
 })();

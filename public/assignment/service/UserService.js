@@ -57,10 +57,11 @@
         function updateUser(id, user, callback) {
             for (var item in users) {
                 if (item.id == id) {
-                    item.username = user.username;
-                    item.password = user.password;
+                    for (var property in user) {
+                        item[property] = user[property];
+                    }
                     callback(item);
-                    break;
+                    return item;
                 }
             }
         }
