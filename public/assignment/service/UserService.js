@@ -15,7 +15,11 @@
         var users = [];
 
         var service = {
-            getAllCourses: getAllCourses
+            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
+            findAllUsers: findAllUsers,
+            createUser: createUser,
+            deleteUserById: deleteUserById,
+            updateUser: updateUser
         };
         return service;
 
@@ -38,7 +42,7 @@
 
         function createUser(user, callback) {
             // user object contains username and password
-            user.id = guid();
+            var user = angular.extend(user, {"id" : guid()});
             users.push(user);
             callback(user);
         }

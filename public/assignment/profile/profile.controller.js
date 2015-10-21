@@ -17,7 +17,7 @@
         $scope.lastname = user.lastname;
         $scope.email = user.email;
 
-        function update() {
+        $scope.update = function() {
             var newUserInfo = {'username' : $scope.username,
                                'password' : $scope.password,
                                'firstname' : $scope.firstname,

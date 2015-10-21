@@ -10,10 +10,13 @@
         $scope.$location = $location;
         //console.log($location.url());
 
-        function login() {
-            var user = UserService.findUserByUsernameAndPassword($scope.username, $scope.password, console.log);
+        $scope.login = function() {
+            var user = UserService.findUserByUsernameAndPassword($scope.username, $scope.password,
+                                                                 function(info) {
+                                                                     console.log(info);
+                                                                 });
             $rootScope.user = user;
-            $scope.$location.path('/profile'); // TODO: didn't work?
+            $location.path('/profile');
         }
     }
 })();

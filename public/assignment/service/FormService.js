@@ -13,6 +13,14 @@
          */
         var forms = [];
 
+        var service = {
+            createFormForUser: createFormForUser,
+            findAllFormsForUser: findAllFormsForUser,
+            deleteFormById: deleteFormById,
+            updateFormById: updateFormById
+        };
+        return service;
+
         function createFormForUser(userid, form, callback) {
             form.id = guid();
             form.userid = userid;
