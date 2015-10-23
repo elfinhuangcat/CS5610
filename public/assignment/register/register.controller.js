@@ -8,7 +8,6 @@
     function RegisterController($rootScope, $scope, $location, UserService)
     {
         $scope.$location = $location;
-        //console.log($location.url());
 
         $scope.register = function() {
             console.log("NG-CLICK REGISTER()");

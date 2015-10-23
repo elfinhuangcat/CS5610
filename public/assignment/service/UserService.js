@@ -10,6 +10,9 @@
          * @property: id
          * @property: username
          * @property: password
+         * @property: email
+         * @property: firstname
+         * @property: lastname
          * @type {Array}
          */
         var users = [];
@@ -45,6 +48,7 @@
             var user = angular.extend(user, {"id" : guid()});
             users.push(user);
             callback(user);
+            return user;
         }
 
         function deleteUserById(id, callback) {
@@ -59,15 +63,19 @@
         }
 
         function updateUser(id, user, callback) {
-            for (var item in users) {
-                if (item.id == id) {
+            console.log("Debug updateUser() : input id - " + id);
+            console.log("                   : users.length - " + users.length);
+            for (var i=0; i < users.length; ++i) {
+                console.log("Debug updateUser() : loop item id - " + i);
+                if (users[i].id == id) {
                     for (var property in user) {
-                        item[property] = user[property];
+                        users[i][property] = user[property];
                     }
-                    callback(item);
-                    return item;
+                    callback(users[i]);
+                    return users[i];
                 }
             }
+            alert("User id: " + id + " not found!");
         }
 
 
