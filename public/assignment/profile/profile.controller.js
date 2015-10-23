@@ -10,13 +10,12 @@
         $scope.$location = $location;
         console.log("Entered profile controller.");
         console.log($location.url());
-        var user = $rootScope.user;
 
-        $scope.username = user.username;
-        $scope.password = user.password;
-        $scope.firstname = user.firstname;
-        $scope.lastname = user.lastname;
-        $scope.email = user.email;
+        $scope.username = $rootScope.user.username;
+        $scope.password = $rootScope.user.password;
+        $scope.firstname = $rootScope.user.firstname;
+        $scope.lastname = $rootScope.user.lastname;
+        $scope.email = $rootScope.user.email;
 
         $scope.update = function() {
             var newUserInfo = {'username' : $scope.username,

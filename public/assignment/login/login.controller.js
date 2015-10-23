@@ -8,7 +8,7 @@
     function LoginController($rootScope, $scope, $location, UserService)
     {
         $scope.$location = $location;
-        //console.log($location.url());
+        console.log($location.url());
 
         $scope.login = function() {
             var user = UserService.findUserByUsernameAndPassword($scope.username, $scope.password,
