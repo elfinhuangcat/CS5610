@@ -22,7 +22,8 @@
                                               console.log("Form id: " + form.id + " created.");
                                           });
             $scope.forms = updateScopeForms($rootScope.user.id);
-            console.log("Debug addForm(): length of $scope.forms:" + $scope.forms.length);
+            // Empty the input field:
+            $scope.inputFormName = "";
         }
 
         /** updateForm()
@@ -36,6 +37,8 @@
                                                           console.log("ID: " + form.id + "\nName: " + form.name);
                                                       });
             $scope.forms =updateScopeForms($rootScope.user.id);
+            // Empty the input field:
+            $scope.inputFormName = "";
         }
 
         /** deleteForm(index):

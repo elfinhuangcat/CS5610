@@ -30,9 +30,9 @@
 
         function findAllFormsForUser(userid, callback) {
             var resultForms = [];
-            for (var form in forms) {
-                if (form.userid == userid) {
-                    resultForms.push(form);
+            for (var i = 0; i < forms.length; ++i) {
+                if (forms[i].userid == userid) {
+                    resultForms.push(forms[i]);
                 }
             }
             callback(resultForms);
@@ -51,12 +51,12 @@
         }
 
         function updateFormById(formid, newForm, callback) {
-            for (var form in forms) {
-                if (form.id == formid) {
+            for (var i = 0; i < forms.length; ++i) {
+                if (forms[i].id == formid) {
                     for (var property in newForm) {
-                        form[property] = newForm[property];
+                        forms[i][property] = newForm[property];
                     }
-                    callback(form);
+                    callback(forms[i]);
                     break;
                 }
             }
