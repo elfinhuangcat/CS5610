@@ -15,8 +15,13 @@
                                                                  function(info) {
                                                                      console.log(info);
                                                                  });
-            $rootScope.user = user;
-            $location.path('/profile');
+            if (user == null) {
+                alert("Username or password incorrect.");
+            }
+            else {
+                $rootScope.user = user;
+                $location.path('/profile');
+            }
         }
     }
 })();
