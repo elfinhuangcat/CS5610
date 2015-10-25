@@ -23,6 +23,7 @@
                 updateScopeForms($rootScope.user.id);
                 // Empty the input field:
                 $scope.inputFormName = "";
+                $scope.selectedFormIndex = null;
             }
             else {
                 alert("The name of a form cannot be empty!");
