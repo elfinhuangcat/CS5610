@@ -8,7 +8,8 @@
     function FormController($rootScope, $scope, $location, FormService)
     {
         $scope.$location = $location;
-        $scope.forms = updateScopeForms($rootScope.user.id);
+        $scope.forms = null;
+        updateScopeForms($rootScope.user.id);
         $scope.selectedFormIndex = null;
 
         /** addForm():
@@ -16,29 +17,45 @@
          * Updates the $scope.forms with the new array of forms
          */
         $scope.addForm = function() {
-            var form = {"name" : $scope.inputFormName};
-            FormService.createFormForUser($rootScope.user.id, form,
-                                          function(form) {
-                                              console.log("Form id: " + form.id + " created.");
-                                          });
-            $scope.forms = updateScopeForms($rootScope.user.id);
-            // Empty the input field:
-            $scope.inputFormName = "";
+            if (form_name_check($scope.inputFormName)) {
+                var form = {"name" : $scope.inputFormName};
+                FormService.createFormForUser($rootScope.user.id, form, add_form_callback);
+                updateScopeForms($rootScope.user.id);
+                // Empty the input field:
+                $scope.inputFormName = "";
+            }
+            else {
+                alert("The name of a form cannot be empty!");
+            }
         }
+
+        /**
+         * @param form: the form created
+         */
+        function add_form_callback(form) {
+            console.log("New form created, ID: " + form.id);
+        }
+
 
         /** updateForm()
          * Uses form model and FormService to update the currently selected form
          */
         $scope.updateForm = function() {
-            var form = $scope.forms[$scope.selectedFormIndex];
-            form.name = $scope.inputFormName;
-            FormService.updateFormById(form.id, form, function(form) {
-                                                          console.log("New form details:");
-                                                          console.log("ID: " + form.id + "\nName: " + form.name);
-                                                      });
-            $scope.forms =updateScopeForms($rootScope.user.id);
-            // Empty the input field:
-            $scope.inputFormName = "";
+            if (form_name_check($scope.inputFormName))
+            {
+                var form = $scope.forms[$scope.selectedFormIndex];
+                form.name = $scope.inputFormName;
+                FormService.updateFormById(form.id, form, function(form) {
+                    console.log("New form details:");
+                    console.log("ID: " + form.id + "\nName: " + form.name);
+                });
+                updateScopeForms($rootScope.user.id);
+                // Empty the input field:
+                $scope.inputFormName = "";
+            }
+            else {
+                alert("The name of a form cannot be empty!");
+            }
         }
 
         /** deleteForm(index):
@@ -47,10 +64,10 @@
          * **/
         $scope.deleteForm = function(index) {
             var formid = $scope.forms[index].id;
-            FormService.deleteFormById(formid, function(forms) {
+            FormService.deleteFormById(formid, function(form) {
                                                    console.log("Selected form deleted.");
                                                });
-            $scope.forms =updateScopeForms($rootScope.user.id);
+            updateScopeForms($rootScope.user.id);
             $scope.selectedFormIndex = null;
         }
 
@@ -65,12 +82,23 @@
             $scope.inputFormName = $scope.forms[index].name;
         }
 
+        /**
+         * Effect: updates $scope.forms
+         * @param userid
+         */
         function updateScopeForms(userid) {
-            return FormService.findAllFormsForUser(userid, function(forms) {
-                for (var i=0; i < forms.length; ++i) {
-                    console.log("Form "+forms[i].id+" fetched.");
-                }
-            })
+            FormService.findAllFormsForUser(userid, function (form_array) {
+                $scope.forms = form_array;
+            });
+        }
+
+        function form_name_check(name) {
+            if (name == "" || name == null) {
+                return false;
+            }
+            else {
+                return true;
+            }
         }
     }
 })();

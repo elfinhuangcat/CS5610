@@ -21,6 +21,12 @@
         };
         return service;
 
+        /**
+         *
+         * @param userid
+         * @param form
+         * @param callback: param - the form object created.
+         */
         function createFormForUser(userid, form, callback) {
             form.id = guid();
             form.userid = userid;
@@ -28,6 +34,11 @@
             callback(form);
         }
 
+        /**
+         *
+         * @param userid
+         * @param callback: param - an array of forms belonged to the input user
+         */
         function findAllFormsForUser(userid, callback) {
             var resultForms = [];
             for (var i = 0; i < forms.length; ++i) {
@@ -36,20 +47,30 @@
                 }
             }
             callback(resultForms);
-            return resultForms;
         }
 
+        /**
+         *
+         * @param formid
+         * @param callback: param - the deleted form object or null
+         */
         function deleteFormById(formid, callback) {
             for (var i = 0; i < forms.length; ++i) {
                 if (forms[i].id == formid) {
-                    console.log("Form deleted. ID: " + formid);
                     forms.splice(i, 1);
-                    break;
+                    callback(forms[i]);
+                    return;
                 }
             }
-            callback(forms);
+            callback(null);
         }
 
+        /**
+         *
+         * @param formid
+         * @param newForm
+         * @param callback: param - the updated form object
+         */
         function updateFormById(formid, newForm, callback) {
             for (var i = 0; i < forms.length; ++i) {
                 if (forms[i].id == formid) {
@@ -57,9 +78,10 @@
                         forms[i][property] = newForm[property];
                     }
                     callback(forms[i]);
-                    break;
+                    return;
                 }
             }
+            callback(null); // form not found
         }
 
         /** Function to generate Guid, from instructor Jose Annunziato.**/
