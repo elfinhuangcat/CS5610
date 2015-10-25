@@ -11,10 +11,10 @@
         console.log($location.url());
 
         $scope.login = function() {
-            var user = UserService.findUserByUsernameAndPassword($scope.username, $scope.password,
-                                                                 function(info) {
-                                                                     console.log(info);
-                                                                 });
+            UserService.findUserByUsernameAndPassword($scope.username, $scope.password, user_login);
+        }
+
+        function user_login(user) {
             if (user == null) {
                 alert("Username or password incorrect.");
             }
