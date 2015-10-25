@@ -5,9 +5,29 @@
         .module("FormBuilderApp")
         .controller("SidebarController", SidebarController);
 
-    function SidebarController($scope, $location)
+    function SidebarController($scope, $location, $rootScope)
     {
         $scope.$location = $location;
-        console.log($location.url());
+
+        $scope.adminHide = function () {
+            return true; // For now the admin page is not implemented
+        }
+
+        $scope.profileHide = function() {
+            return !hasUser();
+        }
+
+        $scope.formHide = function() {
+            return !hasUser();
+        }
+
+        function hasUser() {
+            if ($rootScope.user == undefined || $rootScope.user == null) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
     }
 })();

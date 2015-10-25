@@ -51,6 +51,7 @@
                                                    console.log("Selected form deleted.");
                                                });
             $scope.forms =updateScopeForms($rootScope.user.id);
+            $scope.selectedFormIndex = null;
         }
 
         /** selectForm(index):
