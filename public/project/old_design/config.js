@@ -2,7 +2,7 @@
 (function()
 {
     angular
-        .module("RecipesComApp")
+        .module("RecipesCom")
         .config(function($routeProvider)
         {
             $routeProvider

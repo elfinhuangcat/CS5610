@@ -1,5 +1,5 @@
 "use strict";
 (function(){
     angular
-        .module("RecipesCom", ["ngRoute"])
+        .module("RecipesComApp", ["ngRoute"])
 })();
