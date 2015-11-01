@@ -8,11 +8,11 @@
             $routeProvider
                 .when("/",
                 {
-                    templateUrl: "home/home.view.html",
+                    templateUrl: "../index.html",
                 })
                 .when("/home",
                 {
-                    templateUrl: "home/home.view.html",
+                    templateUrl: "../index.html",
                 })
                 .when("/register",
                 {
