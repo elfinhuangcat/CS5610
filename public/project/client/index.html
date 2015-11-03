@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="RecipesComApp">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
-    <![endif]-->
+    <![endif]-->       
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
@@ -27,22 +27,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
 
-    <script src="js/app.js"></script>
-    <script src="js/controllers/search.result.controller.js"></script>
-    <script src="js/apiService.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
 
 </head><!--/head-->
-<body ng-app="RecipesComApp">
-<div id="headerDiv" ng-include="'htmls/header.view.html'"></div>
-<div class="container" ng-controller="SearchResultController">
-    <h1>Search Results</h1>
-    <p> {{response}}</p>
-</div>
-
-<div id="footerDiv" ng-include="'htmls/footer.view.html'"></div>
-<!-- <script src="js/jquery.js"></script> -->
-<!-- <script src="js/bootstrap.min.js"></script> -->
-<script src="js/jquery.prettyPhoto.js"></script>
-<script src="js/main.js"></script>
+<body>
+    <div id="headerDiv" ng-include="'htmls/header.view.html'"></div>
+    <div id="indexSliderDiv" ng-include="'htmls/index.slider.view.html'"></div>
+    <div id="indexBrowseListDiv" ng-include="'htmls/index.browseList.view.html'"></div>
+    <div id="indexBottomDiv" ng-include="'htmls/index.bottom.view.html'"></div>
+    <div id="footerDiv" ng-include="'htmls/footer.view.html'"></div>
+    <!-- <script src="js/jquery.js"></script> -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
