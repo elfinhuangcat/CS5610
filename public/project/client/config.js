@@ -8,31 +8,22 @@
             $routeProvider
                 .when("/",
                 {
-                    templateUrl: "../index.html",
-                })
-                .when("/home",
-                {
-                    templateUrl: "../index.html",
+                    templateUrl: "views/index.views/index.view.html",
                 })
                 .when("/register",
                 {
-                    templateUrl: "register/register.view.html",
-                    controller: "RegisterController"
+                    templateUrl: "views/register/register.view.html",
+                    //controller: "RegisterController"
                 })
                 .when("/login",
                 {
-                    templateUrl: "login/login.view.html",
-                    controller: "LoginController"
+                    templateUrl: "views/login/login.view.html",
+                    //controller: "LoginController"
                 })
                 .when("/profile",
                 {
-                    templateUrl: "profile/profile.view.html",
-                    controller: "ProfileController"
-                })
-                .when("/form",
-                {
-                    templateUrl: "form/form.view.html",
-                    controller: "FormController"
+                    templateUrl: "views/profile/profile.view.html",
+                    //controller: "ProfileController"
                 })
                 .otherwise({
                     redirectTo: "/"

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RecipesCom | Home</title>
+    <title>RecipesCom</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -32,11 +32,10 @@
 
 </head><!--/head-->
 <body>
-    <div id="headerDiv" ng-include="'htmls/header.view.html'"></div>
-    <div id="indexSliderDiv" ng-include="'htmls/index.slider.view.html'"></div>
-    <div id="indexBrowseListDiv" ng-include="'htmls/index.browseList.view.html'"></div>
-    <div id="indexBottomDiv" ng-include="'htmls/index.bottom.view.html'"></div>
-    <div id="footerDiv" ng-include="'htmls/footer.view.html'"></div>
+    <div id="headerDiv" ng-include="'views/header/header.view.html'"></div>
+    <div class="main" ng-view></div>
+    <div id="footerDiv" ng-include="'views/footer/footer.view.html'"></div>
+
     <!-- <script src="js/jquery.js"></script> -->
     <!-- <script src="js/bootstrap.min.js"></script> -->
     <script src="js/jquery.prettyPhoto.js"></script>
