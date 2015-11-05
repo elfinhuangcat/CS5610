@@ -1,51 +1,33 @@
-<div class="row">
-    <!-- Left-hand side navigation bar -->
-    <div class="col-sm-3 col-md-2 sidebar" ng-include="'views/sidebar/sidebar.view.html'">
-
-    </div>
-    <!-- main content -->
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
-        <section id="title" class="emerald">
-            <div class="container">
-                <div class="gap"></div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h1>Profile</h1>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <ul class="breadcrumb pull-right">
-                            <li><a href="#/">Home</a></li>
-                            <li class="active">Profile</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="gap"></div>
+<div ng-controller="ProfileController">
+<section id="title" class="clouds">
+    <div class="container">
+        <div class="gap"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Profile</h1>
+                <small>Username</small>
             </div>
-        </section><!--/#title-->
-        <section>
-            <div class="gap"></div>
-            <form class="center" role="form">
-                <fieldset class="registration-form">
-                    <div class="form-group">
-                        <input type="text" id="username" name="username" placeholder="Username" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="email" name="email" placeholder="E-mail" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="password" name="password" placeholder="Password" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="password_confirm" name="password_confirm" placeholder="Password (Confirm)" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success btn-md btn-block">Sign Up!</button>
-                    </div>
-                </fieldset>
-            </form>
-            <div class="gap"></div>
-        </section>
+            <div class="col-sm-6">
+                <img src="../server/model/avatar.png" height="100" width="100">
+                <button class="button btn btn-primary" type="submit">Edit</button>
 
+
+            </div>
+        </div>
+        <div class="gap"></div>
     </div>
+</section><!--/#title-->
+<section>
+    <div class="gap"></div>
+    <div class="container">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 col-sm-12">
+            <label>Username:</label> {{username}} <button class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button> <br>
+            <label>Password:</label> ******<button class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button> <br>
+            <label>Email:</label> {{email}}<button class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button> <br>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+    <div class="gap"></div>
+</section>
 </div>
