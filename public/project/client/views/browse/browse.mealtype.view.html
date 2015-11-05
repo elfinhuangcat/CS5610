@@ -1,0 +1,27 @@
+<section id="title" class="emerald">
+    <div class="container">
+        <div class="gap"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Meal Types</h1>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+            </div>
+            <div class="col-sm-6">
+                <ul class="breadcrumb pull-right">
+                    <li><a href="#/">Home</a></li>
+                    <li><a>Browse by..</a></li>
+                    <li class="active">Meal types</li>
+                </ul>
+            </div>
+        </div>
+        <div class="gap"></div>
+    </div>
+</section><!--/#title-->
+
+<section>
+    <div class="container center">
+        <h4 ng-repeat="mealtype in mealtypes">
+            <a href="#">{{mealtype}}</a>
+        </h4>
+    </div>
+</section>
