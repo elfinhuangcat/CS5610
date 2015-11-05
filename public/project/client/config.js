@@ -23,7 +23,12 @@
                 .when("/profile",
                 {
                     templateUrl: "views/profile/profile.view.html",
-                    //controller: "ProfileController"
+                    controller: "ProfileController"
+                })
+                .when("/bookmark",
+                {
+                    templateUrl: "views/bookmark/bookmark.view.html",
+                    //controller: "BookmarkController"
                 })
                 .otherwise({
                     redirectTo: "/"
