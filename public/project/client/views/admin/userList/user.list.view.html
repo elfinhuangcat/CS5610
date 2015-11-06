@@ -1,0 +1,43 @@
+<section id="title" class="clouds">
+    <div class="container">
+        <div class="gap"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Users List</h1>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div>
+        <div class="gap"></div>
+    </div>
+</section><!--/#title-->
+<section>
+    <div class="gap"></div>
+    <div class="container">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users">
+                <td><a href="#/otherprofile">{{user.username}}</a></td>
+                <td>
+                    <span ng-if="user.role=='r'">Register User</span>
+                    <span ng-if="user.role=='c'">Contributor</span>
+                    <span ng-if="user.role=='a'">Admin</span>
+                </td>
+                <td>
+                    <button ng-if="user.role=='r'" type="button" class="btn btn-primary" disabled="disabled">Downgrade</button>
+                    <button ng-if="user.role=='c'" type="button" class="btn btn-danger">Downgrade</button>
+                    <button ng-if="user.role=='a'" type="button" class="btn btn-warning">Change Password</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="gap"></div>
+</section>

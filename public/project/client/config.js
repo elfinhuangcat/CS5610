@@ -25,6 +25,11 @@
                     templateUrl: "views/profile/profile.view.html",
                     controller: "ProfileController"
                 })
+                .when("/otherprofile",
+                {
+                    templateUrl: "views/profile/other.profile.view.html",
+                    controller: "OtherProfileController"
+                })
                 .when("/bookmark",
                 {
                     templateUrl: "views/bookmark/bookmark.view.html",
@@ -69,6 +74,26 @@
                 {
                     templateUrl: "views/myrecipe/myrecipe.view.html",
                     controller: "MyRecipeController"
+                })
+                .when("/friend",
+                {
+                    templateUrl: "views/friend/friend.view.html",
+                    controller: "FriendController"
+                })
+                .when("/searchresult",
+                {
+                    templateUrl: "views/search/search.result.view.html",
+                    controller: "SearchResultController"
+                })
+                .when("/admin/userlist",
+                {
+                    templateUrl: "views/admin/userList/user.list.view.html",
+                    controller: "UserListController"
+                })
+                .when("/admin/contapp",
+                {
+                    templateUrl: "views/admin/contApp/contributor.app.view.html",
+                    controller: "ContAppController"
                 })
                 .otherwise({
                     redirectTo: "/"
