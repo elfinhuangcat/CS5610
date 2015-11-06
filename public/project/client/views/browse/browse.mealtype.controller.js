@@ -13,8 +13,8 @@
             "Entree",
             "Fastfood",
             "Lunch",
-            "Appetizer/Starter",
-        ]
+            "Appetizer/Starter"
+        ];
 
     }
 })();

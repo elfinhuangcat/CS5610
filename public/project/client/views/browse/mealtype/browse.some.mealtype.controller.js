@@ -3,12 +3,12 @@
 {
     angular
         .module("RecipesComApp")
-        .controller("BrowseSomeStyleController", BrowseSomeStyleController);
+        .controller("BrowseSomeMealTypeController", BrowseSomeMealTypeController);
 
-    function BrowseSomeStyleController($scope)
+    function BrowseSomeMealTypeController($scope)
     {
-        $scope.someStyle = "American";
-        $scope.styles = [
+        $scope.someMealtype = "Breakfast";
+        $scope.mealtypes = [
             {
                 "id":1,
                 "title": "mock_recipe_1",
@@ -22,8 +22,8 @@
             },
             {
                 "id":2,
-                "title": "mock_recipe_10",
-                "tags":["breakfast","American"],
+                "title": "mock_recipe_2",
+                "tags":["breakfast","Indian"],
                 "prepTime":30,
                 "prepTimeUnit":"m",
                 "servings":6,

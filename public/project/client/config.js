@@ -55,6 +55,16 @@
                     templateUrl: "views/browse/browse.mealtype.view.html",
                     controller: "BrowseMealtypeController"
                 })
+                .when("/browse/mealtype/:mealtype",
+                {
+                    templateUrl: "views/browse/mealtype/browse.some.mealtype.view.html",
+                    controller: "BrowseSomeMealTypeController"
+                })
+                .when("/message",
+                {
+                    templateUrl: "views/message/message.view.html#compose",
+                    controller: "MessageController"
+                })
                 .otherwise({
                     redirectTo: "/"
                 });
