@@ -62,8 +62,13 @@
                 })
                 .when("/message",
                 {
-                    templateUrl: "views/message/message.view.html#compose",
+                    templateUrl: "views/message/message.view.html",
                     controller: "MessageController"
+                })
+                .when("/myrecipe",
+                {
+                    templateUrl: "views/myrecipe/myrecipe.view.html",
+                    controller: "MyRecipeController"
                 })
                 .otherwise({
                     redirectTo: "/"

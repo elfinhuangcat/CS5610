@@ -23,7 +23,7 @@
         <div class="gap"></div>
         <div>
             <ul class="nav nav-pills">
-                <li ng-class="{'active': $location.url().indexOf('inbox') == -1 && $location.url().indexOf('sentbox') == -1}"><a data-toggle="pill" href="#/message">Compose</a></li>
+                <li ng-class="{'active': $location.url().indexOf('inbox') == -1 && $location.url().indexOf('sentbox') == -1}"><a data-toggle="pill" href="#/message#compose">Compose</a></li>
                 <li ng-class="{'active': $location.url().indexOf('inbox') != -1}"><a data-toggle="pill" href="#/message#inbox">Inbox</a></li>
                 <li ng-class="{'active': $location.url().indexOf('sentbox') != -1}"><a data-toggle="pill" href="#/message#sentbox">Sentbox</a></li>
             </ul>
@@ -31,7 +31,7 @@
             <div class="tab-content">
                 <div class="gap"></div>
                 <div id="compose" class="tab-pane fade in active">
-                    <form>
+                    <form class="form-horizontal">
                         <div class="form-group">
                             <label for="receiver">To:</label>
                             <input type="text" class="form-control" id="receiver" placeholder="Friend's username or email">
