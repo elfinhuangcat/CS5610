@@ -59,13 +59,7 @@ module.exports = function(app, model, db){
         // Properties to be update:
         // firstName, lastName, username, password, email
         var id = req.param["id"];
-        var user = {
-            "firstName" : req.query.firstName,
-            "lastName"  : req.query.lastName,
-            "username"  : req.query.username,
-            "password"  : req.query.password,
-            "email"     : req.query.email
-        };
+        var user = req.body;
         model.updateUser(id, user);
         res.json(model.findAllUser());
     }

@@ -1,4 +1,5 @@
 "use strict";
+var uuid = require('uuid');
 // var q = require("q");
 module.exports = function(app, db) {
 
@@ -26,7 +27,6 @@ module.exports = function(app, db) {
      * @returns a list of all users
      */
     function createUser(user) {
-        var uuid = require('uuid');
         user.id = uuid.v4();
         users.push(user);
         return users;
