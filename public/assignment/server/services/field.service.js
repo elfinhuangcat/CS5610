@@ -29,8 +29,7 @@ module.exports = function(app, model, db){
      * removes a field object whose id is equal to the fieldId path parameter
      * and belonging to a form object whose id is equal to the formId path parameter
      * @param req
-     * @param res
-     * response: none
+     * @param res - none
      */
     function deleteFieldByFormAndFieldId(req, res) {
         model.deleteFieldByFormAndFieldId(req.params["formId"], req.params["fieldId"]);

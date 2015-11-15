@@ -54,9 +54,8 @@ module.exports = function(app, model, db){
     /**
      * updates an existing user whose id property is equal to the id path parameter.
      * The new properties are set to the values in the user object embedded in the HTTP request.
-     * Responds with an array of all users
      * @param req : id(param), firstName, lastName, username, password, email(queries)
-     * @param res
+     * @param res : the updated user object
      */
     function updateUser(req, res) {
         // Properties to be update:
@@ -64,7 +63,7 @@ module.exports = function(app, model, db){
         var id = req.param["id"];
         var user = req.body;
         model.updateUser(id, user);
-        res.json(model.findAllUser());
+        res.json(model.findUserById(id));
     }
 
     /**

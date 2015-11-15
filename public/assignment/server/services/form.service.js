@@ -44,14 +44,12 @@ module.exports = function(app, model, db){
      * Node.js guid or node-uuid libraries. These will eventually be set by the
      * database when they are inserted into a collection
      * @param req
-     * @param res
-     * respond: an array of all forms
+     * @param res - the new form object
      */
     function createForm(req, res) {
         var form = req.body;
         form.userId = req.params["userId"];
         res.json(model.createForm(form));
-
     }
 
     /**
@@ -59,13 +57,12 @@ module.exports = function(app, model, db){
      * so that its properties are the same as the property values of the form
      * object embedded in the request's body
      * @param req
-     * @param res
-     * respond: an array of all forms
+     * @param res - the updated form object
      */
     function updateFormById(req, res) {
         var form_id = req.params["formId"];
         var form = req.body;
         model.updateForm(form_id, form);
-        res.json(model.findAllForm());
+        res.json(model.findFormById(form_id));
     }
 };

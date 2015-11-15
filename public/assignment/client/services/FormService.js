@@ -3,7 +3,7 @@
     angular
         .module("FormBuilderApp")
         .factory("FormService", FormService);
-    function FormService() {
+    function FormService($q, $http) {
         /**
          * Each item in the array 'forms' has these properties:
          * @property: id
@@ -11,7 +11,6 @@
          * And other properties (since a form shape can change.)
          * @type {Array}
          */
-        var forms = [];
 
         var service = {
             createFormForUser: createFormForUser,
@@ -22,66 +21,58 @@
         return service;
 
         /**
-         *
          * @param userid
          * @param form
-         * @param callback: param - the form object created.
+         * @returns the new form object
          */
-        function createFormForUser(userid, form, callback) {
-            form.id = guid();
-            form.userid = userid;
-            forms.push(form);
-            callback(form);
+        function createFormForUser(userid, form) {
+            var deferred = $q.defer();
+            $http.post("/api/assignment/user/" + userid + "/form", form)
+                .success(function(form_obj) {
+                    deferred.resolve(form_obj);
+                });
+            return deferred.promise;
         }
 
         /**
-         *
          * @param userid
-         * @param callback: param - an array of forms belonged to the input user
+         * @returns an array of forms belonging to this user
          */
-        function findAllFormsForUser(userid, callback) {
-            var resultForms = [];
-            for (var i = 0; i < forms.length; ++i) {
-                if (forms[i].userid == userid) {
-                    resultForms.push(forms[i]);
-                }
-            }
-            callback(resultForms);
+        function findAllFormsForUser(userid) {
+            var deferred = $q.defer();
+            $http.get("/api/assignment/user/" + userid + "/form")
+                .success(function(forms) {
+                    deferred.resolve(forms);
+                });
+            return deferred.promise;
         }
 
         /**
-         *
          * @param formid
-         * @param callback: param - the deleted form object or null
+         * @effect delete the form
          */
-        function deleteFormById(formid, callback) {
-            for (var i = 0; i < forms.length; ++i) {
-                if (forms[i].id == formid) {
-                    forms.splice(i, 1);
-                    callback(forms[i]);
-                    return;
-                }
-            }
-            callback(null);
+        function deleteFormById(formid) {
+            var deferred = $q.defer();
+            $http.delete("/api/assignment/form/" + formid)
+                .success(function() {
+                    deferred.resolve();
+                    console.log("INFO - [client] deleteFormById - form " + formid + " deleted.");
+                });
+            return deferred.promise;
         }
 
         /**
          *
          * @param formid
          * @param newForm
-         * @param callback: param - the updated form object
          */
-        function updateFormById(formid, newForm, callback) {
-            for (var i = 0; i < forms.length; ++i) {
-                if (forms[i].id == formid) {
-                    for (var property in newForm) {
-                        forms[i][property] = newForm[property];
-                    }
-                    callback(forms[i]);
-                    return;
-                }
-            }
-            callback(null); // form not found
+        function updateFormById(formid, newForm) {
+            var deferred = $q.defer();
+            $http.put("/api/assignment/form/" + formid, newForm)
+                .success(function(form_obj) {
+                    deferred.resolve(form_obj);
+                });
+            return deferred.promise;
         }
 
         /** Function to generate Guid, from instructor Jose Annunziato.**/

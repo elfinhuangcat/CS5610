@@ -24,10 +24,15 @@ module.exports = function(app, db) {
 
     var forms = require('./form.mock.json');
 
+
+    /**
+     * @param form - the new form object's information
+     * @returns the new form object
+     */
     function createForm(form) {
         form.id = uuid.v4();
         forms.push(form);
-        return forms;
+        return form;
     }
 
     function findAllForm() {
