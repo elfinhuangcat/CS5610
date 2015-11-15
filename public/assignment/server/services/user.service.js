@@ -6,7 +6,10 @@ module.exports = function(app, model, db){
     app.put("/api/assignment/user/:id", updateUser);
     app.delete("/api/assignment/user/:id", deleteUserById);
 
-    // creates a new user embedded in the body of the request, and responds with an array of all users
+    /**
+     * @param req
+     * @param res - the created user (single user)
+     */
     function createUser(req, res) {
 
         var user = req.body;

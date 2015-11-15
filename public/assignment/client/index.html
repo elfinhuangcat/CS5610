@@ -14,21 +14,21 @@
 
     <script src="app.js"></script>
     <script src="config.js"></script>
-    <script src="header/header.controller.js"></script>
-    <script src="sidebar/sidebar.controller.js"></script>
-    <script src="service/UserService.js"></script>
-    <script src="service/FormService.js"></script>
-    <script src="login/login.controller.js"></script>
-    <script src="register/register.controller.js"></script>
-    <script src="profile/profile.controller.js"></script>
-    <script src="form/form.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/sidebar/sidebar.controller.js"></script>
+    <script src="services/UserService.js"></script>
+    <script src="services/FormService.js"></script>
+    <script src="views/login/login.controller.js"></script>
+    <script src="views/register/register.controller.js"></script>
+    <script src="views/profile/profile.controller.js"></script>
+    <script src="views/form/form.controller.js"></script>
 
     <title>Form Maker</title>
 </head>
 <body>
 
 <!-- The head navigation bar -->
-<div ng-include="'header/header.view.html'">
+<div ng-include="'views/header/header.view.html'">
 
 </div>
 
@@ -37,7 +37,7 @@
 <div class="container-fluid">
     <div class="row">
         <!-- Left-hand side navigation bar -->
-        <div class="col-sm-3 col-md-2 sidebar" ng-include="'sidebar/sidebar.view.html'">
+        <div class="col-sm-3 col-md-2 sidebar" ng-include="'views/sidebar/sidebar.view.html'">
 
         </div>
         <!-- main content -->

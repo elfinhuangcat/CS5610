@@ -1,0 +1,11 @@
+<!-- Left-hand side navigation bar -->
+<div class="col-sm-3 col-md-2 sidebar" ng-controller="SidebarController">
+    <ul class="nav nav-sidebar">
+        <!-- TODO : HOME HIGHLIGT TO BE FIXED -->
+
+        <li ng-class="{'active' : $location.url().indexOf('/') == $location.url().length -1}"><a href="#/">Home</a></li>
+        <li ng-hide="profileHide()" ng-class="{'active' : $location.url().indexOf('/profile') != -1}"><a href="#/profile">Profile</a></li>
+        <li ng-hide="adminHide()" ng-class="{'active' : $location.url().indexOf('/admin') != -1}"><a href="#/admin">Admin</a></li>
+        <li ng-hide="formHide()" ng-class="{'active' : $location.url().indexOf('/form') != -1}"><a href="#/form">Forms</a></li>
+    </ul>
+</div>

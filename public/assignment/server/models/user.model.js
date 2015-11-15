@@ -24,12 +24,12 @@ module.exports = function(app, db) {
     /**
      *
      * @param user
-     * @returns a list of all users
+     * @returns the created user
      */
     function createUser(user) {
         user.id = uuid.v4();
         users.push(user);
-        return users;
+        return findUserById(user.id);
     }
 
     function findAllUser() {
