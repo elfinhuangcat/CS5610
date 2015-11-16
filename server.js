@@ -4,7 +4,7 @@ var mongoose_hw = require('mongoose'); // database connection for homework
 var db = require('mongodb'); // PLACE HOLDER
 
 var app = express();
-mongoose_hw.connect('mongodb://localhost/my_database');
+// mongoose_hw.connect('mongodb://localhost/my_database');
 
 // GET /style.css etc
 app.use(express.static(__dirname + '/public'));
@@ -19,6 +19,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // assignment app
-require("./assignment/server/app.js")(app, mongoose_hw, db);
+require('./public/assignment/server/app.js')(app, mongoose_hw, db);
 
 app.listen(port, ipaddress);

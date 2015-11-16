@@ -5,23 +5,18 @@
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($rootScope, $scope, $location, UserService)
+    function LoginController($rootScope, $location, UserService)
     {
-        $scope.$location = $location;
-        console.log($location.url());
+        var model = this;
+        model.$location = $location;
 
-        $scope.login = function() {
-            UserService.findUserByUsernameAndPassword($scope.username, $scope.password, user_login);
-        }
-
-        function user_login(user) {
-            if (user == null) {
-                alert("Username or password incorrect.");
-            }
-            else {
-                $rootScope.user = user;
-                $location.path('/profile');
-            }
+        model.login = function() {
+            UserService
+                .findUserByUsernameAndPassword(model.username, model.password)
+                .then(function(user) {
+                    $rootScope.user = user;
+                    $location = "/profile";
+                });
         }
     }
 })();

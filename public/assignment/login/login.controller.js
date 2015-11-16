@@ -2,7 +2,7 @@
 (function()
 {
     angular
-        .module("FormBuilderApp")
+        .module("FormBuilderAppOld")
         .controller("LoginController", LoginController);
 
     function LoginController($rootScope, $scope, $location, UserService)

@@ -62,9 +62,9 @@
         }
 
         /**
-         *
          * @param formid
          * @param newForm
+         * @returns new form object
          */
         function updateFormById(formid, newForm) {
             var deferred = $q.defer();

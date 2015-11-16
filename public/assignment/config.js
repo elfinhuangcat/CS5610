@@ -2,7 +2,7 @@
 (function()
 {
     angular
-        .module("FormBuilderApp")
+        .module("FormBuilderAppOld")
         .config(function($routeProvider)
         {
             $routeProvider

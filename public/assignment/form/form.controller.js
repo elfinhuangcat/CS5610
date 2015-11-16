@@ -2,7 +2,7 @@
 (function()
 {
     angular
-        .module("FormBuilderApp")
+        .module("FormBuilderAppOld")
         .controller("FormController", FormController);
 
     function FormController($rootScope, $scope, $location, FormService)

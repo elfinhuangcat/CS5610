@@ -5,37 +5,40 @@
         .module("FormBuilderApp")
         .controller("ProfileController",  ProfileController);
 
-    function ProfileController($rootScope, $scope, $location, UserService)
+    function ProfileController($rootScope, $location, UserService)
     {
-        $scope.$location = $location;
-        console.log("Entered profile controller.");
-        console.log($location.url());
+        var model = this;
+        model.$location = $location;
+        model.update = update;
 
-        $scope.username = $rootScope.user.username;
-        $scope.password = $rootScope.user.password;
-        $scope.firstname = $rootScope.user.firstname;
-        $scope.lastname = $rootScope.user.lastname;
-        $scope.email = $rootScope.user.email;
-
-        $scope.update = function() {
-            var newUserInfo = {'username' : $scope.username,
-                               'password' : $scope.password,
-                               'firstname' : $scope.firstname,
-                               'lastname' : $scope.lastname,
-                               'email' : $scope.email};
-            UserService.updateUser($rootScope.user.id, newUserInfo, user_update);
+        function init(){
+            model.username = $rootScope.user.username;
+            model.password = $rootScope.user.password;
+            model.firstname = $rootScope.user.firstname;
+            model.lastname = $rootScope.user.lastname;
+            model.email = $rootScope.user.email;
         }
+        init();
 
-        /**
-         * @param user - user object with updated information
-         */
-        function user_update(user) {
-            $rootScope.user = user;
-            $scope.username = $rootScope.user.username;
-            $scope.password = $rootScope.user.password;
-            $scope.firstname = $rootScope.user.firstname;
-            $scope.lastname = $rootScope.user.lastname;
-            $scope.email = $rootScope.user.email;
+
+
+        function update() {
+            var newUserInfo = {'username' : model.username,
+                               'password' : model.password,
+                               'firstName' : model.firstname,
+                               'lastName' : model.lastname,
+                               'email' : model.email};
+            UserService
+                .updateUser($rootScope.user.id, newUserInfo)
+                .then(function(new_user) {
+                    $rootScope.user = new_user;
+
+                    model.username = $rootScope.user.username;
+                    model.password = $rootScope.user.password;
+                    model.firstname = $rootScope.user.firstname;
+                    model.lastname = $rootScope.user.lastname;
+                    model.email = $rootScope.user.email;
+                });
         }
     }
 })();

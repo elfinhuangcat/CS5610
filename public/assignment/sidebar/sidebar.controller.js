@@ -2,7 +2,7 @@
 (function()
 {
     angular
-        .module("FormBuilderApp")
+        .module("FormBuilderAppOld")
         .controller("SidebarController", SidebarController);
 
     function SidebarController($scope, $location, $rootScope)

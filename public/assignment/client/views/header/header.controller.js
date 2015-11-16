@@ -5,32 +5,22 @@
         .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope, $location, $rootScope)
+    function HeaderController($location, $rootScope)
     {
-        $scope.$location = $location;
+        var model = this;
+        model.$location = $location;
+        model.username = null;
 
-        $scope.logout = function() {
+        model.logout = function() {
             $rootScope.user = null;
+            model.$location = "/home";
         }
 
-        $scope.registerHide = function() {
-            return hasUser();
-        }
+        console.log($location.url().indexOf('register'));
 
-        $scope.loginHide = function() {
-            return hasUser();
-        }
 
-        $scope.logoutHide = function() {
-            return !hasUser();
-        }
-
-        $scope.usernameHide = function() {
-            return !hasUser();
-        }
-
-        function hasUser() {
-            if ($rootScope.user == undefined || $rootScope.user == null) {
+        model.hasUser = function() {
+            if ($rootScope.user === undefined || $rootScope.user === null) {
                 return false;
             }
             else {
