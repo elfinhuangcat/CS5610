@@ -1,4 +1,4 @@
-<h1> Forms : {{form.title}} </h1>
+<h1> Forms : {{model.form.title}} </h1>
 <ul class="nav nav-tabs">
     <li><a href="#/form">Forms</a></li>
     <li class="active"><a>Fields</a></li>
@@ -7,118 +7,57 @@
     <div id="forms" class="tab-pane fade">
     </div>
     <div id="fields" class="tab-pane fade in active">
-<form class="form-horizontal" action="profile.html">
-    <div class="form-group">
-        <label for="firstname" class="control-label">First Name:</label>
-        <div class="row">
-            <div class="col-xs-6">
-                <input type="text" class="form-control" id="firstname" placeholder="First Name">
+        <form class="form-horizontal">
+            <div ng-repeat="field in model.fields" class="form-group">
+                <label for="{{field.id}}" class="control-label">{{field.label}}</label>
+                <div class="row">
+                    <div ng-switch="model.fieldType(field.type)" class="col-sm-6">
+                        <input ng-switch-when="0" type="text" class="form-control" id="{{field.id}}" placeholder="{{field.placeholder}}">
+                        <textarea ng-switch-when="1" class="form-control" rows="5" id="{{field.id}}" placeholder="{{field.placeholder}}"></textarea>
+                        <input ng-switch-when="2" type="date" class="form-control" id="{{field.id}}" placeholder="{{field.placeholder}}">
+                        <div ng-switch-when="3" class="col-xs-6">
+                                <select id="{{field.id}}" class="form-control">
+                                    <option ng-repeat="option in field.options" value="{{option.value}}">
+                                        {{option.label}}
+                                    </option>
+                                </select>
+                        </div>
+                        <div ng-switch-when="4" class="checkbox col-sm-6">
+                            <label ng-repeat="option in field.options">
+                                <input type="checkbox" name="{{field.label}}" value="option.value">{{option.label}}
+                            </label>
+                        </div>
+                        <div ng-switch-when="5" class="radio col-sm-6">
+                            <label ng-repeat="option in field.options">
+                                <input type="radio" name="{{field.label}}" value="option.value">{{option.label}}
+                            </label>
+                        </div>
+                        <input ng-switch-default type="text" class="form-control" id="{{field.id}}" placeholder="{{field.placeholder}}">
+                    </div>
+                    <btn class="btn glyphicon glyphicon-pencil"></btn>
+                    <btn class="btn glyphicon glyphicon-plus"></btn>
+                    <btn ng-click="model.removeField(field)" class="btn glyphicon glyphicon-remove"></btn>
+                    <btn class="btn glyphicon glyphicon-align-justify"></btn>
+                </div>
             </div>
-            <btn class="btn glyphicon glyphicon-pencil"></btn>
-            <btn class="btn glyphicon glyphicon-plus"></btn>
-            <btn class="btn glyphicon glyphicon-remove"></btn>
-            <btn class="btn glyphicon glyphicon-align-justify"></btn>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="lastname" class="control-label">Last Name:</label>
-        <div class="row">
-            <div class="col-xs-6">
-                <input type="text" class="form-control" id="lastname" placeholder="Last Name">
-            </div>
-            <btn class="btn glyphicon glyphicon-pencil"></btn>
-            <btn class="btn glyphicon glyphicon-plus"></btn>
-            <btn class="btn glyphicon glyphicon-remove"></btn>
-            <btn class="btn glyphicon glyphicon-align-justify"></btn>
-        </div>
-    </div>
 
-    <div class="form-group">
-        <label for="birthdate" class="control-label">Date of Birth:</label>
-        <div class="row">
-            <div class="col-xs-6">
-                <input type="date" class="form-control" id="birthdate">
-            </div>
-            <btn class="btn glyphicon glyphicon-pencil"></btn>
-            <btn class="btn glyphicon glyphicon-plus"></btn>
-            <btn class="btn glyphicon glyphicon-remove"></btn>
-            <btn class="btn glyphicon glyphicon-align-justify"></btn>
-        </div>
-    </div>
+            <hr>
 
-    <div class="form-group">
-        <label for="gender" class="control-label">Gender:</label>
-        <div class="row">
-            <div class="col-xs-6">
-                <select id="gender" class="form-control">
-                    <option>Male</option>
-                    <option>Female</option>
-                </select>
+            <!--At the bottom of the Fields tab there should be a dropdown field which allows
+            selecting the type of field. Label is Add New Field and options should be Single
+            Line Text, Date, Dropdown, Checkboxes, Radio buttons, Paragraph Text Field.
+            An add field link should be on the right displayed as a plus sign. Use bootstrap
+            component icon -->
+            <div class="form-group">
+                <label for="newfield" class="control-label">Add New Field:</label>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <select ng-model="model.selectedNewField" ng-options="type.label for type in model.types" id="newfield" class="form-control">
+                        </select>
+                    </div>
+                    <btn ng-click="model.addField(model.selectedNewField)" class="btn glyphicon glyphicon-plus"></btn>
+                </div>
             </div>
-            <btn class="btn glyphicon glyphicon-pencil"></btn>
-            <btn class="btn glyphicon glyphicon-plus"></btn>
-            <btn class="btn glyphicon glyphicon-remove"></btn>
-            <btn class="btn glyphicon glyphicon-align-justify"></btn>
-        </div>
+        </form>
     </div>
-    <div class="form-group">
-        <div class="row">
-            <div class="col-xs-6">
-                <label class="control-label">Roles:</label></div>
-            <btn class="btn glyphicon glyphicon-pencil"></btn>
-            <btn class="btn glyphicon glyphicon-plus"></btn>
-            <btn class="btn glyphicon glyphicon-remove"></btn>
-            <btn class="btn glyphicon glyphicon-align-justify"></btn>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="rolesCheckbox" id="rolesCheckbox1" value="roleAdmin">Admin</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="rolesCheckbox" id="rolesCheckbox2" value="roleStudent">Student</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="rolesCheckbox" id="rolesCheckbox3" value="roleUser">User</label>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row">
-            <div class="col-xs-6">
-                <label class="control-label">License Agreement:</label></div>
-            <btn class="btn glyphicon glyphicon-pencil"></btn>
-            <btn class="btn glyphicon glyphicon-plus"></btn>
-            <btn class="btn glyphicon glyphicon-remove"></btn>
-            <btn class="btn glyphicon glyphicon-align-justify"></btn>
-        </div>
-        <div class="radio">
-            <label><input type="radio" name="licenseRadio" id="licenseRadio1" value="option1" checked>Yes</label>
-
-        </div>
-        <div class="radio">
-            <label><input type="radio" name="licenseRadio" id="licenseRadio2" value="option2">No</label>
-
-        </div>
-    </div>
-    <hr>
-    <!--At the bottom of the Fields tab there should be a dropdown field which allows
-    selecting the type of field. Label is Add New Field and options should be Single
-    Line Text, Date, Dropdown, Checkboxes, Radio buttons, Paragraph Text Field.
-    An add field link should be on the right displayed as a plus sign. Use bootstrap
-    component icon -->
-    <div class="form-group">
-        <label for="newfield" class="control-label">Add New Field:</label>
-        <div class="row">
-            <div class="col-xs-6">
-                <select id="newfield" class="form-control">
-                    <option>Single Line Text</option>
-                    <option>Date</option>
-                    <option>Dropdown</option>
-                    <option>Checkboxes</option>
-                    <option>Radio buttons</option>
-                    <option>Paragraph Text Field</option>
-                </select>
-            </div>
-            <btn class="btn glyphicon glyphicon-plus"></btn>
-        </div>
-    </div>
-</form>
-        </div>
+</div>

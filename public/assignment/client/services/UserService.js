@@ -33,7 +33,8 @@
          */
         function findUserByUsernameAndPassword(username, password) {
             var deferred = $q.defer();
-            $http.get("/api/assignment/user?username=" + username + "&password=" + password)
+            var req = "/api/assignment/user?username=" + username + "&password=" + password;
+            $http.get(req)
                 .success(function(user) {
                     deferred.resolve(user);
                 });
@@ -84,7 +85,8 @@
          */
         function updateUser(id, user) {
             var deferred = $q.defer();
-            $http.put("/api/assignment/user/" + id)
+            var req = "/api/assignment/user/" + id;
+            $http.put(req, user)
                 .success(function(user_obj) {
                     deferred.resolve(user_obj);
                 });

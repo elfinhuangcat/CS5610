@@ -71,15 +71,16 @@
         /**
          * @param formId
          * @param fieldId
-         * @returns {none|promise}
+         * @returns {new form object|promise}
          */
         function deleteFieldFromForm(formId, fieldId) {
             var deferred = $q.defer();
             $http.delete("/api/assignment/form/"+formId+"/field/"+fieldId)
-                .success(function() {
-                    deferred.resolve();
+                .success(function(form) {
                     console.log("INFO - [client] deleteFieldFromForm: field " + fieldId +
                         " deleted from form" + formId);
+                    deferred.resolve(form);
+
                 });
             return deferred.promise;
         }

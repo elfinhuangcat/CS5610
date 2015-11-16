@@ -13,7 +13,7 @@
       ]
   },
 
-  {"id": "010", "title": "ToDo", "userId": 234
+  {"id": "010", "title": "ToDo", "userId": 234,
         "fields": [
           {"id": "777", "label": "Title", "type": "TEXT", "placeholder": "Title"},
           {"id": "888", "label": "Description", "type": "TEXTAREA", "placeholder": "Title"},

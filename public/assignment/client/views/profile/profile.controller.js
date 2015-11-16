@@ -14,8 +14,8 @@
         function init(){
             model.username = $rootScope.user.username;
             model.password = $rootScope.user.password;
-            model.firstname = $rootScope.user.firstname;
-            model.lastname = $rootScope.user.lastname;
+            model.firstname = $rootScope.user.firstName;
+            model.lastname = $rootScope.user.lastName;
             model.email = $rootScope.user.email;
         }
         init();
@@ -35,8 +35,8 @@
 
                     model.username = $rootScope.user.username;
                     model.password = $rootScope.user.password;
-                    model.firstname = $rootScope.user.firstname;
-                    model.lastname = $rootScope.user.lastname;
+                    model.firstName = $rootScope.user.firstName;
+                    model.lastName = $rootScope.user.lastName;
                     model.email = $rootScope.user.email;
                 });
         }

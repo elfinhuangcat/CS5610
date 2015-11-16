@@ -29,11 +29,14 @@ module.exports = function(app, model, db){
     /**
      * removes a form object whose id is equal to the formId path parameter
      * @param req
-     * @param res
+     * @param res - all other forms
      */
     function deleteFormByFormId(req, res) {
         var form_id = req.params["formId"];
+        var user_id = model.findFormById(form_id).userId;
+
         model.deleteFormById(form_id);
+        res.json(model.findFormByUserId(user_id));
     }
 
     /**

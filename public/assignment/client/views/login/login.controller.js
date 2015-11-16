@@ -14,8 +14,13 @@
             UserService
                 .findUserByUsernameAndPassword(model.username, model.password)
                 .then(function(user) {
-                    $rootScope.user = user;
-                    $location = "/profile";
+                    if (user != null){
+                        $rootScope.user = user;
+                        $location.path("/profile");
+                    }
+                    else {
+                        window.alert("User information incorrect. Please enter again.");
+                    }
                 });
         }
     }

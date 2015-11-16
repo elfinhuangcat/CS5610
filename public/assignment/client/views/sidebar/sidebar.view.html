@@ -2,8 +2,8 @@
 <div class="col-sm-3 col-md-2 sidebar" ng-controller="SidebarController">
     <ul class="nav nav-sidebar">
         <li ng-class="{'active' : $location.url()[$location.url().length - 1] == '/'}"><a href="#/">Home</a></li>
-        <li ng-hide="!(model.hasUser())" ng-class="{'active' : $location.url().indexOf('/profile') != -1}"><a href="#/profile">Profile</a></li>
-        <li ng-hide="true" ng-class="{'active' : $location.url().indexOf('/admin') != -1}"><a href="#/admin">Admin</a></li>
-        <li ng-hide="!(model.hasUser())" ng-class="{'active' : $location.url().indexOf('/form') != -1}"><a href="#/form">Forms</a></li>
+        <li ng-class="{'active' : $location.url().indexOf('/profile') != -1}"><a href="#/profile">Profile</a></li>
+        <li ng-class="{'active' : $location.url().indexOf('/admin') != -1}"><a href="#/admin">Admin</a></li>
+        <li ng-class="{'active' : $location.url().indexOf('/form') != -1}"><a href="#/form">Forms</a></li>
     </ul>
 </div>

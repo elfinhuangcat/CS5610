@@ -5,21 +5,20 @@
         .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($location, $rootScope)
+    function HeaderController($scope, $location, $rootScope)
     {
-        var model = this;
-        model.$location = $location;
-        model.username = null;
+        $scope.$location = $location;
+        $scope.username = "Username"; // TODO: update username on header
+        $scope.hasUser = hasUser;
+        $scope.logout = logout;
 
-        model.logout = function() {
+        function logout() {
             $rootScope.user = null;
             model.$location = "/home";
         }
 
-        console.log($location.url().indexOf('register'));
 
-
-        model.hasUser = function() {
+        function hasUser() {
             if ($rootScope.user === undefined || $rootScope.user === null) {
                 return false;
             }

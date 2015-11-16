@@ -3,6 +3,12 @@ var uuid = require('uuid');
 // var q = require("q");
 module.exports = function(app, db) {
 
+    var users = require("./user.mock.json");
+
+    for (var i=0; i < users.length; ++i) {
+        console.log("user id " + users[i].id);
+    }
+
     var api = {
         // Create - should accept an instance object, add it to a corresponding collection, and return the collection
         createUser : createUser,
@@ -19,7 +25,7 @@ module.exports = function(app, db) {
     };
     return api;
 
-    var users = require('./user.mock.json');
+
 
     /**
      *
@@ -52,16 +58,22 @@ module.exports = function(app, db) {
      *
      * @param id
      * @param user: Update the found user instance with the properties in this object
+     * @returns new user object
      */
     function updateUser(id, user) {
+        console.log("update model   id- " + id);
+        console.log("update model   username- " + user.username);
+
+
         for (var i = 0; i < users.length; ++i) {
             if (users[i].id == id) {
                 for (var property in user) {
                     users[i][property] = user[property];
                 }
+                return users[i];
             }
         }
-        console.log("WARNING - updateUser() user id not found")
+        return null;
     }
 
     function deleteUserById(id) {

@@ -16,14 +16,14 @@
             </thead>
             <tbody>
             <tr>
-                <td><input ng-model="inputFormName" type="text" class="form-control" id="formname" placeholder="name"></td>
-                <td><button ng-click="addForm()" type="button" class="btn btn-success glyphicon glyphicon-plus"></button>
-                    <button ng-click="updateForm()" type="button" class="btn btn-warning glyphicon glyphicon-ok"></button></td>
+                <td><input ng-model="model.inputFormName" type="text" class="form-control" id="formname" placeholder="name"></td>
+                <td><button ng-click="model.addForm()" type="button" class="btn btn-success glyphicon glyphicon-plus"></button>
+                    <button ng-click="model.updateForm()" type="button" class="btn btn-warning glyphicon glyphicon-ok"></button></td>
             </tr>
-            <tr ng-repeat="form in forms">
-                <td>{{form.name}}</td>
-                <td><button ng-click="deleteForm($index)" type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
-                    <button ng-click="selectForm($index)" type="button" class="btn btn-warning glyphicon glyphicon-pencil"></button></td>
+            <tr ng-repeat="form in model.forms">
+                <td><a ng-href="#/user/{{model.userId}}/form/{{model.forms[$index].id}}/fields">{{form.title}}</a></td>
+                <td><button ng-click="model.deleteForm($index)" type="button" class="btn btn-danger glyphicon glyphicon-remove"></button>
+                    <button ng-click="model.selectForm($index)" type="button" class="btn btn-warning glyphicon glyphicon-pencil"></button></td>
             </tr>
             </tbody>
 

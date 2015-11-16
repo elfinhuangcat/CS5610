@@ -33,6 +33,7 @@ module.exports = function(app, model, db){
      */
     function deleteFieldByFormAndFieldId(req, res) {
         model.deleteFieldByFormAndFieldId(req.params["formId"], req.params["fieldId"]);
+        res.json(model.findFormById(req.params["formId"]));
     }
 
     /**

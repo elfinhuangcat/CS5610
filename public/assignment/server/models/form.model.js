@@ -1,6 +1,8 @@
 "use strict";
 var uuid = require('uuid');
 module.exports = function(app, db) {
+
+    var forms = require("./form.mock.json");
     var api = {
         // Create - should accept an instance object, add it to a corresponding collection, and return the collection
         createForm : createForm,
@@ -22,7 +24,7 @@ module.exports = function(app, db) {
     };
     return api;
 
-    var forms = require('./form.mock.json');
+
 
 
     /**
@@ -56,7 +58,6 @@ module.exports = function(app, db) {
                 }
             }
         }
-        console.log("WARNING - updateForm() form id not found");
     }
 
     function deleteFormById(id) {
@@ -65,7 +66,6 @@ module.exports = function(app, db) {
                 forms.splice(i,1);
             }
         }
-        console.log("WARNING - deleteFormById() - form id not found");
     }
 
     /**
@@ -139,7 +139,6 @@ module.exports = function(app, db) {
                 }
             }
         }
-        console.log("WARNING - deleteFieldByFormAndFieldId() formId not found");
     }
 
     /**
@@ -149,6 +148,7 @@ module.exports = function(app, db) {
      * @param field
      */
     function createField(formId, field) {
+        field.id = uuid.v4(); // id gen
         for (var i = 0; i < forms.length; ++i) {
             if (forms[i].id == formId) {
                 if (forms[i].fields === undefined) {

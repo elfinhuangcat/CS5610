@@ -24,23 +24,27 @@
                     .createUser(newUser)
                     .then(function(user) {
                         $rootScope.user = user;
-                        model.$location = "/profile";
+
+                        console.log("id- " + $rootScope.user.id);
+                        console.log("username " + $rootScope.user.username);
+                        console.log("password " + $rootScope.user.password);
+                        console.log("first " + $rootScope.user.firstName);
+                        console.log("last " + $rootScope.user.lastName);
+                        console.log("email " + $rootScope.user.email);
+
+                        $location.path("/profile");
                     });
             }
         }
 
-        /**
-         * @returns true if info is valid
-         *          false if info is not valid (and windows will pop up)
-         */
         function register_check(){
             // 1. username is not empty:
-            if (model.username == "") {
+            if (model.username == "" || model.username == undefined) {
                 window.alert("WARNING - user name cannot be empty");
                 return false;
             }
             // 2. password is not empty:
-            else if (model.password =="") {
+            else if (model.password =="" || model.password == undefined) {
                 window.alert("WARNING - password cannot be empty");
                 return false;
             }

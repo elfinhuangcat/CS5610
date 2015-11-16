@@ -17,6 +17,7 @@
         model.$location = $location;
         model.forms = null;
         model.selectedFormIndex = null;
+        model.userId = $rootScope.user.id;
 
         model.addForm = addForm;
         model.updateForm = updateForm;
@@ -37,7 +38,7 @@
          */
         function addForm() {
             if (form_name_check(model.inputFormName)) {
-                var form = {"name" : model.inputFormName};
+                var form = {"title" : model.inputFormName};
                 FormService
                     .createFormForUser($rootScope.user.id, form)
                     .then(function(form) {
@@ -48,7 +49,7 @@
                 model.selectedFormIndex = null;
             }
             else {
-                alert("The name of a form cannot be empty!");
+                alert("The title of a form cannot be empty!");
             }
         }
 
@@ -60,7 +61,7 @@
             if (form_name_check(model.inputFormName))
             {
                 var form = model.forms[model.selectedFormIndex];
-                form.name = model.inputFormName;
+                form.title = model.inputFormName;
                 FormService
                     .updateFormById(form.id, form)
                     .then(function(form) {
@@ -70,7 +71,7 @@
                 model.inputFormName = "";
             }
             else {
-                alert("The name of a form cannot be empty!");
+                alert("The title of a form cannot be empty!");
             }
         }
 

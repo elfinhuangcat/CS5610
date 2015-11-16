@@ -60,10 +60,10 @@ module.exports = function(app, model, db){
     function updateUser(req, res) {
         // Properties to be update:
         // firstName, lastName, username, password, email
-        var id = req.param["id"];
+        console.log("server before update " + req.params["id"]);
+        var id = req.params["id"];
         var user = req.body;
-        model.updateUser(id, user);
-        res.json(model.findUserById(id));
+        res.json(model.updateUser(id, user));
     }
 
     /**
@@ -73,7 +73,7 @@ module.exports = function(app, model, db){
      * @param res
      */
     function deleteUserById(req, res) {
-        var id = req.param["id"];
+        var id = req.params["id"];
         model.deleteUserById(id);
         res.json(model.findAllUser());
     }

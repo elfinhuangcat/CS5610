@@ -5,12 +5,11 @@
         .module("FormBuilderApp")
         .controller("SidebarController", SidebarController);
 
-    function SidebarController($location, $rootScope)
+    function SidebarController($scope, $location, $rootScope)
     {
-        var model = this;
-        model.$location = $location;
-        model.hasUser = hasUser;
-        model.adminHide = adminHide;
+        $scope.$location = $location;
+        $scope.hasUser = hasUser;
+        $scope.adminHide = adminHide;
 
         function adminHide() {
             return true; // For now the admin page is not implemented
