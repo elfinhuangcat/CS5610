@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function(app, model, db){
+module.exports = function(app, model){
     app.post("/api/assignment/user", createUser);
     app.get("/api/assignment/user", getUser); // It may contain queries
     app.get("/api/assignment/user/:id", getUserById);
@@ -11,10 +11,11 @@ module.exports = function(app, model, db){
      * @param res - the created user (single user)
      */
     function createUser(req, res) {
-
-        var user = req.body;
-        res.json(model.createUser(user)); //model.createUser returns all users
-
+        model
+            .createUser(req.body)
+            .then(function(user){
+                res.json(user);
+            });
     }
 
     /** Get User Issues:
@@ -33,22 +34,38 @@ module.exports = function(app, model, db){
                     "username" : req.query.username,
                     "password" : req.query.password
                 };
-                res.json(model.findUserByCredentials(credentials));
+                model
+                    .findUserByCredentials(credentials)
+                    .then(function(user) {
+                        res.json(user);
+                    });
             }
             else {
                 // GET /api/assignment/user?username=username
-                res.json(model.findUserByUsername(req.query.username));
+                model
+                    .findUserByUsername(req.query.username)
+                    .then(function(user) {
+                        res.json(user);
+                    });
             }
         }
         else {
             // no query params. Find all users:
-            res.json(model.findAllUser());
+            model
+                .findAllUser()
+                .then(function(users) {
+                    res.json(users);
+                });
         }
     }
 
     function getUserById(req, res) {
-        var id = req.params["id"];
-        res.json(model.findUserById(id));
+        console.log("GET USER BY ID SERVICE: " + req.params["id"]);
+        model
+            .findUserById(req.params["id"])
+            .then(function(user) {
+                res.json(user);
+            });
     }
 
     /**
@@ -60,10 +77,13 @@ module.exports = function(app, model, db){
     function updateUser(req, res) {
         // Properties to be update:
         // firstName, lastName, username, password, email
-        console.log("server before update " + req.params["id"]);
-        var id = req.params["id"];
-        var user = req.body;
-        res.json(model.updateUser(id, user));
+        // var id = req.params["id"];
+        // var user = req.body;
+        model
+            .updateUser(req.params["id"], req.body)
+            .then(function(user) {
+                res.json(user);
+            });
     }
 
     /**
@@ -74,7 +94,15 @@ module.exports = function(app, model, db){
      */
     function deleteUserById(req, res) {
         var id = req.params["id"];
-        model.deleteUserById(id);
-        res.json(model.findAllUser());
+        model
+            .deleteUserById(req.params["id"])
+            .then(function(result) {
+                console.log("DELETE USER RESULT: " + result);
+            });
+        model
+            .findAllUser()
+            .then(function(users) {
+                res.json(users);
+            });
     }
 };

@@ -2,7 +2,7 @@
 var uuid = require('uuid');
 module.exports = function(app, db) {
 
-    var forms = require("./form.mock.json");
+    var forms = [];
     var api = {
         // Create - should accept an instance object, add it to a corresponding collection, and return the collection
         createForm : createForm,

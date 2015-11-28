@@ -1,7 +1,7 @@
 var express = require('express');
-var bodyParser = require('body-parser')
-var mongoose_hw = require('mongoose'); // database connection for homework
-var db = require('mongodb'); // PLACE HOLDER
+var bodyParser = require('body-parser');
+var db = require('mongoose');
+db.connect("mongodb://localhost/cs5610");
 
 var app = express();
 // mongoose_hw.connect('mongodb://localhost/my_database');
@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // assignment app
-require('./public/assignment/server/app.js')(app, mongoose_hw, db);
+require('./public/assignment/server/app.js')(app, db);
 
+console.log("SERVER LISTENING..");
 app.listen(port, ipaddress);

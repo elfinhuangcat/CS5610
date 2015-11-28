@@ -1,14 +1,8 @@
 "use strict";
-var uuid = require('uuid');
-// var q = require("q");
-module.exports = function(app, db) {
-
-    var users = require("./user.mock.json");
-
-    for (var i=0; i < users.length; ++i) {
-        console.log("user id " + users[i].id);
-    }
-
+// var uuid = require('uuid');
+module.exports = function(app, db, UserSchema) {
+    var q = require("q");
+    var UserModel = db.model("UserModel", UserSchema);
     var api = {
         // Create - should accept an instance object, add it to a corresponding collection, and return the collection
         createUser : createUser,
@@ -26,89 +20,130 @@ module.exports = function(app, db) {
     return api;
 
 
-
     /**
      *
      * @param user
-     * @returns the created user
+     * @returns {*|promise}
      */
     function createUser(user) {
-        user.id = uuid.v4();
-        users.push(user);
-        return findUserById(user.id);
+        var deferred = q.defer();
+        UserModel.create(user, function(err, result) {
+            if (err) {
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(result);
+            }
+        });
+        return deferred.promise;
     }
 
     function findAllUser() {
-        return users;
-    }
+        console.log("MODEL - FIND ALL USERS INVOKED");
+        var deferred = q.defer();
 
-    /**
-     * @param id
-     */
-    function findUserById(id) {
-        for (var i = 0; i < users.length; ++i) {
-            if (users[i].id == id) {
-                return users[i]; //user found
+        UserModel.find(function(err, users){
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(users);
             }
-        }
-        return null; //User not found
+        });
+
+        return deferred.promise;
     }
 
     /**
      *
      * @param id
-     * @param user: Update the found user instance with the properties in this object
-     * @returns new user object
+     * @returns {*|promise}
+     */
+    function findUserById(id) {
+        var deferred = q.defer();
+
+        UserModel.findById(id, function(err, user){
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(user);
+            }
+        });
+
+        return deferred.promise;
+    }
+
+    /**
+     *
+     * @param id
+     * @param user - the whole user object to be modified
+     * @returns {*|promise}
      */
     function updateUser(id, user) {
-        console.log("update model   id- " + id);
-        console.log("update model   username- " + user.username);
+        var deferred = q.defer();
 
+        user.delete("_id");
 
-        for (var i = 0; i < users.length; ++i) {
-            if (users[i].id == id) {
-                for (var property in user) {
-                    users[i][property] = user[property];
-                }
-                return users[i];
+        UserModel.findOneAndUpdate({_id: id}, {$set: user}, function(err, user) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(user);
             }
-        }
-        return null;
+        });
+
+        return deferred.promise;
     }
 
     function deleteUserById(id) {
-        for (var i = 0; i < users.length; ++i) {
-            if (users[i].id == id) {
-                users.splice(i,1);
-            }
-        }
-        console.log("WARNING - deleteUserById() - user id not found");
-    }
+        var deferred = q.defer();
 
-    /**
-     * Returns a found user instance, or null if the user is not found
-     * @param username
-     */
-    function findUserByUsername(username) {
-        for (var i = 0; i < users.length; ++i) {
-            if (users[i].username == username) {
-                return users[i];
+        UserModel.remove({_id: id}, function(err, status) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(status);
             }
-        }
-        return null; // user not found
+        });
+
+        return deferred.promise;
     }
 
     /**
      *
-     * @param credentials : "username" and "password"
+     * @param username
+     * @returns {*|promise}
+     */
+    function findUserByUsername(username) {
+        var deferred = q.defer();
+
+        UserModel.find({"username": username}, function(err, user){
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(user);
+            }
+        });
+
+        return deferred.promise;
+    }
+
+    /**
+     *
+     * @param credentials
+     * @returns {*|promise}
      */
     function findUserByCredentials(credentials) {
-        for (var i = 0; i < users.length; ++i) {
-            if (users[i].username == credentials.username &&
-                users[i].password == credentials.password) {
-                return users[i];
-            }
-        }
-        return null; //user not found
+        var deferred = q.defer();
+
+        UserModel.find(credentials,
+            function(err, user){
+                if(err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
     }
 };
