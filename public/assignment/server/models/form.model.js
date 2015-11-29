@@ -81,10 +81,10 @@ module.exports = function(app, mongoose, FormSchema) {
      */
     function updateForm(id, form) {
         var deferred = q.defer();
-        form.delete("_id");
-        form.delete("id");
+        delete form["_id"];
+        delete form["id"];
 
-        FormModel.findOneAndUpdate({"id": id}, {$set: form}, function(err, newForm) {
+        FormModel.findOneAndUpdate({"id": id}, {$set: form},  { 'new': true }, function(err, newForm) {
             if(err) {
                 deferred.reject(err);
             } else {
@@ -252,8 +252,9 @@ module.exports = function(app, mongoose, FormSchema) {
      */
     function updateField(formId, fieldId, field) {
         var deferred = q.defer();
-        field.delete("id");
+        delete field["id"];
 
+        // TODO: CHECK IF UPDATE REALLY RETURNS THE NEW FORM OBJECT
         FormModel.findOne({"id": formId}, function(err, form){
             if (err) {
                 deferred.reject(err);

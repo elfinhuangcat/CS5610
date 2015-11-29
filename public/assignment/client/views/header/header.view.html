@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li ng-class="{active: $location.path().indexOf('register') != -1}"><a href="#/register">Register</a></li>
                 <li ng-class="{active: $location.path().indexOf('login') != -1}"><a href="#/login">Login</a></li>
-                <li><a href="#/profile"> {{username}} </a></li>
+                <li ng-if="$rootScope.user != null"><a href="#/profile"> {{$rootScope.user.username}} </a></li>
                 <li><a ng-click="logout()" href="#/home">Logout</a></li>
             </ul>
             <!-- <form class="navbar-form navbar-right">

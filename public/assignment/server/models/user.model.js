@@ -81,10 +81,10 @@ module.exports = function(app, mongoose, UserSchema) {
     function updateUser(id, user) {
         var deferred = q.defer();
 
-        user.delete("_id");
-        user.delete("id");
+        delete user["_id"];
+        delete user["id"];
 
-        UserModel.findOneAndUpdate({"id": id}, {$set: user}, function(err, newUser) {
+        UserModel.findOneAndUpdate({"id": id}, {$set: user},{ 'new': true }, function(err, newUser) {
             if(err) {
                 deferred.reject(err);
             } else {

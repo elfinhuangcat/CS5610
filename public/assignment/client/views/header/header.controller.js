@@ -8,13 +8,17 @@
     function HeaderController($scope, $location, $rootScope)
     {
         $scope.$location = $location;
-        $scope.username = "Username"; // TODO: update username on header
+        $scope.username = null;
+        $scope.$rootScope = $rootScope;
+
         $scope.hasUser = hasUser;
         $scope.logout = logout;
 
         function logout() {
-            $rootScope.user = null;
-            model.$location = "/home";
+            delete $rootScope.user;
+            $location.path("/home");
+            $scope.$location = $location;
+            $scope.username = null;
         }
 
 
@@ -23,6 +27,7 @@
                 return false;
             }
             else {
+                $scope.username = $rootScope.user.username;
                 return true;
             }
         }
