@@ -93,16 +93,10 @@ module.exports = function(app, model){
      * @param res
      */
     function deleteUserById(req, res) {
-        var id = req.params["id"];
         model
             .deleteUserById(req.params["id"])
             .then(function(result) {
-                console.log("DELETE USER RESULT: " + result);
-            });
-        model
-            .findAllUser()
-            .then(function(users) {
-                res.json(users);
+                res.json(result);
             });
     }
 };

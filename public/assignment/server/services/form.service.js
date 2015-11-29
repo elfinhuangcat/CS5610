@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function(app, model, db){
+module.exports = function(app, model){
     app.get("/api/assignment/user/:userId/form", getFormByUserId);
     app.get("/api/assignment/form/:formId", getFormByFormId);
     app.delete("/api/assignment/form/:formId", deleteFormByFormId);
@@ -12,8 +12,11 @@ module.exports = function(app, model, db){
      * @param res
      */
     function getFormByUserId(req, res) {
-        var user_id = req.params["userId"];
-        res.json(model.findFormByUserId(user_id));
+        model
+            .findFormByUserId(req.params["userId"])
+            .then(function(forms) {
+                res.json(forms);
+            });
     }
 
     /**
@@ -22,8 +25,11 @@ module.exports = function(app, model, db){
      * @param res
      */
     function getFormByFormId(req, res) {
-        var form_id = req.params["formId"];
-        res.json(model.findFormById(form_id));
+        model
+            .findFormById(req.params["formId"])
+            .then(function(form) {
+                res.json(form);
+            });
     }
 
     /**
@@ -32,11 +38,11 @@ module.exports = function(app, model, db){
      * @param res - all other forms
      */
     function deleteFormByFormId(req, res) {
-        var form_id = req.params["formId"];
-        var user_id = model.findFormById(form_id).userId;
-
-        model.deleteFormById(form_id);
-        res.json(model.findFormByUserId(user_id));
+        model
+            .deleteFormById(req.params["formId"])
+            .then(function(result) {
+                res.json(result);
+            });
     }
 
     /**
@@ -52,7 +58,11 @@ module.exports = function(app, model, db){
     function createForm(req, res) {
         var form = req.body;
         form.userId = req.params["userId"];
-        res.json(model.createForm(form));
+        model
+            .createForm(form)
+            .then(function(newForm) {
+                res.json(newForm);
+            });
     }
 
     /**
@@ -63,9 +73,10 @@ module.exports = function(app, model, db){
      * @param res - the updated form object
      */
     function updateFormById(req, res) {
-        var form_id = req.params["formId"];
-        var form = req.body;
-        model.updateForm(form_id, form);
-        res.json(model.findFormById(form_id));
+        model
+            .updateForm(req.params["formId"], req.body)
+            .then(function(newForm) {
+                res.json(newForm);
+            });
     }
 };

@@ -1,8 +1,8 @@
 "use strict";
-// var uuid = require('uuid');
-module.exports = function(app, db, UserSchema) {
+var uuid = require('uuid');
+module.exports = function(app, mongoose, UserSchema) {
     var q = require("q");
-    var UserModel = db.model("UserModel", UserSchema);
+    var UserModel = mongoose.model("UserModel", UserSchema);
     var api = {
         // Create - should accept an instance object, add it to a corresponding collection, and return the collection
         createUser : createUser,
@@ -27,6 +27,7 @@ module.exports = function(app, db, UserSchema) {
      */
     function createUser(user) {
         var deferred = q.defer();
+        user.id = uuid.v4();
         UserModel.create(user, function(err, result) {
             if (err) {
                 deferred.reject(err);
@@ -39,7 +40,6 @@ module.exports = function(app, db, UserSchema) {
     }
 
     function findAllUser() {
-        console.log("MODEL - FIND ALL USERS INVOKED");
         var deferred = q.defer();
 
         UserModel.find(function(err, users){
@@ -55,13 +55,13 @@ module.exports = function(app, db, UserSchema) {
 
     /**
      *
-     * @param id
+     * @param id - the id created by the server. NOT the one by mongodb (_id)
      * @returns {*|promise}
      */
     function findUserById(id) {
         var deferred = q.defer();
 
-        UserModel.findById(id, function(err, user){
+        UserModel.findOne({"id" : id}, function(err, user){
             if(err) {
                 deferred.reject(err);
             } else {
@@ -74,7 +74,7 @@ module.exports = function(app, db, UserSchema) {
 
     /**
      *
-     * @param id
+     * @param id - the id created by the server. NOT the one by mongodb (_id)
      * @param user - the whole user object to be modified
      * @returns {*|promise}
      */
@@ -82,22 +82,28 @@ module.exports = function(app, db, UserSchema) {
         var deferred = q.defer();
 
         user.delete("_id");
+        user.delete("id");
 
-        UserModel.findOneAndUpdate({_id: id}, {$set: user}, function(err, user) {
+        UserModel.findOneAndUpdate({"id": id}, {$set: user}, function(err, newUser) {
             if(err) {
                 deferred.reject(err);
             } else {
-                deferred.resolve(user);
+                deferred.resolve(newUser);
             }
         });
 
         return deferred.promise;
     }
 
+    /**
+     *
+     * @param id - the id created by the server. NOT the one by mongodb (_id)
+     * @returns {*|promise}
+     */
     function deleteUserById(id) {
         var deferred = q.defer();
 
-        UserModel.remove({_id: id}, function(err, status) {
+        UserModel.remove({"id": id}, function(err, status) {
             if(err) {
                 deferred.reject(err);
             } else {
@@ -116,7 +122,7 @@ module.exports = function(app, db, UserSchema) {
     function findUserByUsername(username) {
         var deferred = q.defer();
 
-        UserModel.find({"username": username}, function(err, user){
+        UserModel.findOne({"username": username}, function(err, user){
             if(err) {
                 deferred.reject(err);
             } else {
@@ -135,7 +141,7 @@ module.exports = function(app, db, UserSchema) {
     function findUserByCredentials(credentials) {
         var deferred = q.defer();
 
-        UserModel.find(credentials,
+        UserModel.findOne(credentials,
             function(err, user){
                 if(err) {
                     deferred.reject(err);

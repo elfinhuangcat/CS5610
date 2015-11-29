@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function(app, model, db){
+module.exports = function(app, model){
     app.get("/api/assignment/form/:formId/field", getFieldByFormId);
     app.get("/api/assignment/form/:formId/field/:fieldId", getOneFieldByFormAndFieldId);
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldByFormAndFieldId);
@@ -12,8 +12,11 @@ module.exports = function(app, model, db){
      * @param res
      */
     function getFieldByFormId(req, res) {
-        var form_id = req.params["formId"];
-        res.json(model.findFieldByFormId(form_id));
+        model
+            .findFieldByFormId(req.params["formId"])
+            .then(function(fields) {
+                res.json(fields);
+            });
     }
 
     /**
@@ -22,7 +25,11 @@ module.exports = function(app, model, db){
      * response: a field object or null
      */
     function getOneFieldByFormAndFieldId(req, res) {
-        res.json(model.findOneFieldByFormAndFieldId(req.params["formId"], req.params["fieldId"]));
+        model
+            .findOneFieldByFormAndFieldId(req.params["formId"], req.params["fieldId"])
+            .then(function(field) {
+                res.json(field);
+            });
     }
 
     /**
@@ -32,8 +39,11 @@ module.exports = function(app, model, db){
      * @param res - none
      */
     function deleteFieldByFormAndFieldId(req, res) {
-        model.deleteFieldByFormAndFieldId(req.params["formId"], req.params["fieldId"]);
-        res.json(model.findFormById(req.params["formId"]));
+        model
+            .deleteFieldByFormAndFieldId(req.params["formId"], req.params["fieldId"])
+            .then(function(result) {
+                res.json(result);
+            });
     }
 
     /**
@@ -48,9 +58,11 @@ module.exports = function(app, model, db){
      * response : the new form object
      */
     function createField(req, res) {
-        var field = req.body;
-        var formId = req.params["formId"];
-        res.json(model.createField(formId, field));
+        model
+            .createField(req.params["formId"], req.body)
+            .then(function(form) {
+                res.json(form);
+            });
     }
 
     /**
@@ -65,6 +77,10 @@ module.exports = function(app, model, db){
     function updateField(req, res) {
         var fieldId = req.params["fieldId"];
         var formId = req.params["formId"];
-        res.json(model.updateField(formId, fieldId, req.body));
+        model
+            .updateField(formId, fieldId, req.body)
+            .then(function(form) {
+                res.json(form);
+            });
     }
 };
