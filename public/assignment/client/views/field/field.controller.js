@@ -27,6 +27,7 @@
         model.selectedNewField = model.types[0];
         model.addField = addField;
         model.removeField= removeField;
+        model.cloneField = cloneField;
         model.fieldType = fieldType;
         model.userId = $routeParams["userId"];
         model.formId = $routeParams["formId"];
@@ -81,6 +82,23 @@
                 });
         }
 
+        function removeField(field) {
+            console.log("REMOVE FIELD ID: "+ field.id);
+            FieldService
+                .deleteFieldFromForm(model.formId, field.id)
+                .then(function(form) {
+                    model.fields = form.fields;
+                });
+        }
+
+        function cloneField(field) {
+            FieldService
+                .createFieldForForm(model.formId, field)
+                .then(function (form) {
+                    model.fields = form.fields;
+                });
+        }
+
         function fieldType(type) {
             if (type == "TEXT") {
                 return 0;
@@ -106,13 +124,6 @@
 
         }
 
-        function removeField(field) {
-            console.log("REMOVE FIELD ID: "+ field.id);
-            FieldService
-                .deleteFieldFromForm(model.formId, field.id)
-                .then(function(form) {
-                    model.fields = form.fields;
-                });
-        }
+
     }
 })();

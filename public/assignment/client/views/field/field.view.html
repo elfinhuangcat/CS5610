@@ -35,7 +35,7 @@
                         <input ng-switch-default type="text" class="form-control" id="{{field.id}}" placeholder="{{field.placeholder}}">
                     </div>
                     <btn class="btn glyphicon glyphicon-pencil"></btn>
-                    <btn class="btn glyphicon glyphicon-plus"></btn>
+                    <btn ng-click="model.cloneField(field)" class="btn glyphicon glyphicon-plus"></btn>
                     <btn ng-click="model.removeField(field)" class="btn glyphicon glyphicon-remove"></btn>
                     <btn class="btn glyphicon glyphicon-align-justify"></btn>
                 </div>
