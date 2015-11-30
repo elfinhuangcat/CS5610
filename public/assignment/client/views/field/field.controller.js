@@ -11,7 +11,7 @@
      * @param FormService
      * @constructor
      */
-    function FieldController($rootScope, $location, FieldService, $routeParams)
+    function FieldController($location, FieldService, $routeParams)
     {
         var model = this;
         model.$location = $location;
@@ -20,9 +20,9 @@
             {id: 0, value:"TEXT", label: "Single Line Text Field", name: "New Text Field"}, //0
             {id: 1, value:"TEXTAREA", label: "Multi Line Text Field", name: "New Text Field"},  //1
             {id: 2, value:"DATE", label: "Date Field", name: "New Date Field"},             //2
-            {id: 3, value:"OPTIONS", label: "Dropdown Field", name:"New Dropdown"},         //3
-            {id: 4, value:"CHECKBOXES", label: "Checkboxes Field", name:"New Checkboxes"},       //4
-            {id: 5, value:"RADIOS", label: "Radio Buttons Field", name:"New Radio Buttons"}     //5
+            {id: 3, value:"SELECT", label: "Dropdown Field", name:"New Dropdown"},         //3
+            {id: 4, value:"CHECKBOXE", label: "Checkboxes Field", name:"New Checkboxes"},       //4
+            {id: 5, value:"RADIO", label: "Radio Buttons Field", name:"New Radio Buttons"}     //5
         ];
         model.selectedNewField = model.types[0];
         model.addField = addField;
@@ -44,7 +44,7 @@
 
         function addField(type) {
             var newField = {
-                id: null,
+                id: "000",
                 label: type.name,
                 type: type.value
             };
@@ -91,13 +91,13 @@
             else if (type == "DATE") {
                 return 2;
             }
-            else if (type == "OPTIONS") {
+            else if (type == "SELECT") {
                 return 3;
             }
-            else if (type == "CHECKBOXES") {
+            else if (type == "CHECKBOXE") {
                 return 4;
             }
-            else if (type == "RADIOS") {
+            else if (type == "RADIO") {
                 return 5;
             }
             else{

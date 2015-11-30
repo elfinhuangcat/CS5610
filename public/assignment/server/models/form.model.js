@@ -230,11 +230,14 @@ module.exports = function(app, mongoose, FormSchema) {
                 deferred.reject(err);
             }
             else {
+                console.log("Form " + formId + "found. New field ID: " + field.id);
                 form.fields.push(field);
+                console.log("Form's new field pushed.");
                 form.save(function(err, form){
                     if (err) {
                         deferred.reject(err);
                     } else {
+                        console.log("new form object: " + form);
                         deferred.resolve(form);
                     }
                 });
