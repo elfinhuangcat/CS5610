@@ -200,7 +200,7 @@ module.exports = function(app, mongoose, FormSchema) {
                 var ind;
                 var flag = false;
                 for (ind = 0; ind < form.fields.length; ++ind) {
-                    if (form.fields.id == fieldId) {
+                    if (form.fields[ind].id == fieldId) {
                         flag = true;
                         form.fields.splice(ind, 1);
                         form.save(function (err, form) {
