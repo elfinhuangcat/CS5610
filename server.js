@@ -26,6 +26,8 @@ app.use(bodyParser.json());
 
 // assignment app
 require('./public/assignment/server/app.js')(app, mongoose, db);
+// project app
+require('./public/project/server/app.js')(app, mongoose, db);
 
 console.log("SERVER LISTENING..");
 app.listen(port, ipaddress);
