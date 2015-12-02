@@ -31,6 +31,7 @@ module.exports = function(mongoose) {
         'brunch',
         'dinner',
         'high tea',
+        'lunch',
         'nosh',
         'picnic',
         'snack',

@@ -21,6 +21,7 @@ module.exports = function(app, mongoose, RecipeSchema) {
         var deferred = q.defer();
         RecipeModel.create(recipe, function(err, result) {
             if (err) {
+                console.log(err);
                 deferred.reject(err);
             }
             else {

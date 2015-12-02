@@ -15,9 +15,8 @@ module.exports = function(app, model){
     // delete a user by id
     app.delete("/rest/api/recipescom/user/:id", deleteUserById);
 
-    // findUsersInEmailArray : findUsersInEmailArray, // arg: [{email: String}]
-    // user emails (arr) in the body
-    app.get(   "/rest/api/recipescom/user/multiple", getMultipleUser);
+    // Given the userid, return the user's friends objects
+    app.get(   "/rest/api/recipescom/user/:id/friend", getMultipleUser);
 
     /**
      * @param req
@@ -109,14 +108,22 @@ module.exports = function(app, model){
 
     /**
      *
-     * @param req : [{email: String}] arr in the body
-     * @param res : an array of users
+     * @param req - [{email: String}] arr in the body
+     * @param res - an array of users
      */
     function getMultipleUser(req, res) {
         model
-            .findUsersInEmailArray(req.body)
-            .then(function(users) {
-                res.json(users);
+            .findUserById(req.params["id"])
+            .then(function(user) {
+                var friend = [];
+                for (var ind = 0; ind < user.friends.length; ++ind) {
+                    friend.push({"email": user.friends[ind]});
+                }
+                model
+                    .findUsersInEmailArray(friend)
+                    .then(function(users) {
+                        res.json(users);
+                    });
             });
     }
 };

@@ -1,7 +1,7 @@
 "use strict";
 module.exports = function(app, model){
     // new recipe object in the body
-    app.post(   "/rest/api/recipescom/recipe", createRecipe);
+    app.post(  "/rest/api/recipescom/recipe", createRecipe);
 
     // find all recipes
     app.get(   "/rest/api/recipescom/recipe", getRecipe);
@@ -15,9 +15,6 @@ module.exports = function(app, model){
     // delete a recipe by id
     app.delete("/rest/api/recipescom/recipe/:id", deleteRecipeById);
 
-    // findRecipesInArrayOfId : findRecipesInArrayOfId, // arg: [{_id: String(Recipe's id)}]
-    // recipe _ids (arr) in the body
-    app.get(   "/rest/api/recipescom/recipe/multiple", getMultipleRecipe);
 
     /**
      * @param req
@@ -77,19 +74,6 @@ module.exports = function(app, model){
             .deleteRecipeById(req.params["id"])
             .then(function(result) {
                 res.json(result);
-            });
-    }
-
-    /**
-     * In the body: arr : [{_id: String}]
-     * @param req : [{email: String}] arr in the body
-     * @param res : an array of users
-     */
-    function getMultipleRecipe(req, res) {
-        model
-            .findRecipesInArrayOfId(req.body)
-            .then(function(recipes) {
-                res.json(recipes);
             });
     }
 };

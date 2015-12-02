@@ -71,7 +71,7 @@ module.exports = function(app, mongoose, ApplicationSchema) {
      */
     function findApplicationByApplicant(email) {
         var deferred = q.defer();
-        ApplicationModel.findOne({"email": email}, function(err, application) {
+        ApplicationModel.findOne({"applicant": email}, function(err, application) {
             if (err) {
                 deferred.reject(err);
             } else {

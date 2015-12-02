@@ -1,7 +1,7 @@
 "use strict";
 module.exports = function(app, mongoose, UserSchema) {
     var q = require("q");
-    var UserModel = mongoose.model("UserModel", UserSchema);
+    var UserModel = mongoose.model("ProjectUserModel", UserSchema);
     var api = {
         createUser : createUser, // arg: user
         findAllUser : findAllUser, // arg: null
@@ -56,6 +56,7 @@ module.exports = function(app, mongoose, UserSchema) {
         var deferred = q.defer();
         UserModel.find({$or: arr}, function (err, users) {
             if (err) {
+                console.log(err);
                 deferred.reject(err);
             }
             else {

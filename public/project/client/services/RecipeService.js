@@ -6,7 +6,6 @@
 
     function RecipeService($http, $q) {
         var service = {
-            findMultipleRecipeByIds: findMultipleRecipeByIds,
             findAllRecipes: findAllRecipes,
             findRecipeById: findRecipeById,
             createRecipe: createRecipe,
@@ -14,20 +13,6 @@
             updateRecipe: updateRecipe
         };
         return service;
-
-        /**
-         *
-         * @param arr - [{_id: String(Recipe's id)}]
-         * @returns {*|promise}
-         */
-        function findMultipleRecipeByIds(arr) {
-            var deferred = $q.defer();
-            $http.get("/rest/api/recipescom/recipe/multiple", arr)
-                .success(function(recipes) {
-                    deferred.resolve(recipes);
-                });
-            return deferred.promise;
-        }
 
         function findAllRecipes() {
             var deferred = $q.defer();

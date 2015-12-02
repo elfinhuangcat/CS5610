@@ -1,7 +1,7 @@
 "use strict";
 module.exports = function(app, model){
     // new message object in the body
-    app.post(   "/rest/api/recipescom/message", createMessage);
+    app.post(  "/rest/api/recipescom/message", createMessage);
 
     // find all messages
     app.get(   "/rest/api/recipescom/message", getMessage);
