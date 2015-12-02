@@ -9,10 +9,10 @@ module.exports = function(app, model){
     // get a message by id
     app.get(   "/rest/api/recipescom/message/:id", getMessageById);
 
-    // get all inbox message for a user by user id
+    // get all inbox message for a user by [user email]
     app.get(   "/rest/api/recipescom/message/:email/in", getInMessageByUserEmail);
 
-    // get all sentbox message for a user by user id
+    // get all sentbox message for a user by [user email]
     app.get(   "/rest/api/recipescom/message/:email/sent", getOutMessageByUserEmail);
 
     // update a message by id

@@ -8,6 +8,8 @@
         var service = {
             findUserByEmailAndPassword: findUserByEmailAndPassword,
             findAllUsers: findAllUsers,
+            findUserById: findUserById,
+            findMultipleUsersFromEmailArray: findMultipleUsersFromEmailArray,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser
@@ -21,7 +23,7 @@
          */
         function findUserByEmailAndPassword(email, password) {
             var deferred = $q.defer();
-            var req = "/api/assignment/user?email=" + email + "&password=" + password;
+            var req = "/rest/api/recipescom/user?email=" + email + "&password=" + password;
             $http.get(req)
                 .success(function(user) {
                     deferred.resolve(user);
@@ -32,20 +34,47 @@
 
         function findAllUsers() {
             var deferred = $q.defer();
-            $http.get("/api/assignment/user")
+            $http.get("/rest/api/recipescom/user")
                 .success(function(users) {
                     deferred.resolve(users);
                 });
             return deferred.promise;
         }
 
+        function findUserById(id) {
+            var deferred = $q.defer();
+            $http.get("/rest/api/recipescom/user/" + id)
+                .success(function(user) {
+                    deferred.resolve(user);
+                });
+            return deferred.promise;
+        }
+
         /**
-         * @param user : the new user object
+         *
+         * @param arr - [String] (email)
+         * @returns {*|promise}
+         */
+        function findMultipleUsersFromEmailArray(arr) {
+            var deferred = $q.defer();
+            var newArr = [];
+            for (var ind in arr) {
+                newArr.push({"email" : arr[ind]});
+            }
+            $http.get("/rest/api/recipescom/user/multiple", newArr)
+                .success(function(user) {
+                    deferred.resolve(user);
+                });
+            return deferred.promise;
+        }
+
+        /**
+         * @param user - the new user object
          * @returns the created user object
          */
         function createUser(user) {
             var deferred = $q.defer();
-            $http.post("/api/assignment/user", user)
+            $http.post("/rest/api/recipescom/user", user)
                 .success(function(user_obj) {
                     deferred.resolve(user_obj);
                 });
@@ -54,13 +83,13 @@
 
         /**
          * @param id
-         * @returns an array of all users after that user is removed
+         * @returns status
          */
         function deleteUserById(id) {
             var deferred = $q.defer();
-            $http.delete("/api/assignment/user/" + id)
-                .success(function(users) {
-                    deferred.resolve(users);
+            $http.delete("/rest/api/recipescom/user/" + id)
+                .success(function(status) {
+                    deferred.resolve(status);
                 });
             return deferred.promise;
         }
@@ -73,24 +102,12 @@
          */
         function updateUser(id, user) {
             var deferred = $q.defer();
-            var req = "/api/assignment/user/" + id;
+            var req = "/rest/api/recipescom/user/" + id;
             $http.put(req, user)
                 .success(function(user_obj) {
                     deferred.resolve(user_obj);
                 });
             return deferred.promise;
-        }
-
-
-        /** Function to generate Guid, from instructor Jose Annunziato.**/
-        function guid() {
-            function s4() {
-                return Math.floor((1 + Math.random()) * 0x10000)
-                    .toString(16)
-                    .substring(1);
-            }
-            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-                s4() + '-' + s4() + s4() + s4();
         }
     }
 })();
