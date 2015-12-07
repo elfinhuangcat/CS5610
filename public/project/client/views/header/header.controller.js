@@ -5,14 +5,37 @@
         .module("RecipesComApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope, $location)
+    function HeaderController($location, $rootScope)
     {
-        $scope.$location = $location;
-        var searchKey = $scope.searchKey;
+        var vm = this;
+        vm.$location = $location;
+        vm.$rootScope = $rootScope;
+        vm.search = search;
+        vm.isLoggedIn = isLoggedIn;
+        vm.logout = logout;
+        vm.isAdmin = isAdmin;
 
-        $scope.search = function() {
-            console.log("Search key: " + searchKey);
-            $location.path("/searchresult");
+
+
+        function search() {
+            console.log("Search key: " + vm.searchKey); // vm.searchKey is the ng-model of search input
+            // $location.path("/searchresult");
+        }
+
+        function isLoggedIn() {
+            return ($rootScope.user != null || $rootScope.user != undefined);
+        }
+
+        function logout() {
+            $rootScope.user = null;
+        }
+
+        function isAdmin() {
+            if (isLoggedIn()) {
+                return $rootScope.user.role == 'A';
+            } else {
+                return false;
+            }
         }
     }
 })();

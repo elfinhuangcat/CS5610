@@ -18,18 +18,20 @@
                 .when("/login",
                 {
                     templateUrl: "views/login/login.view.html",
-                    //controller: "LoginController"
+                    controller: "LoginController as loginController"
                 })
-                .when("/profile",
+                .when("/profile/:id",
                 {
                     templateUrl: "views/profile/profile.view.html",
-                    controller: "ProfileController"
+                    controller: "ProfileController as profileController"
                 })
+                /*
                 .when("/otherprofile",
                 {
                     templateUrl: "views/profile/other.profile.view.html",
                     controller: "OtherProfileController"
                 })
+                */
                 .when("/bookmark",
                 {
                     templateUrl: "views/bookmark/bookmark.view.html",

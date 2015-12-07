@@ -1,4 +1,4 @@
-<header id="navHeader" class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner" ng-controller="HeaderController">
+<header id="navHeader" class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner" ng-controller="HeaderController as headerController">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -13,9 +13,9 @@
         <div class="col-md-3 col-sm-6 pull-right">
             <form class="nav navbar-nav navbar-form" role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                    <input ng-model="headerController.searchKey" type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
                     <div class="input-group-btn">
-                        <button class="btn btn-success" ng-click="search()" ng-model="searchKey"><i class="glyphicon glyphicon-search"></i></button>
+                        <button class="btn btn-success" ng-click="headerController.search()"><i class="glyphicon glyphicon-search"></i></button>
                     </div>
                 </div>
             </form>
@@ -30,17 +30,19 @@
                         <li><a href="#/browse/mealtype">Meal Types</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
+                <!-- HIDE when user logged in -->
+                <li class="dropdown" ng-hide = "headerController.isLoggedIn()">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <i class="icon-angle-down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="#/login">Sign in</a></li>
                         <li><a href="#/register">Sign up</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
+                <!-- HIDE when user is not logged in -->
+                <li class="dropdown" ng-show = "headerController.isLoggedIn()">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-home">&nbsp;Username</span> <i class="icon-angle-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#/profile"><span class="glyphicon glyphicon-user"></span>&nbsp;Profile</a></li>
+                        <li><a ng-href="#/profile/{{headerController.$rootScope.user._id}}"><span class="glyphicon glyphicon-user"></span>&nbsp;Profile</a></li>
                         <li><a href="#/bookmark"><span class="glyphicon glyphicon-star"></span>&nbsp;Bookmarks</a></li>
                         <li><a href="#/myrecipe"><span class="glyphicon glyphicon-book"></span>&nbsp;My Recipes</a></li>
                         <li><a href="#/friend"><span class="glyphicon glyphicon-asterisk"></span>&nbsp;Friends</a></li>
