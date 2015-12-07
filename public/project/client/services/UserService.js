@@ -7,9 +7,10 @@
     function UserService($http, $q) {
         var service = {
             findUserByEmailAndPassword: findUserByEmailAndPassword,
+            findUserByEmail: findUserByEmail,
             findAllUsers: findAllUsers,
             findUserById: findUserById,
-            findMultipleUsersFromEmailArray: findMultipleUsersFromEmailArray,
+            //findMultipleUsersFromEmailArray: findMultipleUsersFromEmailArray,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser
@@ -26,6 +27,16 @@
             var req = "/rest/api/recipescom/user?email=" + email + "&password=" + password;
             $http.get(req)
                 .success(function(user) {
+                    deferred.resolve(user);
+                });
+            return deferred.promise;
+        }
+
+        function findUserByEmail(email) {
+            var deferred = $q.defer();
+            var req = "/rest/api/recipescom/user?email=" + email;
+            $http.get(req)
+                .success(function (user) {
                     deferred.resolve(user);
                 });
             return deferred.promise;
@@ -54,7 +65,7 @@
          *
          * @param arr - [String] (email)
          * @returns {*|promise}
-         */
+
         function findMultipleUsersFromEmailArray(arr) {
             var deferred = $q.defer();
             var newArr = [];
@@ -67,6 +78,7 @@
                 });
             return deferred.promise;
         }
+         */
 
         /**
          * @param user - the new user object

@@ -1,0 +1,54 @@
+<section id="title" class="orange">
+    <div class="container">
+        <div class="gap"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Apply to Contribute</h1>
+                <p>We all know it is a great honor to become a contributor! As a contributor,
+                    you will be able to create your own recipes and spread it over the community.
+                    But first we would like to know if you are capable of being a contributor.
+                    Please read the following rules for contributors and also please take a minute
+                    to write down the reasons why you can be a good contributor.</p>
+            </div>
+            <div class="col-sm-6">
+                <ul class="breadcrumb pull-right">
+                    <li><a href="#/">Home</a></li>
+                    <li ng-if="applyContributorController.isLoggedIn()" ng-href="/profile/{{applyContributorController.user._id}}">Profile</li>
+                    <li class="acitve">Apply to Contribute</li>
+                </ul>
+            </div>
+        </div>
+        <div class="gap"></div>
+    </div>
+</section><!--/#title-->
+
+<section id="login" class="container">
+    <div class="gap"></div>
+    <div class="container">
+        <blockquote>
+            <p>Rules for a Contributor:</p>
+            <p>1. Never submit spam to the community.</p>
+            <p>2. Fill in all information of a recipe.</p>
+            <p>3. (optional) Avoid accidental deletion of good recipes created by you.</p>
+        </blockquote>
+    </div>
+    <form ng-show="applyContributorController.showForm" class="center" role="form">
+        <div class="form-group">
+            <textarea ng-model="applyContributorController.form.reasons" class="form-control" placeholder="Why you want to become a contributor; How you can contribute to RecipesCom.." rows="3"></textarea>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input ng-model="applyContributorController.form.agree" type="checkbox">
+                I agree the rules listed above.
+            </label>
+        </div>
+
+        <div class="form-group">
+            <button ng-click="applyContributorController.apply()" class="btn btn-success btn-md btn-block" type="submit">Apply</button>
+        </div>
+        <div class="alert alert-danger alert-dismissible" role="alert" ng-if="applyContributorController.errorMessage">{{applyContributorController.errorMessage}}</div>
+
+    </form>
+    <div class="gap"></div>
+</section><!--/#registration-->

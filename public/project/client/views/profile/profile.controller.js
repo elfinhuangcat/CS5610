@@ -5,13 +5,14 @@
         .module("RecipesComApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($location, $rootScope, UserService, $routeParams)
+    function ProfileController($location, $rootScope, UserService, $routeParams, ApplicationService)
     {
         var vm = this;
         vm.$location = $location;
         vm.user = null;
 
         vm.isOwnProfile = isOwnProfile;
+        vm.isApplicationSubmitted = false;
         vm.update = update;
         vm.applyContribute = applyContribute;
 
@@ -19,6 +20,15 @@
         function init() {
             if (isOwnProfile()) {
                 vm.user = $rootScope.user;
+                if (vm.user.role == 'R') {
+                    ApplicationService
+                        .findApplicationByEmail(vm.user.email)
+                        .then(function(result) {
+                            if (result != null) {
+                                vm.isApplicationSubmitted = true;
+                            }
+                        });
+                }
             } else {
                 UserService
                     .findUserById($routeParams["id"])
@@ -49,6 +59,7 @@
 
         function applyContribute() {
             //jump to another page.
+            $location.path("/profile/" + vm.user._id + "/applycontributor")
         }
     }
 })();

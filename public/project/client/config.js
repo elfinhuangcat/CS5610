@@ -13,7 +13,7 @@
                 .when("/register",
                 {
                     templateUrl: "views/register/register.view.html",
-                    //controller: "RegisterController"
+                    controller: "RegisterController as registerController"
                 })
                 .when("/login",
                 {
@@ -25,13 +25,11 @@
                     templateUrl: "views/profile/profile.view.html",
                     controller: "ProfileController as profileController"
                 })
-                /*
-                .when("/otherprofile",
+                .when("/profile/:id/applycontributor",
                 {
-                    templateUrl: "views/profile/other.profile.view.html",
-                    controller: "OtherProfileController"
+                    templateUrl: "views/apply.contributor/apply.contributor.html",
+                    controller: "ApplyContributorController as applyContributorController"
                 })
-                */
                 .when("/bookmark",
                 {
                     templateUrl: "views/bookmark/bookmark.view.html",
