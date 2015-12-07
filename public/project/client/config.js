@@ -35,11 +35,13 @@
                     templateUrl: "views/bookmark/bookmark.view.html",
                     controller: "BookmarkController"
                 })
+                /*
                 .when("/recipe",
                 {
                     templateUrl: "views/recipe/recipe.view.html",
                     controller: "RecipeController"
                 })
+                */
                 .when("/recipe/:id",
                 {
                     templateUrl: "views/recipe/recipe.view.html",

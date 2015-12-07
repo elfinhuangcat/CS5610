@@ -32,23 +32,28 @@
             <p>3. (optional) Avoid accidental deletion of good recipes created by you.</p>
         </blockquote>
     </div>
-    <form ng-show="applyContributorController.showForm" class="center" role="form">
-        <div class="form-group">
-            <textarea ng-model="applyContributorController.form.reasons" class="form-control" placeholder="Why you want to become a contributor; How you can contribute to RecipesCom.." rows="3"></textarea>
-        </div>
+    <div class="container">
+        <form class="form-horizontal" ng-show="applyContributorController.showForm" role="form">
+            <div class="form-group">
+                <textarea ng-model="applyContributorController.form.reasons" class="form-control" placeholder="Why you want to become a contributor; How you can contribute to RecipesCom.." rows="3"></textarea>
+            </div>
 
-        <div class="checkbox">
-            <label>
-                <input ng-model="applyContributorController.form.agree" type="checkbox">
-                I agree the rules listed above.
-            </label>
-        </div>
+            <div class="checkbox">
+                <label>
+                    <input ng-model="applyContributorController.form.agree" type="checkbox">
+                    I agree the rules listed above.
+                </label>
+            </div>
 
-        <div class="form-group">
-            <button ng-click="applyContributorController.apply()" class="btn btn-success btn-md btn-block" type="submit">Apply</button>
-        </div>
-        <div class="alert alert-danger alert-dismissible" role="alert" ng-if="applyContributorController.errorMessage">{{applyContributorController.errorMessage}}</div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                <button ng-click="applyContributorController.apply()" class="btn btn-success btn-md btn-block" type="submit">Apply</button>
 
-    </form>
+                </div>
+            </div>
+            <div class="alert alert-danger alert-dismissible" role="alert" ng-if="applyContributorController.errorMessage">{{applyContributorController.errorMessage}}</div>
+
+        </form>
+    </div>
     <div class="gap"></div>
 </section><!--/#registration-->

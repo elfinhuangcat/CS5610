@@ -5,18 +5,23 @@
         .module("RecipesComApp")
         .controller("RecipeController", RecipeController);
 
-    function RecipeController($scope)
+    function RecipeController(RecipeService, $routeParams, $location)
     {
-        $scope.recipe = {
-            "id":1,
-            "title": "mock_recipe_1",
-            "tags":["breakfast","American"],
-            "prepTime":30,
-            "prepTimeUnit":"m",
-            "servings":6,
-            "author":123,
-            "ingredients": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.",
-            "steps":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id."
-        };
+        // For now, the image is not implemented and all show the same image.
+        var vm = this;
+        vm.recipe = null;
+
+        function init() {
+            RecipeService
+                .findRecipeById($routeParams["id"])
+                .then(function(result) {
+                    if (result == null) {
+                        $location.path("/");
+                    } else {
+                        vm.recipe = result;
+                    }
+                });
+        }
+        init();
     }
 })();

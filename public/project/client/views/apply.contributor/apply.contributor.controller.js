@@ -16,6 +16,7 @@
         vm.isAdmin = isAdmin;
         vm.apply = apply;
         vm.showForm = true;
+        vm.form = {reasons:"", agree: false};
 
         function init() {
             if (!isLoggedIn()) {
