@@ -18,6 +18,9 @@ module.exports = function(app, model){
     // Given the userid, return the user's friends objects
     app.get(   "/rest/api/recipescom/user/:id/friend", getMultipleUser);
 
+    // get the number of users
+    app.get(   "/rest/api/recipescom/user-count", getUserCount);
+
     /**
      * @param req
      * @param res - the created user (single user)
@@ -124,6 +127,14 @@ module.exports = function(app, model){
                     .then(function(users) {
                         res.json(users);
                     });
+            });
+    }
+
+    function getUserCount(req, res) {
+        model
+            .getUserCount()
+            .then(function (count) {
+                res.send(count);
             });
     }
 };

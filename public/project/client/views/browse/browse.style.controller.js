@@ -5,18 +5,33 @@
         .module("RecipesComApp")
         .controller("BrowseStyleController", BrowseStyleController);
 
-    function BrowseStyleController($scope)
+    function BrowseStyleController()
     {
-        $scope.styles = [
-            "American",
-            "British",
-            "Chinese",
-            "Indian",
-            "Japanese",
-            "Korean",
-            "Mediterranean",
-            "Mexican"
+        var vm = this;
+        vm.AllStyles = [
+            'American',
+            'British',
+            'Cajun',
+            'Caribbean',
+            'Chinese',
+            'French',
+            'German',
+            'Greek',
+            'Indian',
+            'Italian',
+            'Japanese',
+            'Korean',
+            'Lebanese',
+            'Mediterranean',
+            'Mexican',
+            'Moroccan',
+            'Soul',
+            'Spanish',
+            'Thai',
+            'Turkish',
+            'Vietnamese',
+            'Mixed',
+            'Other'
         ];
-
     }
 })();

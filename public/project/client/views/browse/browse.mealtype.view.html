@@ -19,9 +19,11 @@
 </section><!--/#title-->
 
 <section>
+    <div class="gap"></div>
     <div class="container center">
-        <h4 ng-repeat="mealtype in mealtypes">
+        <h4 ng-repeat="mealtype in browseMealtypeController.AllMealType">
             <a href="#/browse/mealtype/{{mealtype}}">{{mealtype}}</a>
         </h4>
     </div>
+    <div class="gap"></div>
 </section>

@@ -15,6 +15,8 @@ module.exports = function(app, model){
     // delete a application by id
     app.delete("/rest/api/recipescom/application/:id", deleteApplicationById);
 
+    app.get(   "/rest/api/recipescom/application-count", getApplicationCount);
+
     /**
      * @param req
      * @param res - the created application (single application)
@@ -85,5 +87,13 @@ module.exports = function(app, model){
             .then(function(result) {
                 res.json(result);
             });
+    }
+
+    function getApplicationCount(req, res) {
+        model
+            .getApplicationCount()
+            .then(function(count) {
+                res.send(count);
+            })
     }
 };

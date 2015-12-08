@@ -25,6 +25,9 @@
                 <input ng-model="registerController.form.email" type="email" id="email" name="email" placeholder="E-mail" class="form-control">
             </div>
             <div class="form-group">
+                <input ng-model="registerController.form.name" type="text" id="name" name="name" placeholder="Nickname" class="form-control">
+            </div>
+            <div class="form-group">
                 <input ng-model="registerController.form.password" type="password" id="password" name="password" placeholder="Password" class="form-control">
             </div>
             <div class="form-group">
@@ -33,7 +36,6 @@
             <div class="form-group">
                 <button ng-click="registerController.register()" class="btn btn-success btn-md btn-block" type="submit">Sign Up!</button>
             </div>
-
         </fieldset>
     </form>
     <div class="gap"></div>

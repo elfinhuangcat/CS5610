@@ -3,31 +3,35 @@
         <div class="gap"></div>
         <div class="row">
             <div class="col-sm-4">
-                <h1>{{recipe.title}}</h1>
-                <h2><small>Author:&nbsp;{{recipe.author}}</small></h2> <!-- For now, it's the author's ID -->
+                <h1>{{recipeController.recipe.title}}</h1>
+                <h2><small>Author:&nbsp;<a ng-href="#/profile/{{recipeController.author._id}}">{{recipeController.author.name}}</a></small></h2> <!-- For now, it's the author's ID -->
                 <!-- Twitter -->
                 <button href="http://twitter.com/home?status=" title="Share on Twitter" target="_blank" class="btn btn-twitter" type="button"><i class="fa fa-twitter"></i></button>
                 <!-- Facebook -->
                 <button href="https://www.facebook.com/sharer/sharer.php?u=" title="Share on Facebook" target="_blank" class="btn btn-facebook" type="button"><i class="fa fa-facebook"></i></button>
-                <!-- Bookmark -->
-                <button type="button" class="btn btn-success glyphicon glyphicon-star-empty"></button>
+                <!-- Bookmark button -->
+                <button ng-show="recipeController.showBookmark" ng-click="recipeController.bookmark()" type="button" class="btn btn-success glyphicon glyphicon-star-empty"></button>
+                <!-- unbookmark button -->
+                <button ng-show="recipeController.showUnbookmark" ng-click="recipeController.unbookmark()" type="button" class="btn btn-success glyphicon glyphicon-star"></button>
             </div>
             <div class="col-sm-4">
                 <ul>
                     <li><h2><small>
                         Tags:&nbsp;
-                        <a ng-repeat="tag in recipe.tags">{{tag}}&nbsp;</a>
+                        <a ng-repeat="style in recipeController.recipe.style">{{style}}&nbsp;</a>
+                        <a ng-repeat="mealtype in recipeController.recipe.mealtype">{{mealtype}}&nbsp;</a>
                     </small></h2>
                     </li>
                     <li><h2><small>
-                        Prep Time:&nbsp; {{recipe.prepTime}}&nbsp;
-                        <span ng-if="recipe.prepTimeUnit == 'm'">mins</span>
-                        <span ng-if="recipe.prepTimeUnit == 'h'">hours</span>
+                        Prep Time:&nbsp; {{recipeController.recipe.time}}&nbsp;
+                        <span ng-if="recipeController.recipe.unit == 'H'">hours</span>
+                        <span ng-if="recipeController.recipe.unit == 'M'">minutes</span>
+                        <span ng-if="recipeController.recipe.unit == 'S'">seconds</span>
                     </small></h2>
                     </li>
                     <li>
                         <h2><small>
-                            Servings:&nbsp;{{recipe.servings}}
+                            Servings:&nbsp;{{recipeController.recipe.servings}}
                         </small></h2>
                     </li>
                 </ul>
@@ -46,51 +50,42 @@
 
         <div class="col-sm-6">
             <h3>Ingredients</h3>
-            <p>{{recipe.ingredients}}</p>
+            <p>{{recipeController.recipe.ingredients}}</p>
             <hr>
             <h3>Steps</h3>
-            <p>{{recipe.steps}}</p>
+            <p>{{recipeController.recipe.steps}}</p>
             <hr>
             <!-- text area for comment -->
-            <h3>Any Comments?</h3>
-            <form>
-                <textarea class="form-control" rows="3" placeholder="Write a comment..."></textarea>
-                <br>
-                <button type="button" class="btn btn-primary pull-right">Comment</button>
-            </form>
+            <div ng-show="recipeController.isLoggedIn()">
+                <h3>Any Comments?</h3>
+                <form>
+                    <textarea ng-model="recipeController.commentSubmitted" class="form-control" rows="3" placeholder="Write a comment..."></textarea>
+                    <br>
+                    <button ng-click="recipeController.comment()" type="button" class="btn btn-primary pull-right">Comment</button>
+                </form>
+            </div>
         </div>
+        <!-- COMMENTS ----------------------------------------------------->
         <div id="comments" class="col-sm-6">
             <h3>Comments</h3>
-            <div class="media">
+            <div ng-repeat="comment in recipeController.recipe.comments" class="media">
                 <div class="pull-left">
-                    <img class="avatar img-circle" src="images/blog/avatar1.png" alt="">
+                    <img class="avatar img-circle" src="images/blog/avatar1.png" alt="User image">
                 </div>
                 <div class="media-body">
                     <div class="well">
                         <div class="media-heading">
-                            <strong>john</strong>&nbsp; <small>27 Aug 2013</small>
-                            <a class="pull-right" href="#"><span class="glyphicon glyphicon-repeat"></span> Reply</a>
+                            <!-- comment author and time -->
+                            <strong><a ng-href="#/profile/{{recipeController.findUserIdByEmail(comment.replyto)}}">{{recipeController.findUserNameByEmail(comment.author)}}</a></strong>&nbsp; <small>{{comment.time.toLocaleDateString()}}</small>
+                            <a ng-click="recipeController.replyComment(comment.author)" class="pull-right"><span class="glyphicon glyphicon-repeat"></span> Reply</a>
                         </div>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                    </div>
-                </div>
-            </div><!--/.media-->
-            <div class="media">
-                <div class="pull-left">
-                    <img class="avatar img-circle" src="images/blog/avatar1.png" alt="">
-                </div>
-                <div class="media-body">
-                    <div class="well">
-                        <div class="media-heading">
-                            <strong>{{recipe.author}}</strong>&nbsp; <small>27 Aug 2013</small>
-                            <a class="pull-right" href="#"><span class="glyphicon glyphicon-repeat"></span> Reply</a>
-                        </div>
-                        <p><a href="#">@john</a> Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                        <!-- comment content (ant replyto) -->
+                        <p><strong><a ng-href="#/profile/{{recipeController.findUserIdByEmail(comment.replyto)}}" ng-if="comment.replyto != null && comment.replyto != ''">@{{recipeController.findUserNameByEmail(comment.replyto)}}:&nbsp;</a></strong>
+                            {{comment.content}}</p>
                     </div>
                 </div>
             </div><!--/.media-->
         </div>
-
     </div>
     <div class="gap"></div>
 </section>

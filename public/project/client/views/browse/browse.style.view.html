@@ -19,9 +19,11 @@
 </section><!--/#title-->
 
 <section>
+    <div class="gap"></div>
     <div class="container center">
-        <h4 ng-repeat="style in styles">
+        <h4 ng-repeat="style in browseStyleController.AllStyles">
             <a href="#/browse/style/{{style}}">{{style}}</a>
         </h4>
     </div>
+    <div class="gap"></div>
 </section>

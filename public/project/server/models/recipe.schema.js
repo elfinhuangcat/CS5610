@@ -52,6 +52,7 @@ module.exports = function(mongoose) {
         "comments"   : [{
             "author" : String, // author's EMAIL
             "replyto": String, // user's EMAIL
+            "time"   : {type: Date, default:Date.now()},
             "content": String}]
     }, {collection: "cs5610.project.recipe"});
     return RecipeSchema;

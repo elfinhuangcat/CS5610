@@ -10,7 +10,9 @@ module.exports = function(app, mongoose, MessageSchema) {
         findSentMessageByUserEmail : findSentMessageByUserEmail, // arg: userEmail
         updateMessage : updateMessage, // arg: _id, newMsg
         deleteMessageById : deleteMessageById, // arg: _id
-        deleteMultipleMessageByIds : deleteMultipleMessageByIds // arg: arr of ids
+        deleteMultipleMessageByIds : deleteMultipleMessageByIds, // arg: arr of ids
+        getInMessageCountByUserEmail : getInMessageCountByUserEmail,
+        getOutMessageCountByUserEmail: getOutMessageCountByUserEmail
     };
     return api;
 
@@ -140,6 +142,30 @@ module.exports = function(app, mongoose, MessageSchema) {
                 deferred.reject(err);
             } else {
                 deferred.resolve(status);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function getInMessageCountByUserEmail(userEmail) {
+        var deferred = q.defer();
+        MessageModel.count({"to": userEmail}, function(err, count) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(count);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function getOutMessageCountByUserEmail(userEmail){
+        var deferred = q.defer();
+        MessageModel.count({"from": userEmail}, function(err, count) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(count);
             }
         });
         return deferred.promise;

@@ -7,6 +7,7 @@
 
     function ProfileController($location, $rootScope, UserService, $routeParams, ApplicationService)
     {
+        //TODO: the user image is displayed always the same
         var vm = this;
         vm.$location = $location;
         vm.user = null;

@@ -35,22 +35,15 @@
                     templateUrl: "views/bookmark/bookmark.view.html",
                     controller: "BookmarkController"
                 })
-                /*
-                .when("/recipe",
-                {
-                    templateUrl: "views/recipe/recipe.view.html",
-                    controller: "RecipeController"
-                })
-                */
                 .when("/recipe/:id",
                 {
                     templateUrl: "views/recipe/recipe.view.html",
-                    controller: "RecipeController"
+                    controller: "RecipeController as recipeController"
                 })
                 .when("/browse/style",
                 {
                     templateUrl: "views/browse/browse.style.view.html",
-                    controller: "BrowseStyleController"
+                    controller: "BrowseStyleController as browseStyleController"
                 })
                 .when("/browse/style/:style",
                 {
@@ -60,12 +53,16 @@
                 .when("/browse/mealtype",
                 {
                     templateUrl: "views/browse/browse.mealtype.view.html",
-                    controller: "BrowseMealtypeController"
+                    controller: "BrowseMealtypeController as browseMealtypeController"
+                })
+                .when("/browse/mealtype/:mealtype/:page",
+                {
+                    templateUrl: "views/browse/mealtype/browse.some.mealtype.view.html",
+                    controller: "BrowseSomeMealTypeController as someMealTypeController"
                 })
                 .when("/browse/mealtype/:mealtype",
                 {
-                    templateUrl: "views/browse/mealtype/browse.some.mealtype.view.html",
-                    controller: "BrowseSomeMealTypeController"
+                    redirectTo: "/browse/mealtype/:mealtype/1"
                 })
                 .when("/message",
                 {

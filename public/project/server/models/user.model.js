@@ -10,7 +10,8 @@ module.exports = function(app, mongoose, UserSchema) {
         updateUser : updateUser, // arg: _id, newUser
         deleteUserById : deleteUserById, // arg: _id
         findUserByEmail: findUserByEmail, // arg: email
-        findUserByCredentials: findUserByCredentials // arg: email&password
+        findUserByCredentials: findUserByCredentials, // arg: email&password
+        getUserCount: getUserCount
     };
     return api;
 
@@ -156,6 +157,21 @@ module.exports = function(app, mongoose, UserSchema) {
                 }
             });
 
+        return deferred.promise;
+    }
+
+    function getUserCount() {
+        console.log("get user count - model");
+        var deferred = q.defer();
+        UserModel.count(function(err, count) {
+            if (err) {
+                console.log(err);
+                deferred.reject(err);
+            } else {
+                console.log("user count : " + count);
+                deferred.resolve(count);
+            }
+        });
         return deferred.promise;
     }
 };

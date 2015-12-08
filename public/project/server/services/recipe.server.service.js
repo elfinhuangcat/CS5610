@@ -15,6 +15,11 @@ module.exports = function(app, model){
     // delete a recipe by id
     app.delete("/rest/api/recipescom/recipe/:id", deleteRecipeById);
 
+    app.get(   "/rest/api/recipescom/recipe/style-count/:style", getRecipesCountByStyle);
+    app.get(   "/rest/api/recipescom/recipe/mealtype-count/:mealtype", getRecipesCountByMealtype);
+    app.get(   "/rest/api/recipescom/recipe/style/:style", getRecipesByStyle);
+    app.get(   "/rest/api/recipescom/recipe/mealtype/:mealtype", getRecipesByMealtype);
+
 
     /**
      * @param req
@@ -74,6 +79,38 @@ module.exports = function(app, model){
             .deleteRecipeById(req.params["id"])
             .then(function(result) {
                 res.json(result);
+            });
+    }
+
+    function getRecipesCountByStyle(req, res) {
+        model
+            .getRecipeCountByStyle(req.params["style"])
+            .then(function(count) {
+                res.send(count);
+            });
+    }
+
+    function getRecipesCountByMealtype(req, res) {
+        model
+            .getRecipeCountByMealtype(req.params["mealtype"])
+            .then(function(count) {
+                res.send(count);
+            });
+    }
+
+    function getRecipesByStyle(req, res) {
+        model
+            .findRecipesByStyle(req.params["style"])
+            .then(function(recipes) {
+                res.json(recipes);
+            });
+    }
+
+    function getRecipesByMealtype(req, res) {
+        model
+            .findRecipesByMealtype(req.params["mealtype"])
+            .then(function (recipes) {
+                res.json(recipes);
             });
     }
 };

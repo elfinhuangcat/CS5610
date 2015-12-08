@@ -5,44 +5,41 @@
         .module("RecipesComApp")
         .controller("BrowseSomeMealTypeController", BrowseSomeMealTypeController);
 
-    function BrowseSomeMealTypeController($scope)
+    function BrowseSomeMealTypeController($routeParams, $location, RecipeService)
     {
-        $scope.someMealtype = "Breakfast";
-        $scope.mealtypes = [
-            {
-                "id":1,
-                "title": "mock_recipe_1",
-                "tags":["breakfast","American"],
-                "prepTime":30,
-                "prepTimeUnit":"m",
-                "servings":6,
-                "author":123,
-                "ingredients": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.",
-                "steps":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id."
-            },
-            {
-                "id":2,
-                "title": "mock_recipe_2",
-                "tags":["breakfast","Indian"],
-                "prepTime":30,
-                "prepTimeUnit":"m",
-                "servings":6,
-                "author":123,
-                "ingredients": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.",
-                "steps":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id."
-            },
-            {
-                "id":3,
-                "title": "mock_recipe_11",
-                "tags":["breakfast","American"],
-                "prepTime":30,
-                "prepTimeUnit":"m",
-                "servings":6,
-                "author":123,
-                "ingredients": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.",
-                "steps":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id."
-            }
-        ];
+        var vm = this;
+        vm.mealtype = $routeParams["mealtype"];
+        vm.page = $routeParams["page"];
+        vm.itemsPerPage = 9;
+        vm.showPrev = true;
+        vm.showNext = true;
+        vm.recipes = null;
 
+        function init() {
+            var numOfRecipesOfMealtype = 0;
+            RecipeService
+                .getRecipesCountByMealtype(vm.mealtype)
+                .then(function (count) {
+                    numOfRecipesOfMealtype = count;
+                    var numOfPages = Math.ceil(count / vm.itemsPerPage);
+                    console.log("Number of pages (browse by meal types): " + numOfPages);
+                    if (vm.page < 1 || vm.page > numOfPages) {
+                        $location.path("/browse/mealtype/"+vm.mealtype +"/1");
+                    } else {
+                        if (vm.page == 1) {
+                            vm.showPrev = false;
+                        }
+                        if (vm.page == numOfPages) {
+                            vm.showNext == false;
+                        }
+                        RecipeService
+                            .findRecipesByMealtype(vm.mealtype)
+                            .then(function(recipes) {
+                                vm.recipes = recipes;
+                            });
+                    }
+                });
+        }
+        init();
     }
 })();

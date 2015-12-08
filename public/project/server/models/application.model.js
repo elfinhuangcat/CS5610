@@ -9,6 +9,7 @@ module.exports = function(app, mongoose, ApplicationSchema) {
         findApplicationByApplicant : findApplicationByApplicant, // arg: email of applicant
         updateApplication : updateApplication, // arg: _id, newApplicaiton
         deleteApplicationById : deleteApplicationById, // arg: _id
+        getApplicationCount : getApplicationCount
     };
     return api;
 
@@ -119,6 +120,18 @@ module.exports = function(app, mongoose, ApplicationSchema) {
             }
         });
 
+        return deferred.promise;
+    }
+
+    function getApplicationCount() {
+        var deferred = q.defer();
+        ApplicationModel.count(function(err, count) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(count);
+            }
+        });
         return deferred.promise;
     }
 };

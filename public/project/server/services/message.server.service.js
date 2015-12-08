@@ -24,6 +24,11 @@ module.exports = function(app, model){
     // delete multiple messages, message ids in body
     app.delete("/rest/api/recipescom/message", deleteMultipleMessage);
 
+    // get the number of inbox/sentbox message by user email
+    app.get(   "/rest/api/recipescom/message/:email/in-count", getInMessageCountByUserEmail);
+    app.get(   "/rest/api/recipescom/message/:email/sent-count", getSentMessageCountByUserEmail);
+
+
     /**
      * @param req
      * @param res - the created message (single message)
@@ -111,6 +116,22 @@ module.exports = function(app, model){
             .deleteMultipleMessageByIds(req.body)
             .then(function(result) {
                 res.json(result);
+            });
+    }
+
+    function getInMessageCountByUserEmail(req, res) {
+        model
+            .getInMessageCountByUserEmail(req.params["email"])
+            .then(function (count) {
+                res.send(count);
+            });
+    }
+
+    function getSentMessageCountByUserEmail(req, res) {
+        model
+            .getOutMessageCountByUserEmail(req.params["email"])
+            .then(function (count) {
+                res.send(count);
             });
     }
 };

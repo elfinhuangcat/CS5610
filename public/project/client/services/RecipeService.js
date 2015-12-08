@@ -10,7 +10,11 @@
             findRecipeById: findRecipeById,
             createRecipe: createRecipe,
             deleteRecipeById: deleteRecipeById,
-            updateRecipe: updateRecipe
+            updateRecipe: updateRecipe,
+            getRecipesCountByStyle: getRecipesCountByStyle,
+            getRecipesCountByMealtype: getRecipesCountByMealtype,
+            findRecipesByStyle: findRecipesByStyle,
+            findRecipesByMealtype: findRecipesByMealtype
         };
         return service;
 
@@ -55,6 +59,42 @@
             $http.put("/rest/api/recipescom/recipe/" + id, recipe)
                 .success(function(newRecipe) {
                     deferred.resolve(newRecipe);
+                });
+            return deferred.promise;
+        }
+
+        function getRecipesCountByStyle(style) {
+            var deferred = $q.defer();
+            $http.get("/rest/api/recipescom/recipe/style-count/" + style)
+                .success(function(count) {
+                    deferred.resolve(count);
+                });
+            return deferred.promise;
+        }
+
+        function getRecipesCountByMealtype(mealtype) {
+            var deferred = $q.defer();
+            $http.get("/rest/api/recipescom/recipe/mealtype-count/" + mealtype)
+                .success(function(count) {
+                    deferred.resolve(count);
+                });
+            return deferred.promise;
+        }
+
+        function findRecipesByStyle(style) {
+            var deferred = $q.defer();
+            $http.get("/rest/api/recipescom/recipe/style/" + style)
+                .success(function(recipes) {
+                    deferred.resolve(recipes);
+                });
+            return deferred.promise;
+        }
+
+        function findRecipesByMealtype(mealtype) {
+            var deferred = $q.defer();
+            $http.get("/rest/api/recipescom/recipe/mealtype/" + mealtype)
+                .success(function(recipes) {
+                    deferred.resolve(recipes);
                 });
             return deferred.promise;
         }
