@@ -93,7 +93,7 @@ module.exports = function(app, model){
         model
             .getApplicationCount()
             .then(function(count) {
-                res.send(count);
+                res.json(count);
             })
     }
 };

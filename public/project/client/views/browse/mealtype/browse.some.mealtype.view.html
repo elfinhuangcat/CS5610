@@ -20,25 +20,54 @@
 </section><!--/#title-->
 
 <section>
+    <!-- number of recipes shown on each page: 6 -->
     <div class="container">
         <div class="gap"></div>
-        <div class="row">
+        <div ng-if="someMealTypeController.recipes.length < 1">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                Sorry, there is no recipes in this category.
+            </div>
+        </div>
+        <div ng-if="someMealTypeController.recipes.length >= 1" class="row">
             <div class="col-md-4 center">
-                <a href="#/recipe" class="thumbnail">
-                    <h5>{{mealtypes[0].title}}</h5>
-                    <img src="images/slider/bg1.jpg" alt="{{mealtypes[0].title}}" style="width:150px;height:150px">
+                <a ng-href="#/recipe/{{someMealTypeController.recipes[0]._id}}" class="thumbnail">
+                    <h5>{{someMealTypeController.recipes[0].title}}</h5>
+                    <img src="images/slider/bg1.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
-            <div class="col-md-4 center">
-                <a href="#/recipe" class="thumbnail">
-                    <h5>{{mealtypes[1].title}}</h5>
-                    <img src="images/slider/bg2.jpg" alt="{{mealtypes[1].title}}" style="width:150px;height:150px">
+            <div ng-if="someMealTypeController.recipes.length >= 2" class="col-md-4 center">
+                <a ng-href="#/recipe/{{someMealTypeController.recipes[1]._id}}" class="thumbnail">
+                    <h5>{{someMealTypeController.recipes[1].title}}</h5>
+                    <img src="images/slider/bg2.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
-            <div class="col-md-4 center">
-                <a href="#/recipe" class="thumbnail">
-                    <h5>{{mealtypes[2].title}}</h5>
-                    <img src="images/slider/bg3.jpg" alt="{{mealtypes[2].title}}" style="width:150px;height:150px">
+            <div ng-if="someMealTypeController.recipes.length >= 3" class="col-md-4 center">
+                <a ng-href="#/recipe/{{someMealTypeController.recipes[2]._id}}" class="thumbnail">
+                    <h5>{{someMealTypeController.recipes[2].title}}</h5>
+                    <img src="images/slider/bg3.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                </a>
+            </div>
+        </div>
+
+        <div ng-if="someMealTypeController.recipes.length >= 4" class="row">
+            <div ng-if="someMealTypeController.recipes.length >= 4" class="col-md-4 center">
+                <a ng-href="#/recipe/{{someMealTypeController.recipes[3]._id}}" class="thumbnail">
+                    <h5>{{someMealTypeController.recipes[3].title}}</h5>
+                    <img src="images/slider/bg1.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                </a>
+            </div>
+            <div ng-if="someMealTypeController.recipes.length >= 5" class="col-md-4 center">
+                <a ng-href="#/recipe/{{someMealTypeController.recipes[4]._id}}" class="thumbnail">
+                    <h5>{{someMealTypeController.recipes[4].title}}</h5>
+                    <img src="images/slider/bg2.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                </a>
+            </div>
+            <div ng-if="someMealTypeController.recipes.length >= 6" class="col-md-4 center">
+                <a ng-href="#/recipe/{{someMealTypeController.recipes[5]._id}}" class="thumbnail">
+                    <h5>{{someMealTypeController.recipes[5].title}}</h5>
+                    <img src="images/slider/bg3.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
         </div>

@@ -56,7 +56,7 @@
             <p>{{recipeController.recipe.steps}}</p>
             <hr>
             <!-- text area for comment -->
-            <div ng-show="recipeController.isLoggedIn()">
+            <div ng-show="recipeController.isLoggedIn">
                 <h3>Any Comments?</h3>
                 <form>
                     <textarea ng-model="recipeController.commentSubmitted" class="form-control" rows="3" placeholder="Write a comment..."></textarea>
@@ -68,7 +68,7 @@
         <!-- COMMENTS ----------------------------------------------------->
         <div id="comments" class="col-sm-6">
             <h3>Comments</h3>
-            <div ng-repeat="comment in recipeController.recipe.comments" class="media">
+            <div ng-repeat="comment in recipeController.comments" class="media">
                 <div class="pull-left">
                     <img class="avatar img-circle" src="images/blog/avatar1.png" alt="User image">
                 </div>
@@ -76,11 +76,11 @@
                     <div class="well">
                         <div class="media-heading">
                             <!-- comment author and time -->
-                            <strong><a ng-href="#/profile/{{recipeController.findUserIdByEmail(comment.replyto)}}">{{recipeController.findUserNameByEmail(comment.author)}}</a></strong>&nbsp; <small>{{comment.time.toLocaleDateString()}}</small>
+                            <strong><a ng-href="#/profile/{{comment.author_id}}">{{comment.author_name}}</a></strong>&nbsp; <small>{{comment.time.toLocaleDateString()}}</small>
                             <a ng-click="recipeController.replyComment(comment.author)" class="pull-right"><span class="glyphicon glyphicon-repeat"></span> Reply</a>
                         </div>
                         <!-- comment content (ant replyto) -->
-                        <p><strong><a ng-href="#/profile/{{recipeController.findUserIdByEmail(comment.replyto)}}" ng-if="comment.replyto != null && comment.replyto != ''">@{{recipeController.findUserNameByEmail(comment.replyto)}}:&nbsp;</a></strong>
+                        <p><strong><a ng-href="#/profile/{{comment.replyto_id}}" ng-if="comment.replyto != null && comment.replyto != ''">@{{comment.replyto_name}}:&nbsp;</a></strong>
                             {{comment.content}}</p>
                     </div>
                 </div>

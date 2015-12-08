@@ -10,7 +10,7 @@
         //TODO: For now, the image is not implemented and all show the same image.
         // TODO: the unbookmark and bookmark problem
         var vm = this;
-        vm.isLoggedIn = isLoggedIn;
+        vm.isLoggedIn = isLoggedIn();
         vm.bookmark = bookmark;
         vm.unbookmark = unbookmark;
         vm.comment = comment;
@@ -19,6 +19,7 @@
         vm.findUserIdByEmail = findUserIdByEmail;
         vm.recipe = null; // the recipe
         vm.author = null; // the recipe's author
+        vm.comments = null; // the comments to display
         vm.showBookmark = true;
         vm.showUnbookmark = false;
         vm.commentSubmitted = ""; // for user comment
@@ -53,6 +54,24 @@
                         $location.path("/");
                     } else {
                         vm.recipe = result;
+                        // init the comments to display:
+                        vm.comments = vm.recipe.comments;
+                        vm.comments.forEach(function(comment) {
+                            UserService
+                                .findUserByEmail(comment.author)
+                                .then(function(user) {
+                                    comment.author_id = user._id;
+                                    comment.author_name = user.name;
+                                });
+                            if (comment.replyto != null || comment.replyto != "") {
+                                UserService
+                                    .findUserByEmail(comment.replyto)
+                                    .then(function(user) {
+                                        comment.replyto_id = user._id;
+                                        comment.replyto_name = user.name;
+                                    });
+                            }
+                        });
                         // find author to display:
                         UserService
                             .findUserByEmail(vm.recipe.author)

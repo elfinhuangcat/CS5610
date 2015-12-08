@@ -123,7 +123,7 @@ module.exports = function(app, model){
         model
             .getInMessageCountByUserEmail(req.params["email"])
             .then(function (count) {
-                res.send(count);
+                res.json(count);
             });
     }
 
@@ -131,7 +131,7 @@ module.exports = function(app, model){
         model
             .getOutMessageCountByUserEmail(req.params["email"])
             .then(function (count) {
-                res.send(count);
+                res.json(count);
             });
     }
 };

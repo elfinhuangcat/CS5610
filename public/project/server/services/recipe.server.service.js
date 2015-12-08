@@ -86,7 +86,7 @@ module.exports = function(app, model){
         model
             .getRecipeCountByStyle(req.params["style"])
             .then(function(count) {
-                res.send(count);
+                res.json(count);
             });
     }
 
@@ -94,7 +94,7 @@ module.exports = function(app, model){
         model
             .getRecipeCountByMealtype(req.params["mealtype"])
             .then(function(count) {
-                res.send(count);
+                res.json(count);
             });
     }
 
