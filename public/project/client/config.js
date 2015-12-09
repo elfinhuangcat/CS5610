@@ -110,11 +110,6 @@
                     templateUrl: "views/friend/friend.view.html",
                     controller: "FriendController as friendController"
                 })
-                .when("/searchresult",
-                {
-                    templateUrl: "views/search/search.result.view.html",
-                    controller: "SearchResultController"
-                })
                 .when("/admin/userlist",
                 {
                     templateUrl: "views/admin/userList/user.list.view.html",

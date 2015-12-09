@@ -6,14 +6,14 @@
             <li data-target="#main-slider" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="item active" style="background-image: url(images/slider/bg1.jpg)">
+            <div class="item active" style="background-image: url(images/slider/bg2.jpg)">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="carousel-content center centered">
                                 <h2 class="boxed animation animated-item-1">{{sliderController.recipes[0].title}}</h2>
                                 <br>
-                                <p class="boxed animation animated-item-2"><span ng-repeat="style in sliderController.recipes[0].style">{{style}}</span></p>
+                                <p class="boxed animation animated-item-2"><span ng-repeat="style in sliderController.recipes[0].style">{{style}}&nbsp;</span></p>
                                 <br>
                                 <a class="btn btn-md animation animated-item-3" ng-href="#/recipe/{{sliderController.recipes[0]._id}}">Learn More</a>
                             </div>
@@ -21,14 +21,14 @@
                     </div>
                 </div>
             </div><!--/.item-->
-            <div class="item" style="background-image: url(images/slider/bg2.jpg)">
+            <div class="item" style="background-image: url(images/slider/bg1.jpg)">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="carousel-content center centered">
                                 <h2 class="boxed animation animated-item-1">{{sliderController.recipes[1].title}}</h2>
                                 <br>
-                                <p class="boxed animation animated-item-2"><span ng-repeat="style in sliderController.recipes[1].style">{{style}}</span></p>
+                                <p class="boxed animation animated-item-2"><span ng-repeat="style in sliderController.recipes[1].style">{{style}}&nbsp;</span></p>
                                 <br>
                                 <a class="btn btn-md animation animated-item-3" ng-href="#/recipe/{{sliderController.recipes[1]._id}}">Learn More</a>
                             </div>
@@ -43,7 +43,7 @@
                             <div class="carousel-content center centered">
                                 <h2 class="boxed animation animated-item-1">{{sliderController.recipes[2].title}}</h2>
                                 <br>
-                                <p class="boxed animation animated-item-2"><span ng-repeat="style in sliderController.recipes[2].style">{{style}}</span></p>
+                                <p class="boxed animation animated-item-2"><span ng-repeat="style in sliderController.recipes[2].style">{{style}}&nbsp;</span></p>
                                 <br>
                                 <a class="btn btn-md animation animated-item-3" ng-href="#/recipe/{{sliderController.recipes[2]._id}}">Learn More</a>
                             </div>
