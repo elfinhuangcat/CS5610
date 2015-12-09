@@ -1,0 +1,63 @@
+<section id="title" class="green-sea">
+    <div class="container">
+        <div class="gap"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Messages</h1>
+            </div>
+            <div class="col-sm-6">
+                <ul class="breadcrumb pull-right">
+                    <li><a href="#/">Home</a></li>
+                    <li class="active">Messages</li>
+                </ul>
+            </div>
+        </div>
+        <div class="gap"></div>
+    </div>
+</section><!--/#title-->
+
+<section> <!--main content -->
+    <div class="container">
+        <div class="col-sm-1 gap"></div>
+        <div class="col-sm-10">
+            <div class="gap"></div>
+            <div>
+                <ul class="nav nav-pills">
+                    <li><a href="#/message/compose">Compose</a></li>
+                    <li><a href="#/message/inbox">Inbox</a></li>
+                    <li><a href="#/message/sentbox">Sentbox</a></li>
+                    <li class="active"><a>Read Msg</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="gap"></div>
+                    <div id="read" class="tab-pane fade in active">
+                        <form>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input readonly ng-model="msgController.msg.subject" type="text" class="form-control" id="subject">
+                            </div>
+                            <div class="form-group">
+                                <label for="from">From</label>
+                                <input readonly ng-model="msgController.from" type="text" class="form-control" id="from">
+                            </div>
+                            <div class="form-group">
+                                <label for="to">To</label>
+                                <input readonly ng-model="msgController.to" type="text" class="form-control" id="to">
+                            </div>
+                            <div class="form-group">
+                                <label for="body">Body</label>
+                                <textarea readonly ng-model="msgController.msg.body" type="text" class="form-control" id="body"></textarea>
+                            </div>
+                            <button ng-click="msgController.reply()" type="submit" class="btn btn-success">Reply</button>
+                        </form>
+                    </div>
+                    <div class="gap"></div>
+                </div>
+            </div>
+            <div class="gap"></div>
+        </div>
+        <div class="col-sm-1 gap"></div>
+    </div>
+
+</section>

@@ -20,14 +20,20 @@
                 <tr>
                     <th>Recipe Title</th>
                     <th>Tags</th>
-                    <th><button class="btn btn-warning glyphicon glyphicon-trash"></button></th>
+                    <th><button ng-click="bookmarkController.unbookmark()" class="btn btn-warning glyphicon glyphicon-trash"></button></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="recipe in recipes">
-                    <td><a href="">{{recipe.title}}</a></td>
-                    <td><a href="" ng-repeat="tag in recipe.tags">{{tag}} &nbsp;</a></td>
-                    <td><input type="checkbox" name="unbookmark">
+                <tr ng-repeat="recipe in bookmarkController.bookmarks">
+                    <td>
+                        <a ng-href="#/recipe/{{recipe._id}}">{{recipe.title}}</a>
+                    </td>
+                    <td>
+                        <a ng-href="#/browse/style/{{style}}" ng-repeat="style in recipe.style">{{style}} &nbsp;</a>
+                        <a ng-href="#/browse/style/{{mealtype}}" ng-repeat="mealtype in recipe.mealtype">{{mealtype}} &nbsp;</a>
+                    </td>
+                    <td>
+                        <input type="checkbox" ng-model="recipe.selected">
                     </td>
                 </tr>
             </tbody>

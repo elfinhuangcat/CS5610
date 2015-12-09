@@ -33,7 +33,7 @@
                 .when("/bookmark",
                 {
                     templateUrl: "views/bookmark/bookmark.view.html",
-                    controller: "BookmarkController"
+                    controller: "BookmarkController as bookmarkController"
                 })
                 .when("/recipe/:id",
                 {
@@ -45,10 +45,14 @@
                     templateUrl: "views/browse/browse.style.view.html",
                     controller: "BrowseStyleController as browseStyleController"
                 })
-                .when("/browse/style/:style",
+                .when("/browse/style/:style/:page",
                 {
                     templateUrl: "views/browse/style/browse.some.style.view.html",
-                    controller: "BrowseSomeStyleController"
+                    controller: "BrowseSomeStyleController as someStyleController"
+                })
+                .when("/browse/style/:style",
+                {
+                    redirectTo: "/browse/style/:style/1"
                 })
                 .when("/browse/mealtype",
                 {
@@ -64,10 +68,29 @@
                 {
                     redirectTo: "/browse/mealtype/:mealtype/1"
                 })
+                .when("/message/compose",
+                {
+                    templateUrl: "views/message/message.compose.view.html",
+                    controller: "MessageComposeController as msgController"
+                })
+                .when("/message/inbox",
+                {
+                    templateUrl: "views/message/message.inbox.view.html",
+                    controller: "MessageInboxController as msgController"
+                })
+                .when("/message/sentbox",
+                {
+                    templateUrl: "views/message/message.sentbox.view.html",
+                    controller: "MessageSentboxController as msgController"
+                })
+                .when("/message/read/:id",
+                {
+                    templateUrl: "views/message/message.read.view.html",
+                    controller: "MessageReadController as msgController"
+                })
                 .when("/message",
                 {
-                    templateUrl: "views/message/message.view.html",
-                    controller: "MessageController"
+                    redirectTo: "/message/compose"
                 })
                 .when("/myrecipe",
                 {
@@ -77,7 +100,7 @@
                 .when("/friend",
                 {
                     templateUrl: "views/friend/friend.view.html",
-                    controller: "FriendController"
+                    controller: "FriendController as friendController"
                 })
                 .when("/searchresult",
                 {

@@ -20,27 +20,65 @@
 </section><!--/#title-->
 
 <section>
+    <!-- number of recipes shown on each page: 6 -->
     <div class="container">
         <div class="gap"></div>
-        <div class="row">
+        <div ng-if="someStyleController.recipes.length < 1">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                Sorry, there is no recipes in this category.
+            </div>
+        </div>
+
+        <div ng-if="someStyleController.recipes.length >= 1" class="row">
             <div class="col-md-4 center">
-                <a href="#/recipe" class="thumbnail">
-                    <h5>{{styles[0].title}}</h5>
-                    <img src="images/slider/bg1.jpg" alt="{{styles[0].title}}" style="width:150px;height:150px">
+                <a ng-href="#/recipe/{{someStyleController.recipes[0]._id}}" class="thumbnail">
+                    <h5>{{someStyleController.recipes[0].title}}</h5>
+                    <img src="images/slider/bg1.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
-            <div class="col-md-4 center">
-                <a href="#/recipe" class="thumbnail">
-                    <h5>{{styles[1].title}}</h5>
-                    <img src="images/slider/bg2.jpg" alt="{{styles[1].title}}" style="width:150px;height:150px">
+            <div ng-if="someStyleController.recipes.length >= 2" class="col-md-4 center">
+                <a ng-href="#/recipe/{{someStyleController.recipes[1]._id}}" class="thumbnail">
+                    <h5>{{someStyleController.recipes[1].title}}</h5>
+                    <img src="images/slider/bg2.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
-            <div class="col-md-4 center">
-                <a href="#/recipe" class="thumbnail">
-                    <h5>{{styles[2].title}}</h5>
-                    <img src="images/slider/bg3.jpg" alt="{{styles[2].title}}" style="width:150px;height:150px">
+            <div ng-if="someStyleController.recipes.length >= 3" class="col-md-4 center">
+                <a ng-href="#/recipe/{{someStyleController.recipes[2]._id}}" class="thumbnail">
+                    <h5>{{someStyleController.recipes[2].title}}</h5>
+                    <img src="images/slider/bg3.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
+        </div>
+
+        <div ng-if="someStyleController.recipes.length >= 4" class="row">
+            <div ng-if="someStyleController.recipes.length >= 4" class="col-md-4 center">
+                <a ng-href="#/recipe/{{someStyleController.recipes[3]._id}}" class="thumbnail">
+                    <h5>{{someStyleController.recipes[3].title}}</h5>
+                    <img src="images/slider/bg1.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                </a>
+            </div>
+            <div ng-if="someStyleController.recipes.length >= 5" class="col-md-4 center">
+                <a ng-href="#/recipe/{{someStyleController.recipes[4]._id}}" class="thumbnail">
+                    <h5>{{someStyleController.recipes[4].title}}</h5>
+                    <img src="images/slider/bg2.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                </a>
+            </div>
+            <div ng-if="someStyleController.recipes.length >= 6" class="col-md-4 center">
+                <a ng-href="#/recipe/{{someStyleController.recipes[5]._id}}" class="thumbnail">
+                    <h5>{{someStyleController.recipes[5].title}}</h5>
+                    <img src="images/slider/bg3.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                </a>
+            </div>
+        </div>
+        <div ng-if="someStyleController.recipes.length >= 1">
+            <nav>
+                <ul class="pager">
+                    <li ng-show="someStyleController.showPrev"><a ng-href="#/browse/style/{{someStyleController.style}}/{{someStyleController.page-1}}">Previous</a></li>
+                    <li ng-show="someStyleController.showNext"><a ng-href="#/browse/style/{{someStyleController.style}}/{{someStyleController.page+1}}">Next</a></li>
+                </ul>
+            </nav>
         </div>
         <div class="gap"></div>
     </div>

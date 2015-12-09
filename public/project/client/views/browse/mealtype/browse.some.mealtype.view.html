@@ -71,6 +71,14 @@
                 </a>
             </div>
         </div>
+        <div ng-if="someMealTypeController.recipes.length >= 1">
+            <nav>
+                <ul class="pager">
+                    <li ng-show="someMealTypeController.showPrev"><a ng-href="#/browse/mealtype/{{someMealTypeController.style}}/{{someMealTypeController.page-1}}">Previous</a></li>
+                    <li ng-show="someMealTypeController.showNext"><a ng-href="#/browse/mealtype/{{someMealTypeController.style}}/{{someMealTypeController.page+1}}">Next</a></li>
+                </ul>
+            </nav>
+        </div>
         <div class="gap"></div>
     </div>
 </section>

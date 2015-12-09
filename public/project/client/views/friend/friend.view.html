@@ -18,16 +18,18 @@
             <thead>
             <tr>
                 <th>Friend</th>
+                <th>Email</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="friend in friends">
-                <td><a href="">{{friend.username}}</a></td>
+            <tr ng-repeat="friend in friendController.friends">
+                <td><a ng-href="#/profile/{{friend._id}}">{{friend.name}}</a></td>
+                <td>{{friend.email}}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Actions">
-                        <button type="button" class="btn btn-primary glyphicon glyphicon-envelope" ng-click="sendMessage()"></button>
-                        <button type="button" class="btn btn-warning glyphicon glyphicon-trash"></button>
+                        <button ng-click="friendController.sendMsg()" type="button" class="btn btn-primary glyphicon glyphicon-envelope"></button>
+                        <button ng-click="friendController.unfriend(friend.email)" type="button" class="btn btn-warning glyphicon glyphicon-trash"></button>
                     </div>
                 </td>
             </tr>

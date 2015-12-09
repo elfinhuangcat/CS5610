@@ -5,44 +5,47 @@
         .module("RecipesComApp")
         .controller("BrowseSomeStyleController", BrowseSomeStyleController);
 
-    function BrowseSomeStyleController($scope)
+    function BrowseSomeStyleController($routeParams, $location, RecipeService)
     {
-        $scope.someStyle = "American";
-        $scope.styles = [
-            {
-                "id":1,
-                "title": "mock_recipe_1",
-                "tags":["breakfast","American"],
-                "prepTime":30,
-                "prepTimeUnit":"m",
-                "servings":6,
-                "author":123,
-                "ingredients": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.",
-                "steps":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id."
-            },
-            {
-                "id":2,
-                "title": "mock_recipe_10",
-                "tags":["breakfast","American"],
-                "prepTime":30,
-                "prepTimeUnit":"m",
-                "servings":6,
-                "author":123,
-                "ingredients": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.",
-                "steps":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id."
-            },
-            {
-                "id":3,
-                "title": "mock_recipe_11",
-                "tags":["breakfast","American"],
-                "prepTime":30,
-                "prepTimeUnit":"m",
-                "servings":6,
-                "author":123,
-                "ingredients": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.",
-                "steps":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id."
-            }
-        ];
+        var vm = this;
+        vm.style = $routeParams["style"];
+        vm.page = $routeParams["page"]; // start from 1
+        vm.itemsPerPage = 6; // the number of recipes to show per page
+        vm.showPrev = true; // activate the "Prev" button ?
+        vm.showNext = true; // activate the "Next" button ?
+        vm.recipes = null; // the recipes to show on this page.
 
+        function init() {
+            var numOfRecipesOfStyle = 0;
+            RecipeService
+                .getRecipesCountByStyle(vm.style)
+                .then(function (count) {
+                    numOfRecipesOfStyle = count;
+                    var numOfPages = Math.ceil(count / vm.itemsPerPage);
+                    if (vm.page < 1 || vm.page > numOfPages) {
+                        vm.page = 1;
+                        $location.path("/browse/style/"+vm.style +"/1");
+                    } else {
+                        if (vm.page == 1) {
+                            vm.showPrev = false;
+                        }
+                        if (vm.page == numOfPages) {
+                            vm.showNext = false;
+                        }
+                        RecipeService
+                            .findRecipesByStyle(vm.style)
+                            .then(function(recipes) {
+                                // show the recipes in current page:
+                                var start = (vm.page - 1) * vm.itemsPerPage;
+                                var end = vm.page * (vm.itemsPerPage + 1);
+                                if (vm.page * (vm.itemsPerPage + 1) > recipes.length) {
+                                    end = recipes.length;
+                                }
+                                vm.recipes = recipes.slice(start, end);
+                            });
+                    }
+                });
+        }
+        init();
     }
 })();

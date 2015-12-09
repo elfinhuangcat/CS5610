@@ -12,7 +12,7 @@
             findOutMessageForUserByEmail: findOutMessageForUserByEmail,
             createMessage: createMessage,
             deleteMessageById: deleteMessageById,
-            deleteMultipleMessage: deleteMultipleMessage,
+            //deleteMultipleMessage: deleteMultipleMessage,
             updateMessage: updateMessage
         };
         return service;

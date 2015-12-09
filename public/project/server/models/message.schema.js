@@ -6,7 +6,7 @@ module.exports = function(mongoose) {
         "to"         : String, // user's email
         "subject"    : String, // message title
         "body"       : String, // message content
-        "read"       : Boolean
+        "read"       : {type: Boolean, default: false}
     }, {collection: "cs5610.project.message"});
     return MessageSchema;
 };

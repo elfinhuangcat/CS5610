@@ -27,26 +27,7 @@
         vm.user = $rootScope.user;
 
         function init() {
-            // The bookmark buttons:
-            if (isLoggedIn() && vm.user.role != 'A') {
-                // See if it has already been bookmarked by the user
-                var bookmarkFlag = false;
-                for (var i = 0; i < vm.user.bookmarks.length; ++i) {
-                    if (vm.user.bookmarks[i] == vm.recipe._id) {
-                        bookmarkFlag = true;
-                    }
-                }
-                if (bookmarkFlag) {
-                    vm.showUnbookmark = true;
-                    vm.showBookmark = false;
-                } else {
-                    vm.showBookmark = true;
-                    vm.showUnbookmark = false;
-                }
-            } else {
-                vm.showBookmark = false;
-                vm.showUnbookmark = false;
-            }
+
             RecipeService
                 .findRecipeById($routeParams["id"])
                 .then(function(result) {
@@ -54,6 +35,29 @@
                         $location.path("/");
                     } else {
                         vm.recipe = result;
+
+                        // The bookmark buttons:
+                        if (isLoggedIn() && vm.user.role != 'A') {
+                            // See if it has already been bookmarked by the user
+                            var bookmarkFlag = false;
+                            for (var i = 0; i < vm.user.bookmarks.length; ++i) {
+                                if (vm.user.bookmarks[i] == vm.recipe._id) {
+                                    bookmarkFlag = true;
+                                }
+                            }
+                            if (bookmarkFlag) {
+                                vm.showUnbookmark = true;
+                                vm.showBookmark = false;
+                            } else {
+                                vm.showBookmark = true;
+                                vm.showUnbookmark = false;
+                            }
+                        } else {
+                            vm.showBookmark = false;
+                            vm.showUnbookmark = false;
+                        }
+
+
                         // init the comments to display:
                         vm.comments = vm.recipe.comments;
                         vm.comments.forEach(function(comment) {
