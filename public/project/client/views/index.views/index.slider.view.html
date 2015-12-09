@@ -1,4 +1,4 @@
-<section id="main-slider" class="no-margin">
+<section id="main-slider" class="no-margin" ng-controller="SliderController as sliderController">
     <div class="carousel slide wet-asphalt">
         <ol class="carousel-indicators">
             <li data-target="#main-slider" data-slide-to="0" class="active"></li>
@@ -11,11 +11,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="carousel-content center centered">
-                                <h2 class="boxed animation animated-item-1">Title of Recipe 1</h2>
+                                <h2 class="boxed animation animated-item-1">{{sliderController.recipes[0].title}}</h2>
                                 <br>
-                                <p class="boxed animation animated-item-2">Style | Meal Type</p>
+                                <p class="boxed animation animated-item-2"><span ng-repeat="style in sliderController.recipes[0].style">{{style}}</span></p>
                                 <br>
-                                <a class="btn btn-md animation animated-item-3" href="#">Learn More</a>
+                                <a class="btn btn-md animation animated-item-3" ng-href="#/recipe/{{sliderController.recipes[0]._id}}">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -26,11 +26,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="carousel-content center centered">
-                                <h2 class="boxed animation animated-item-1">Title of Recipe 2</h2>
+                                <h2 class="boxed animation animated-item-1">{{sliderController.recipes[1].title}}</h2>
                                 <br>
-                                <p class="boxed animation animated-item-2">Style | Meal Type</p>
+                                <p class="boxed animation animated-item-2"><span ng-repeat="style in sliderController.recipes[1].style">{{style}}</span></p>
                                 <br>
-                                <a class="btn btn-md animation animated-item-3" href="#">Learn More</a>
+                                <a class="btn btn-md animation animated-item-3" ng-href="#/recipe/{{sliderController.recipes[1]._id}}">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -41,11 +41,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="carousel-content center centered">
-                                <h2 class="boxed animation animated-item-1">Title of Recipe 3</h2>
+                                <h2 class="boxed animation animated-item-1">{{sliderController.recipes[2].title}}</h2>
                                 <br>
-                                <p class="boxed animation animated-item-2">Style | Meal Type</p>
+                                <p class="boxed animation animated-item-2"><span ng-repeat="style in sliderController.recipes[2].style">{{style}}</span></p>
                                 <br>
-                                <a class="btn btn-md animation animated-item-3" href="#">Learn More</a>
+                                <a class="btn btn-md animation animated-item-3" ng-href="#/recipe/{{sliderController.recipes[2]._id}}">Learn More</a>
                             </div>
                         </div>
                     </div>
