@@ -47,6 +47,7 @@ module.exports = function(mongoose) {
         "mealtype"   : [{type: String, enum: AllMealType}], // can belong to many meal types
         "time"       : Number, // Preparation time
         "unit"       : {type: String, enum: ['H','M','S']}, // Preparation time unit
+        "servings"   : {type: Number, default: 1},
         "ingredients": String,
         "steps"      : String,
         "comments"   : [{

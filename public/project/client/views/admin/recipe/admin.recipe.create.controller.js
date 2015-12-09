@@ -3,9 +3,9 @@
 {
     angular
         .module("RecipesComApp")
-        .controller("MyRecipeCreateController", MyRecipeCreateController);
+        .controller("AdminRecipeCreateController", AdminRecipeCreateController);
 
-    function MyRecipeCreateController($rootScope, $location, $routeParams, RecipeService)
+    function AdminRecipeCreateController($rootScope, $location, $routeParams, RecipeService)
     {
         // query - id: _id of the recipe to MODIFY
         var vm = this;
@@ -17,7 +17,7 @@
         vm.update = update;
 
         function init() {
-            if (isLoggedIn() && $rootScope.user.role == 'C') {
+            if (isAdmin()) {
                 // only 'C' users can use this feature
                 vm.user = $rootScope.user;
                 if ($routeParams["id"] == undefined || $routeParams["id"] == null) {
@@ -49,8 +49,12 @@
 
 
 
-        function isLoggedIn() {
-            return ($rootScope.user != null || $rootScope.user != undefined);
+        function isAdmin() {
+            if ($rootScope.user != null || $rootScope.user != undefined) {
+                return $rootScope.user.role == 'A';
+            } else {
+                return false;
+            }
         }
 
         function create() {

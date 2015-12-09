@@ -14,7 +14,8 @@
             getRecipesCountByStyle: getRecipesCountByStyle,
             getRecipesCountByMealtype: getRecipesCountByMealtype,
             findRecipesByStyle: findRecipesByStyle,
-            findRecipesByMealtype: findRecipesByMealtype
+            findRecipesByMealtype: findRecipesByMealtype,
+            findRecipesByAuthor: findRecipesByAuthor
         };
         return service;
 
@@ -93,6 +94,15 @@
         function findRecipesByMealtype(mealtype) {
             var deferred = $q.defer();
             $http.get("/rest/api/recipescom/recipe/mealtype/" + mealtype)
+                .success(function(recipes) {
+                    deferred.resolve(recipes);
+                });
+            return deferred.promise;
+        }
+
+        function findRecipesByAuthor(email) {
+            var deferred = $q.defer();
+            $http.get("/rest/api/recipescom/recipe?author=" + email)
                 .success(function(recipes) {
                     deferred.resolve(recipes);
                 });

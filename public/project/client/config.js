@@ -96,13 +96,13 @@
                 })
                 .when("/myrecipe/create",
                 {
-                    templateUrl: "views/myrecipe/myrecipe.view.html",
+                    templateUrl: "views/myrecipe/myrecipe.create.view.html",
                     controller: "MyRecipeCreateController as myRecipeController"
                 })
                 .when("/myrecipe/manage",
                 {
-                    templateUrl: "views/myrecipe/myrecipe.view.html",
-                    controller: "MyRecipeController"
+                    templateUrl: "views/myrecipe/myrecipe.manage.view.html",
+                    controller: "MyRecipeManageController as myRecipeController"
                 })
                 .when("/friend",
                 {
@@ -117,12 +117,22 @@
                 .when("/admin/userlist",
                 {
                     templateUrl: "views/admin/userList/user.list.view.html",
-                    controller: "UserListController"
+                    controller: "UserListController as userlistController"
                 })
                 .when("/admin/contapp",
                 {
                     templateUrl: "views/admin/contApp/contributor.app.view.html",
-                    controller: "ContAppController"
+                    controller: "ContAppController as appController"
+                })
+                .when("/admin/recipe/create",
+                {
+                    templateUrl: "views/admin/recipe/admin.recipe.create.html",
+                    controller: "AdminRecipeCreateController as recipeController"
+                })
+                .when("/admin/recipe/manage",
+                {
+                    templateUrl: "views/admin/recipe/admin.recipe.manage.html",
+                    controller: "AdminRecipeManageController as recipeController"
                 })
                 .otherwise({
                     redirectTo: "/"

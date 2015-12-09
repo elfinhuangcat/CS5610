@@ -3,7 +3,7 @@ module.exports = function(app, model){
     // new recipe object in the body
     app.post(  "/rest/api/recipescom/recipe", createRecipe);
 
-    // find all recipes
+    // find all recipes OR get recipe by author email (query - author : email)
     app.get(   "/rest/api/recipescom/recipe", getRecipe);
 
     // get a recipe by id
@@ -14,6 +14,7 @@ module.exports = function(app, model){
 
     // delete a recipe by id
     app.delete("/rest/api/recipescom/recipe/:id", deleteRecipeById);
+
 
     app.get(   "/rest/api/recipescom/recipe/style-count/:style", getRecipesCountByStyle);
     app.get(   "/rest/api/recipescom/recipe/mealtype-count/:mealtype", getRecipesCountByMealtype);
@@ -40,11 +41,19 @@ module.exports = function(app, model){
      * @param res
      */
     function getRecipe(req, res) {
-        model
-            .findAllRecipe()
-            .then(function(recipes) {
-                res.json(recipes);
-            });
+        if (req.query.author != undefined || req.query.author != null) {
+            model
+                .findRecipesByUserEmail(req.query.author)
+                .then(function(recipes) {
+                    res.json(recipes);
+                });
+        } else {
+            model
+                .findAllRecipe()
+                .then(function(recipes) {
+                    res.json(recipes);
+                });
+        }
     }
 
     function getRecipeById(req, res) {

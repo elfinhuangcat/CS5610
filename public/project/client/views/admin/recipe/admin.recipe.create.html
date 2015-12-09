@@ -3,13 +3,13 @@
         <div class="gap"></div>
         <div class="row">
             <div class="col-sm-6">
-                <h1>My Recipes</h1>
-                <p>Here you can create new recipes and manage the recipes created by you.</p>
+                <h1>Recipe Management</h1>
+                <p>Dear admin, you can view all the recipes in our database, update them or create new recipes.</p>
             </div>
             <div class="col-sm-6">
                 <ul class="breadcrumb pull-right">
                     <li><a href="#/">Home</a></li>
-                    <li class="active">My Recipes</li>
+                    <li class="active">Recipe Management</li>
                 </ul>
             </div>
         </div>
@@ -24,8 +24,8 @@
             <div class="gap"></div>
             <div>
                 <ul class="nav nav-pills">
-                    <li class="active"><a href="#/myrecipe/create">Create/Update</a></li>
-                    <li><a href="#/myrecipe/manage">Manage</a></li>
+                    <li class="active"><a href="#/admin/recipe/create">Create/Update</a></li>
+                    <li><a href="#/admin/recipe/manage">Manage</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -34,7 +34,7 @@
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <label for="recipeTitle">Title:</label>
-                                <input ng-model="myRecipeController.newRecipe.title" type="text" class="form-control" id="recipeTitle" placeholder="Recipe's Title">
+                                <input ng-model="recipeController.newRecipe.title" type="text" class="form-control" id="recipeTitle" placeholder="Recipe's Title">
                             </div>
                             <!--
                             <div class="form-group">
@@ -45,12 +45,12 @@
                             <div class="row">
                                 <div class="form-group col-md-2">
                                     <label for="prepTime">Prep Time:</label>
-                                    <input ng-model="myRecipeController.newRecipe.time" type="text" class="form-control bfh-number" id="prepTime" placeholder="30">
+                                    <input ng-model="recipeController.newRecipe.time" type="text" class="form-control bfh-number" id="prepTime" placeholder="30">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-2">
-                                    <select ng-model="myRecipeController.newRecipe.unit" name="unitSelect" class="form-control">
+                                    <select ng-model="recipeController.newRecipe.unit" name="unitSelect" class="form-control">
                                         <option value="H">hour(s)</option>
                                         <option value="M">minute(s)</option>
                                         <option value="S">second(s)</option>
@@ -61,36 +61,36 @@
                             <div class="row">
                                 <div class="form-group col-md-2">
                                     <label for="servings">Servings:</label>
-                                    <input ng-model="myRecipeController.newRecipe.servings" type="text" class="form-control bfh-number" id="servings" placeholder="2">
+                                    <input ng-model="recipeController.newRecipe.servings" type="text" class="form-control bfh-number" id="servings" placeholder="2">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Style tags:</label>
-                                <label ng-repeat="style in myRecipeController.styles">
-                                    <input type="checkbox" checklist-model="myRecipeController.newRecipe.style" checklist-value="style"> {{style}}
+                                <label ng-repeat="style in recipeController.styles">
+                                    <input type="checkbox" checklist-model="recipeController.newRecipe.style" checklist-value="style"> {{style}}
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label>Meal type tags:</label>
-                                <label ng-repeat="mealtype in myRecipeController.mealtypes">
-                                    <input type="checkbox" checklist-model="myRecipeController.newRecipe.mealtype" checklist-value="mealtype"> {{mealtype}}
+                                <label ng-repeat="mealtype in recipeController.mealtypes">
+                                    <input type="checkbox" checklist-model="recipeController.newRecipe.mealtype" checklist-value="mealtype"> {{mealtype}}
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label for="ingredients">Ingredients:</label>
-                                <textarea id="ingredients" ng-model="myRecipeController.newRecipe.ingredients" class="form-control" rows="3"></textarea>
+                                <textarea id="ingredients" ng-model="recipeController.newRecipe.ingredients" class="form-control" rows="3"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="steps">Steps:</label>
-                                <textarea id="steps" ng-model="myRecipeController.newRecipe.steps" class="form-control" rows="3"></textarea>
+                                <textarea id="steps" ng-model="recipeController.newRecipe.steps" class="form-control" rows="3"></textarea>
                             </div>
-                            <button ng-show="myRecipeController.createMode" ng-click="myRecipeController.create()" type="submit" class="btn btn-success pull-left">Create</button>
-                            <button ng-hide="myRecipeController.createMode" ng-click="myRecipeController.update()" type="submit" class="btn btn-success pull-left">Update</button>
+                            <button ng-show="recipeController.createMode" ng-click="recipeController.create()" type="submit" class="btn btn-success pull-left">Create</button>
+                            <button ng-hide="recipeController.createMode" ng-click="recipeController.update()" type="submit" class="btn btn-success pull-left">Update</button>
                         </form>
                     </div>
 
-                    <div ng-show="myRecipeController.cannotCreateRecipe" class="alert alert-danger alert-dismissible" role="alert">
+                    <div ng-show="recipeController.cannotCreateRecipe" class="alert alert-danger alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <strong>Error</strong> Recipe creation/modification failed.
                     </div>

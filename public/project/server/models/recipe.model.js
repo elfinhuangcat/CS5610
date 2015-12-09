@@ -13,7 +13,8 @@ module.exports = function(app, mongoose, RecipeSchema) {
         getRecipeCountByStyle: getRecipeCountByStyle,
         getRecipeCountByMealtype: getRecipeCountByMealtype,
         findRecipesByStyle: findRecipesByStyle,
-        findRecipesByMealtype: findRecipesByMealtype
+        findRecipesByMealtype: findRecipesByMealtype,
+        findRecipesByUserEmail: findRecipesByUserEmail
     };
     return api;
 
@@ -166,6 +167,18 @@ module.exports = function(app, mongoose, RecipeSchema) {
     function findRecipesByMealtype(mealtype) {
         var deferred = q.defer();
         RecipeModel.find({ "mealtype": { $in: [mealtype] }}, function(err, recipes) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(recipes);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findRecipesByUserEmail(email) {
+        var deferred = q.defer();
+        RecipeModel.find({"author" : email}, function(err, recipes) {
             if (err) {
                 deferred.reject(err);
             } else {

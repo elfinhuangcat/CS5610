@@ -14,6 +14,7 @@
         vm.isLoggedIn = isLoggedIn;
         vm.logout = logout;
         vm.isAdmin = isAdmin;
+        vm.isContributor = isContributor;
 
 
 
@@ -34,6 +35,14 @@
         function isAdmin() {
             if (isLoggedIn()) {
                 return $rootScope.user.role == 'A';
+            } else {
+                return false;
+            }
+        }
+
+        function isContributor() {
+            if (isLoggedIn()) {
+                return $rootScope.user.role == 'C';
             } else {
                 return false;
             }

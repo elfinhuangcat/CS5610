@@ -1,5 +1,5 @@
 "use strict";
 (function(){
     angular
-        .module("RecipesComApp", ["ngRoute"])
+        .module("RecipesComApp", ["ngRoute","checklist-model"])
 })();

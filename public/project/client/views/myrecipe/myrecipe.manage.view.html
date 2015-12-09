@@ -39,12 +39,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="recipe in myRecipes">
-                                <td><a href="#/recipe">{{recipe.title}}</a></td>
+                            <tr ng-repeat="recipe in myRecipeController.recipes">
+                                <td><a ng-href="#/recipe/{{recipe._id}}">{{recipe.title}}</a></td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Action">
-                                        <button type="button" class="btn btn-primary glyphicon glyphicon-pencil"></button>
-                                        <button type="button" class="btn btn-danger glyphicon glyphicon-trash"></button>
+                                        <button ng-click="myRecipeController.update(recipe._id)" type="button" class="btn btn-primary glyphicon glyphicon-pencil"></button>
+                                        <button ng-click="myRecipeController.remove(recipe._id)" type="button" class="btn btn-danger glyphicon glyphicon-trash"></button>
                                     </div>
                                 </td>
                             </tr>

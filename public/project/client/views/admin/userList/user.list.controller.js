@@ -5,35 +5,68 @@
         .module("RecipesComApp")
         .controller("UserListController", UserListController);
 
-    function UserListController($scope, $location)
+    function UserListController(UserService, $rootScope, $location)
     {
-        $scope.$location = $location;
-        $scope.users = [
-            {
-                "id": 123,
-                "username": "mock_user",
-                "email": "mock@mock.com",
-                "password": 1234,
-                "bookmark":[1,2],
-                "friend":[124],
-                "role":"r"
-            },
-            {
-                "id": 124,
-                "username": "mock_user2",
-                "email": "mock@mock.com",
-                "password": 1234,
-                "bookmark":[1,2],
-                "friend":[123],
-                "role":"c"
-            },
-            {
-                "id": 0,
-                "username":"admin",
-                "email":"admin@admin.com",
-                "password":"abc",
-                "role":"a"
+        var vm = this;
+        vm.users = [];
+        vm.admin = null;
+
+        vm.upgrade = upgrade;
+        vm.downgrade = downgrade;
+        vm.resetPassword = resetPassword;
+
+        function init() {
+            if (isAdmin()) {
+                vm.admin = $rootScope.user;
+                UserService
+                    .findAllUsers()
+                    .then(function(users) {
+                        vm.users = users;
+                    });
+            } else {
+                $location.path("/");
             }
-    ];
+        }
+        init();
+
+        function isAdmin() {
+            if ($rootScope.user != null || $rootScope.user != undefined) {
+                return $rootScope.user.role == 'A';
+            } else {
+                return false;
+            }
+        }
+
+        function upgrade(user) {
+            if (user.role == 'R') {
+                user.role = 'C';
+                UserService
+                    .updateUser(user._id, user)
+                    .then(function (newUser) {
+                        init();
+                    });
+            }
+        }
+
+        function downgrade(user) {
+            if (user.role == 'C') {
+                user.role = 'R';
+                UserService
+                    .updateUser(user._id, user)
+                    .then(function (newUser) {
+                        init();
+                    });
+            }
+        }
+
+        function resetPassword(user) {
+            // reset password to default
+            user.password = '88888888';
+            UserService
+                .updateUser(user._id, user)
+                .then(function (newUser) {
+                    init();
+                });
+        }
     }
 })();

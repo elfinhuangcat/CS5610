@@ -5,10 +5,15 @@
             <div class="col-sm-4">
                 <h1>{{recipeController.recipe.title}}</h1>
                 <h2><small>Author:&nbsp;<a ng-href="#/profile/{{recipeController.author._id}}">{{recipeController.author.name}}</a></small></h2> <!-- For now, it's the author's ID -->
-                <!-- Twitter -->
-                <button href="http://twitter.com/home?status=" title="Share on Twitter" target="_blank" class="btn btn-twitter" type="button"><i class="fa fa-twitter"></i></button>
                 <!-- Facebook -->
-                <button href="https://www.facebook.com/sharer/sharer.php?u=" title="Share on Facebook" target="_blank" class="btn btn-facebook" type="button"><i class="fa fa-facebook"></i></button>
+                <a ng-href="https://www.facebook.com/sharer/sharer.php?u=cs5610-huangyaxin.rhcloud.com/project/client/index.html#/recipe/{{recipeController.recipe._id}}" target="_blank">
+                    <i class="fa fa-facebook"></i>&nbsp;Share on Facebook&nbsp;
+                </a>
+                <!-- Twitter -->
+                <a ng-href="http://twitter.com/home?status=cs5610-huangyaxin.rhcloud.com/project/client/index.html#/recipe/{{recipeController.recipe._id}}" target="_blank">
+                    <i class="fa fa-twitter"></i>&nbsp;Share on Twitter&nbsp;
+                </a>
+
                 <!-- Bookmark button -->
                 <button ng-show="recipeController.showBookmark" ng-click="recipeController.bookmark()" type="button" class="btn btn-success glyphicon glyphicon-star-empty"></button>
                 <!-- unbookmark button -->
