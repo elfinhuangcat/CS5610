@@ -24,8 +24,8 @@
             <div class="gap"></div>
             <div>
                 <ul class="nav nav-pills">
-                    <li ng-class="{'active': $location.url().indexOf('manage') == -1}"><a data-toggle="pill" href="#/myrecipe#create">Create</a></li>
-                    <li ng-class="{'active': $location.url().indexOf('manage') != -1}"><a data-toggle="pill" href="#/myrecipe#manage">Manage</a></li>
+                    <li class="active"><a href="#/myrecipe/create">Create</a></li>
+                    <li><a href="#/myrecipe/manage">Manage</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -67,27 +67,7 @@
                             <button type="submit" class="btn btn-success pull-right">Create</button>
                         </form>
                     </div>
-                    <div id="manage" class="tab-pane fade">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="recipe in myRecipes">
-                                <td><a href="#/recipe">{{recipe.title}}</a></td>
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="Action">
-                                        <button type="button" class="btn btn-primary glyphicon glyphicon-pencil"></button>
-                                        <button type="button" class="btn btn-danger glyphicon glyphicon-trash"></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
                     <div class="gap"></div>
                 </div>
 

@@ -4,7 +4,9 @@
         <div class="row">
             <div class="col-sm-6">
                 <h1>Profile</h1>
-                <small>Username</small>
+                <!-- <small>Username</small> -->
+                <span ng-click="profileController.friend()" ng-if="profileController.showFriendButton" class="btn btn-success pull-left">Friend Me!</span>
+                <span ng-click="profileController.unfriend()" ng-if="profileController.showUnfriendButton" class="btn btn-danger pull-left">Unfriend :(</span>
             </div>
             <div class="col-sm-6">
                 <img src="images/blog/avatar1.png" height="100" width="100">
@@ -19,7 +21,7 @@
         <div class="col-sm-2 col-xs-0"></div>
         <div class="col-sm-8 col-xs-12">
             <div class="panel panel-info">
-                <div class="panel-heading">{{profileController.user.email}}</div>
+                <div class="panel-heading"><strong>{{profileController.user.email}}</strong></div>
                 <div class="panel-body">
                     <form>
                         <div class="form-group">
@@ -68,7 +70,9 @@
         <div class="col-sm-8 col-xs-12">
             <div class="panel panel-info">
                 <!-- show profile here-->
-                <div class="panel-heading">{{profileController.user.email}}</div>
+                <div class="panel-heading">
+                    <strong>{{profileController.user.email}}</strong>
+                </div>
                 <div class="panel-body">
                     <form>
                         <div class="form-group">
@@ -76,6 +80,7 @@
                             <input disabled ng-model="profileController.user.name" type="text" class="form-control" id="otherName" placeholder="Name">
                         </div>
                         <div>
+
                             <p class="text-success">He/She has {{profileController.user.friends.length}} friends.</p>
                             <p class="text-info">{{profileController.user.bookmarks.length}} recipes have been bookmarked by him/her.</p>
                         </div>

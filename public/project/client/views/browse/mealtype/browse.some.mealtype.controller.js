@@ -13,7 +13,7 @@
         vm.itemsPerPage = 6; // the number of recipes to show per page
         vm.showPrev = true; // activate the "Prev" button ?
         vm.showNext = true; // activate the "Next" button ?
-        vm.recipes = null; // the recipes to show on this page.
+        vm.recipes = []; // the recipes to show on this page.
 
         function init() {
             var numOfRecipesOfMealtype = 0;

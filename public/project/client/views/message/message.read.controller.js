@@ -24,6 +24,7 @@
                     .then(function(msg) {
                         if (msg != null) {
                             vm.msg = msg;
+                            vm.msg.read = true;
                             if (vm.msg.from != vm.user.email && vm.msg.to != vm.user.email) {
                                 $location.path("/message/inbox");
                             } else if (vm.msg.from == vm.user.email){
@@ -60,7 +61,7 @@
         }
 
         function reply() {
-            $location.path("/message/compose?to=" + vm.msg.from.email + "&subject=[Re]" + vm.msg.subject)
+            $location.path("/message/compose").search("to", vm.msg.from.email).search("subject", "[Re]"+vm.msg.subject);
         }
     }
 })();

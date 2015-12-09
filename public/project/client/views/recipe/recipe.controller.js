@@ -37,7 +37,7 @@
                         vm.recipe = result;
 
                         // The bookmark buttons:
-                        if (isLoggedIn() && vm.user.role != 'A') {
+                        if (isLoggedIn()) {
                             // See if it has already been bookmarked by the user
                             var bookmarkFlag = false;
                             for (var i = 0; i < vm.user.bookmarks.length; ++i) {

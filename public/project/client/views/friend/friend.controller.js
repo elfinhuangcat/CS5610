@@ -7,12 +7,12 @@
     function FriendController($rootScope, $location, UserService) {
         var vm = this;
         vm.user = $rootScope.user;
-        vm.friends = []; // list of recipes bookmarked by the current user
+        vm.friends = []; // list of friends (user objects)
         vm.unfriend = unfriend;
         vm.sendMsg = sendMsg;
 
         function init() {
-            if (!isLoggedIn() || vm.user.role == 'A') {
+            if (!isLoggedIn()) {
                 $location.path("/");
             } else {
                 // find the friends objects:
@@ -35,7 +35,6 @@
                     break;
                 }
             }
-
             UserService
                 .updateUser(vm.user._id, vm.user)
                 .then(function(newUser) {
@@ -46,8 +45,8 @@
                 });
         }
 
-        function sendMsg() {
-            // TODO: jump to the message page
+        function sendMsg(user) {
+            $location.path("/message/compose").search("to", user.email);
         }
 
 

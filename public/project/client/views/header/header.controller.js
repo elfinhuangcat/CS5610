@@ -28,6 +28,7 @@
 
         function logout() {
             $rootScope.user = null;
+            $location.path("/");
         }
 
         function isAdmin() {

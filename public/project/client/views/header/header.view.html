@@ -44,14 +44,15 @@
                     <ul class="dropdown-menu">
                         <li><a ng-href="#/profile/{{headerController.$rootScope.user._id}}"><span class="glyphicon glyphicon-user"></span>&nbsp;Profile</a></li>
                         <li><a href="#/bookmark"><span class="glyphicon glyphicon-star"></span>&nbsp;Bookmarks</a></li>
+                        <!-- R and C user only "My Recipes"-->
                         <li><a href="#/myrecipe"><span class="glyphicon glyphicon-book"></span>&nbsp;My Recipes</a></li>
                         <li><a href="#/friend"><span class="glyphicon glyphicon-asterisk"></span>&nbsp;Friends</a></li>
                         <li><a href="#/message"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Messages</a></li>
-                        <li><a href="#/"><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Sign out</a></li>
+                        <li><a ng-click="headerController.logout()"><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Sign out</a></li>
 
-                        <li class="dropdown-header">Admins:</li>
-                        <li><a href="#/admin/userlist">Users List</a></li>
-                        <li><a href="#/admin/contapp">Contributor Applications</a></li>
+                        <li ng-show="headerController.isAdmin()" class="dropdown-header">Admin Features:</li>
+                        <li ng-show="headerController.isAdmin()"><a href="#/admin/userlist">Users List</a></li>
+                        <li ng-show="headerController.isAdmin()"><a href="#/admin/contapp">Contributor Applications</a></li>
                     </ul>
                 </li>
             </ul>

@@ -28,7 +28,7 @@
                 <td>{{friend.email}}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Actions">
-                        <button ng-click="friendController.sendMsg()" type="button" class="btn btn-primary glyphicon glyphicon-envelope"></button>
+                        <button ng-click="friendController.sendMsg(friend)" type="button" class="btn btn-primary glyphicon glyphicon-envelope"></button>
                         <button ng-click="friendController.unfriend(friend.email)" type="button" class="btn btn-warning glyphicon glyphicon-trash"></button>
                     </div>
                 </td>

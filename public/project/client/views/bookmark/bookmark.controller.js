@@ -13,7 +13,7 @@
         vm.unbookmark = unbookmark;
 
         function init() {
-            if (!isLoggedIn() || vm.user.role == 'A') {
+            if (!isLoggedIn()) {
                 $location.path("/");
             } else {
                 vm.user.bookmarks.forEach(function(recipe_id) {

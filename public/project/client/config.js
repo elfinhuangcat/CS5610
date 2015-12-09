@@ -70,6 +70,8 @@
                 })
                 .when("/message/compose",
                 {
+                    // query 1: "to" : receiver's email addr
+                    // query 2: "subject" : the subject of message
                     templateUrl: "views/message/message.compose.view.html",
                     controller: "MessageComposeController as msgController"
                 })
@@ -92,7 +94,12 @@
                 {
                     redirectTo: "/message/compose"
                 })
-                .when("/myrecipe",
+                .when("/myrecipe/create",
+                {
+                    templateUrl: "views/myrecipe/myrecipe.view.html",
+                    controller: "MyRecipeCreateController as myRecipeController"
+                })
+                .when("/myrecipe/manage",
                 {
                     templateUrl: "views/myrecipe/myrecipe.view.html",
                     controller: "MyRecipeController"

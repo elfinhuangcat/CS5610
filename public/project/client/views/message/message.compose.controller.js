@@ -5,14 +5,11 @@
         .module("RecipesComApp")
         .controller("MessageComposeController", MessageComposeController);
 
-    function MessageComposeController($rootScope, MessageService, $location, UserService)
+    function MessageComposeController($rootScope, MessageService, $location, UserService, $routeParams)
     {
         var vm = this;
         vm.user = null;
-        vm.sent = null;
-        vm.received = null;
         vm.$location = $location;
-        vm.messageToRead = null;
 
         // Compose:
         vm.composeReceiver = "";
@@ -27,8 +24,14 @@
                 $location.path("/");
             } else {
                 vm.user = $rootScope.user;
-                initSent();
-                initReceived();
+                if ($routeParams["to"] != undefined) {
+                    vm.composeReceiver = $routeParams["to"];
+                }
+                if ($routeParams["subject"] != undefined) {
+                    vm.composeSubject = $routeParams["subject"];
+                }
+                console.log("vm.composeReceiver: " + vm.composeReceiver);
+                console.log("vm.composeSubject: " + vm.composeSubject);
             }
         }
         init();
@@ -58,7 +61,6 @@
                             .createMessage(newMsg)
                             .then(function(msg) {
                                 if (msg) {
-                                    initSent();
                                     vm.composeToError = false;
                                     vm.composeContent = "";
                                     vm.composeReceiver = "";
@@ -67,50 +69,6 @@
                             });
                     } else {
                         vm.composeToError = true;
-                    }
-                });
-        }
-
-        function initSent() {
-            // init vm.sent:
-            MessageService
-                .findOutMessageForUserByEmail(vm.user.email)
-                .then(function(msgs) {
-                    msgs.forEach(function(msg) {
-                        msg.selected = false; // to use the checkbox
-                        /*
-                        UserService
-                            .findUserByEmail(msg.to)
-                            .then(function(user) {
-                                msg.to = user; //TODO DANGEROUS : ASYNCHRONOUS
-                            });
-                            */
-
-                    });
-                    vm.sent = msgs;
-                    console.log(vm.sent);
-                });
-        }
-
-        function initReceived() {
-            // init vm.received
-            MessageService
-                .findInMessageForUserByEmail(vm.user.email)
-                .then(function(msgs) {
-                    msgs.forEach(function(msg) {
-                        msg.selected = false;
-                        /*
-                        UserService
-                            .findUserByEmail(msg.from)
-                            .then(function(user) {
-                                msg.from = user; //TODO DANGEROUS : ASYNCHRONOUS
-                            });
-                            */
-
-                    });
-                    vm.received = msgs;
-                    if (vm.received.length > 0) {
-                        vm.messageToRead = msgs[0];
                     }
                 });
         }
