@@ -7,8 +7,7 @@
 
     function RecipeController(RecipeService, UserService, $routeParams, $location, $rootScope)
     {
-        //TODO: For now, the image is not implemented and all show the same image.
-        // TODO: the unbookmark and bookmark problem
+        //TODO: For now, the image is stored as url
         var vm = this;
         vm.isLoggedIn = isLoggedIn();
         vm.bookmark = bookmark;

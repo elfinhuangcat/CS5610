@@ -34,19 +34,19 @@
             <div class="col-md-4 center">
                 <a ng-href="#/recipe/{{someMealTypeController.recipes[0]._id}}" class="thumbnail">
                     <h5>{{someMealTypeController.recipes[0].title}}</h5>
-                    <img src="images/slider/bg1.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                    <img ng-src="{{someMealTypeController.recipes[0].img}}" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
             <div ng-if="someMealTypeController.recipes.length >= 2" class="col-md-4 center">
                 <a ng-href="#/recipe/{{someMealTypeController.recipes[1]._id}}" class="thumbnail">
                     <h5>{{someMealTypeController.recipes[1].title}}</h5>
-                    <img src="images/slider/bg2.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                    <img ng-src="{{someMealTypeController.recipes[1].img}}" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
             <div ng-if="someMealTypeController.recipes.length >= 3" class="col-md-4 center">
                 <a ng-href="#/recipe/{{someMealTypeController.recipes[2]._id}}" class="thumbnail">
                     <h5>{{someMealTypeController.recipes[2].title}}</h5>
-                    <img src="images/slider/bg3.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                    <img ng-src="{{someMealTypeController.recipes[2].img}}" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
         </div>
@@ -55,19 +55,19 @@
             <div ng-if="someMealTypeController.recipes.length >= 4" class="col-md-4 center">
                 <a ng-href="#/recipe/{{someMealTypeController.recipes[3]._id}}" class="thumbnail">
                     <h5>{{someMealTypeController.recipes[3].title}}</h5>
-                    <img src="images/slider/bg1.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                    <img ng-src="{{someMealTypeController.recipes[3].img}}" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
             <div ng-if="someMealTypeController.recipes.length >= 5" class="col-md-4 center">
                 <a ng-href="#/recipe/{{someMealTypeController.recipes[4]._id}}" class="thumbnail">
                     <h5>{{someMealTypeController.recipes[4].title}}</h5>
-                    <img src="images/slider/bg2.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                    <img ng-src="{{someMealTypeController.recipes[4].img}}" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
             <div ng-if="someMealTypeController.recipes.length >= 6" class="col-md-4 center">
                 <a ng-href="#/recipe/{{someMealTypeController.recipes[5]._id}}" class="thumbnail">
                     <h5>{{someMealTypeController.recipes[5].title}}</h5>
-                    <img src="images/slider/bg3.jpg" alt="Pic of Recipe" style="width:150px;height:150px">
+                    <img ng-src="{{someMealTypeController.recipes[5].img}}" alt="Pic of Recipe" style="width:150px;height:150px">
                 </a>
             </div>
         </div>

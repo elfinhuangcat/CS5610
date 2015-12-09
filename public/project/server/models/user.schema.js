@@ -7,7 +7,7 @@ module.exports = function(mongoose) {
         "friends"    : [String],  // list of user EMAILs
         "bookmarks"  : [String],  // list of recipe _ids
         "role"       : {type: String, enum : ['A', 'R', 'C'], default: "R"}, // A: admin; R: Registered User; C: Contributor
-        "img"        : { data: Buffer, contentType: String } // user profile image
+        "img"        : String // user profile image url
     }, {collection: "cs5610.project.user"});
     return UserSchema;
 };
