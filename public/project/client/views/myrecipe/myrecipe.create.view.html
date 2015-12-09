@@ -24,7 +24,7 @@
             <div class="gap"></div>
             <div>
                 <ul class="nav nav-pills">
-                    <li class="active"><a href="#/myrecipe/create">Create</a></li>
+                    <li class="active"><a href="#/myrecipe/create">Create/Update</a></li>
                     <li><a href="#/myrecipe/manage">Manage</a></li>
                 </ul>
 
@@ -34,25 +34,26 @@
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <label for="recipeTitle">Title:</label>
-                                <input type="text" class="form-control" id="recipeTitle" placeholder="Recipe's Title">
+                                <input ng-model="myRecipeController.newRecipe.title" type="text" class="form-control" id="recipeTitle" placeholder="Recipe's Title">
                             </div>
+                            <!--
                             <div class="form-group">
                                 <img src="images/placeholder.png" width="150" height="150">
                                 <button type="button" class="btn btn-primary glyphicon glyphicon-pencil"></button>
                             </div>
+                            -->
                             <div class="form-group">
                                 <label for="prepTime">Prep Time:</label>
-                                <input type="text" class="form-control bfh-number" id="prepTime" placeholder="30">
-                                <select class="form-control">
-                                    <option id="time_m">mins</option>
-                                    <option id="time_h">hours</option>
-                                </select>
+                                <input ng-model="myRecipeController.newRecipe.time" type="text" class="form-control bfh-number" id="prepTime" placeholder="30">
+                                <select ng-options="unit in myRecipeController.unitOptions" ng-model="myRecipeController.unitValue"></select>
                                 <label for="servings">Servings:</label>
-                                <input type="text" class="form-control bfh-number" id="servings" placeholder="2">
+                                <input ng-model="myRecipeController.newRecipe.servings" type="text" class="form-control bfh-number" id="servings" placeholder="2">
                             </div>
                             <div class="form-group">
                                 <label for="style">Style tags:</label>
                                 <input type="text" class="form-control" id="style" placeholder="style1,styl2,styl3">
+                            </div>
+                            <div class="form-group">
                                 <label for="mealtype">Meal type tags:</label>
                                 <input type="text" class="form-control" id="mealtype" placeholder="mealtype1, mealtype2,mealtype3">
                             </div>
