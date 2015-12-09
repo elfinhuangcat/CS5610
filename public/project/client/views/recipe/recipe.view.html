@@ -23,8 +23,8 @@
                 <ul>
                     <li><h2><small>
                         Tags:&nbsp;
-                        <a ng-repeat="style in recipeController.recipe.style">{{style}}&nbsp;</a>
-                        <a ng-repeat="mealtype in recipeController.recipe.mealtype">{{mealtype}}&nbsp;</a>
+                        <a ng-href="#/browse/style/{{style}}" ng-repeat="style in recipeController.recipe.style">{{style}}&nbsp;</a>
+                        <a ng-href="#/browse/mealtype/{{mealtype}}" ng-repeat="mealtype in recipeController.recipe.mealtype">{{mealtype}}&nbsp;</a>
                     </small></h2>
                     </li>
                     <li><h2><small>

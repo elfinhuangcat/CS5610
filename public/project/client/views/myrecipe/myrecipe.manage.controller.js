@@ -3,9 +3,9 @@
 {
     angular
         .module("RecipesComApp")
-        .controller("AdminRecipeManageController", AdminRecipeManageController);
+        .controller("MyRecipeManageController", MyRecipeManageController);
 
-    function AdminRecipeManageController($rootScope, $location, RecipeService)
+    function MyRecipeManageController($rootScope, $location, RecipeService)
     {
         // query - id: _id of the recipe to MODIFY
         var vm = this;

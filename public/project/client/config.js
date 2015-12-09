@@ -96,6 +96,7 @@
                 })
                 .when("/myrecipe/create",
                 {
+                    // query 1: "id" : recipe _id to modify
                     templateUrl: "views/myrecipe/myrecipe.create.view.html",
                     controller: "MyRecipeCreateController as myRecipeController"
                 })
@@ -126,6 +127,7 @@
                 })
                 .when("/admin/recipe/create",
                 {
+                    // query 1: "id" : recipe _id to modify
                     templateUrl: "views/admin/recipe/admin.recipe.create.html",
                     controller: "AdminRecipeCreateController as recipeController"
                 })

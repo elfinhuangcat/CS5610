@@ -67,7 +67,7 @@
                                     comment.author_id = user._id;
                                     comment.author_name = user.name;
                                 });
-                            if (comment.replyto != null || comment.replyto != "") {
+                            if (comment.replyto != null && comment.replyto != "") {
                                 UserService
                                     .findUserByEmail(comment.replyto)
                                     .then(function(user) {
@@ -150,7 +150,7 @@
                 .then(function(recipe) {
                     console.log("Comment pushed to recipe: ");
                     console.log(recipe);
-                    vm.recipe = recipe;
+                    init();
                 });
         }
 
